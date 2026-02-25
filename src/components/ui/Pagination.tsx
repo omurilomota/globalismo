@@ -28,8 +28,8 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
           href={getPageUrl(i)}
           className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium transition-colors ${
             i === currentPage
-              ? 'bg-gray-900 text-white'
-              : 'text-gray-700 hover:bg-gray-100'
+              ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
           }`}
         >
           {i}
@@ -45,7 +45,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
       {currentPage > 1 && (
         <Link
           href={getPageUrl(currentPage - 1)}
-          className="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+          className="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           aria-label="Página anterior"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
       {currentPage < totalPages && (
         <Link
           href={getPageUrl(currentPage + 1)}
-          className="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+          className="w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           aria-label="Próxima página"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

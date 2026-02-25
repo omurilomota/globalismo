@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://globalismo.com.br'),
   title: {
     default: "Globalismo - Reflexões sobre a Globalização",
     template: "%s | Globalismo"
@@ -27,7 +28,11 @@ export const metadata: Metadata = {
     description: "Um espaço para reflexão sobre os impactos da globalização.",
     type: "website",
     locale: "pt_BR",
-    siteName: "Globalismo"
+    siteName: "Globalismo",
+    url: "https://globalismo.com.br"
+  },
+  alternates: {
+    canonical: "https://globalismo.com.br"
   },
   robots: {
     index: true,
@@ -41,8 +46,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 min-h-screen flex flex-col`}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 min-h-screen flex flex-col transition-colors`}>
         <Header />
         <main className="flex-1">
           {children}

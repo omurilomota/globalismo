@@ -21,7 +21,7 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Buscar artigos..."
-        className="w-full px-4 py-2 pl-10 text-sm bg-gray-100 border border-transparent rounded-full focus:bg-white focus:border-gray-300 focus:outline-none transition-colors"
+        className="w-full px-4 py-2 pl-10 text-sm bg-gray-100 dark:bg-gray-800 border border-transparent rounded-full focus:bg-white dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 focus:outline-none transition-colors text-gray-900 dark:text-white placeholder-gray-500"
       />
       <svg 
         className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" 
