@@ -1,0 +1,64 @@
+{
+  "artigos": [
+    {
+      "id": "1",
+      "titulo": "O Poder das Empresas Transnacionais na Era da Globalização",
+      "slug": "poder-empresas-transnacionais-globalizacao",
+      "conteudo": "<p>Ulrich Beck introduz sua obra afirmando que globalização significa politização, pois esta confere poder às empresas e suas associações de atuar tanto na configuração da economia quanto na sociedade como um todo.</p><p>O poder das empresas transnacionais se fundamenta nos seguintes fatores: elas podem exportar postos de trabalho, distribuir produtos e serviços nos mais variados lugares, podem criar confronto e punir os Estados nacionais, escolher seus locais de investimento etc.</p><p>Tudo isso sem interferência do poder estatal e sem qualquer debate ou mudança na legislação. O autor chama este fenômeno de <strong>subpolítica</strong> e ressaltar que o princípio da autoridade do Estado Nacional está cada vez mais apagado diante do comércio mundial.</p><p>O autor afirma que a globalização permite às empresas transnacionais produzir em um país, pagar imposto em outro e exigir políticas públicas de um terceiro, bem como critica o fato destas empresas auferirem cada vez mais lucro, reduzindo postos de trabalho e pagando menos impostos, ao passo que o governo nacional aumenta a arrecadação de impostos das pequenas e médias empresas que mais geram postos de trabalho.</p><p>Isto se chama <strong>conflito entre contribuintes virtuais e reais</strong>. Os contribuintes virtuais (empresas transnacionais) auferem lucros astronômicos escapando dos impostos do Estado nacional, enquanto os contribuintes reais (pequenas e médias empresas) pagam uma carga pesada de impostos e lutam pela sobrevivência.</p><p>Como consequência, a questão da justiça social deve ser reformulada teórica e politicamente na era da globalização.</p>",
+      "resumo": "Ulrich Beck analisa como a globalização confere poder às empresas transnacionais, criando um fenômeno de subpolítica que desafia a autoridade dos Estados nacionais.",
+      "autor": "Ulrich Beck",
+      "dataPublicacao": "2024-01-15",
+      "imagemCapa": "/images/artigos/transnacionais.jpg",
+      "categorias": ["Economia", "Política"],
+      "tags": ["empresas transnacionais", "globalização", "subpolítica", "Ulrich Beck"],
+      "tempoLeitura": 5,
+      "visualizacoes": 1250,
+      "destaque": true
+    },
+    {
+      "id": "2",
+      "titulo": "Cidadania e Direitos na Sociedade Capitalista",
+      "slug": "cidadania-direitos-sociedade-capitalista",
+      "conteudo": "<p>Segundo o Dicionário Aurélio, cidadão é aquele que goza de direitos e deveres frente ao Estado e aos seus concidadãos. A questão, portanto, é saber, primeiramente, como se constituem os direitos e quais são aqueles que efetivamente podem exigi-los.</p><p>John Locke, considerado o pai do liberalismo (que é a expressão política por excelência da sociedade capitalista), partia do pressuposto de que os homens – que nascem livres, iguais e inteligentes – precisaram construir o Estado para garantir a propriedade privada (direito natural) e a liberdade (principalmente da livre iniciativa).</p><p>Porém, para construir o Estado, precisaram os homens – coletivamente – entrar em acordo entre si, onde todos e cada um concordaram na transformação dos direitos e liberdades naturais em liberdades e direitos civis.</p><p>O que significa dizer: consentiram em restringir a plena liberdade natural pelas garantias da liberdade civil, as quais representam restrições à liberdade irrestrita do estado de natureza.</p><p>Esta teoria lockeana fundamenta a organização política das sociedades capitalistas modernas, onde o Estado existe para proteger a propriedade privada e garantir as liberdades individuais necessárias ao funcionamento do mercado.</p>",
+      "resumo": "Uma análise sobre a teoria de John Locke acerca da cidadania, dos direitos naturais e da formação do Estado para garantir a propriedade privada na sociedade capitalista.",
+      "autor": "John Locke",
+      "dataPublicacao": "2024-02-01",
+      "imagemCapa": "/images/artigos/cidadania.jpg",
+      "categorias": ["Política", "Filosofia"],
+      "tags": ["cidadania", "direitos", "John Locke", "liberalismo", "propriedade privada"],
+      "tempoLeitura": 4,
+      "visualizacoes": 890,
+      "destaque": false
+    },
+    {
+      "id": "3",
+      "titulo": "A Globalização como Fenômeno Histórico Inevitável",
+      "slug": "globalizacao-fenomeno-historico-inevitavel",
+      "conteudo": "<p>A globalização é entendida como resultado de vários acontecimentos históricos significativos que transformaram o cenário social da vida humana através de uma revolução tecnológica concentrada nas tecnologias da informação.</p><p>Para os defensores do processo de globalização, a busca por uma sociedade mundial nivelada por padrões de consumo e pela massificação cultural intensifica-se como um fenômeno inevitável.</p><p>Segundo eles, ela se apresenta como a única resposta para todas as mudanças contemporâneas e para o progresso civilizatório, ou seja, está dada, é inquestionável e irreversível.</p><p>Basta observar a formação crescente dos grandes blocos econômicos, dai os quais estão o <strong>NAFTA</strong>, a <strong>União Europeia</strong>, o <strong>MERCOSUL</strong> e o <strong>BRICS</strong>.</p><p>Neste sentido, faz-se necessário encontrar uma saída para o quebra-cabeça das divergentes contradições do sistema econômico global, por meio de uma passagem sustentável, frente a uma diferente ordem social.</p><p>A globalização econômica traz consigo tanto oportunidades quanto desafios, exigindo que as sociedades encontrem formas de lidar com as complexidades de um mundo cada vez mais interconectado.</p>",
+      "resumo": "A globalização como resultado de revolução tecnológica e formação de blocos econômicos, apresentando-se como fenômeno inevitável e irreversível.",
+      "autor": "Vários autores",
+      "dataPublicacao": "2024-02-15",
+      "imagemCapa": "/images/artigos/blocos-economicos.jpg",
+      "categorias": ["Economia", "Geopolítica"],
+      "tags": ["globalização", "blocos econômicos", "NAFTA", "União Europeia", "MERCOSUL", "BRICS"],
+      "tempoLeitura": 4,
+      "visualizacoes": 720,
+      "destaque": true
+    },
+    {
+      "id": "4",
+      "titulo": "Comunicação, Consumismo e Integração Social na Era da Globalização",
+      "slug": "comunicacao-consumismo-integracao-social",
+      "conteudo": "<p>O tema da comunicação se tornará central no desenvolvimento do consumismo em escala global não apenas pela característica de sua materialidade técnica, ou seja, enquanto meio difusor e propagador das mercadorias em escala mundial, mas mais que isto, se tornará imprescindível exatamente por ser o agente principal que, na modernidade, irá produzir a <strong>integração social</strong>.</p><p>O tema da integração irá emergir, neste sentido, como um dos principais processos derivados da expansão do consumismo em escala transnacional através de sua difusão através dos <strong>media</strong>.</p><p>A própria origem e desenvolvimento da comunicação social moderna e seus meios irão ser entrecortados pela formação dos Estados-nacionais e do próprio sentido da nacionalidade.</p><p>Se a consolidação da nação passou a estar condicionada a um indispensável processo de integração regional, cultural e política de setores da sociedade até então difusos no interior de um território, o avanço dos modernos sistemas de comunicação vieram a se tornar fundamentais neste processo de integração.</p><p>Trata-se, na verdade, de um processo de natureza política e cultural, onde a diversidade passa a ser sobredeterminada pela construção de uma centralidade política nas mãos do Estado e pela tentativa de construção de uma <strong>cultura nacional</strong>.</p>",
+      "resumo": "A comunicação como agente central do consumismo global e da integração social, criando culturas nacionais através dos meios de comunicação de massa.",
+      "autor": "Vários autores",
+      "dataPublicacao": "2024-03-01",
+      "imagemCapa": "/images/artigos/comunicacao.jpg",
+      "categorias": ["Cultura", "Mídia"],
+      "tags": ["comunicação", "consumismo", "integração social", "mídia", "cultura nacional"],
+      "tempoLeitura": 5,
+      "visualizacoes": 650,
+      "destaque": false
+    }
+  ]
+}
