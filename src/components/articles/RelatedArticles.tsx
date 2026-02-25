@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { IArticle } from '@/types';
 import ArticleCard from './ArticleCard';
 
