@@ -16,12 +16,12 @@ export default function Home() {
       
       <section className="mb-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-serif">
-            📰 <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Últimos Artigos</span>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white font-serif">
+            Últimos Artigos
           </h2>
           <Link 
             href="/artigos" 
-            className="flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-blue-900 dark:text-blue-300 hover:underline"
           >
             Ver todos <ArrowRight className="w-4 h-4" />
           </Link>
@@ -40,11 +40,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-2xl p-8 border border-indigo-100 dark:border-indigo-800">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 font-serif">
-          🏷️ <span className="bg-gradient-to-r from-indigo-600 to-amber-500 bg-clip-text text-transparent">Categorias</span>
+      <section className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 font-serif">
+          Categorias
         </h2>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2">
           {categories.map((cat) => (
             <CategoryTag key={cat} category={cat} size="md" />
           ))}

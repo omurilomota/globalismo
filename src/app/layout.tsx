@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins, Inter } from "next/font/google";
+import { Merriweather, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "700", "900"],
   display: "swap",
 });
 
@@ -26,18 +20,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://globalismo.com.br'),
   title: {
-    default: "🌐 Globalismo - Reflexões sobre a Globalização",
-    template: "%s | 🌐 Globalismo"
+    default: "Globalismo - Reflexões sobre a Globalização",
+    template: "%s | Globalismo"
   },
-  description: "Um espaço para reflexão sobre os impactos da globalização na economia, política, cultura e sociedade.",
-  keywords: ["globalização", "economia", "política", "cultura", "sociedade", "mundo"],
+  description: "Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade. Análises fundamentadas em fontes acadêmicas e jornalísticas.",
+  keywords: ["globalização", "economia", "política", "cultura", "sociedade", "mundo", "geopolítica", "ordem mundial"],
   authors: [{ name: "Globalismo" }],
   openGraph: {
-    title: "🌐 Globalismo - Reflexões sobre a Globalização",
-    description: "Um espaço para reflexão sobre os impactos da globalização.",
+    title: "Globalismo - Reflexões sobre a Globalização",
+    description: "Um espaço para reflexão crítica sobre os impactos da globalização.",
     type: "website",
     locale: "pt_BR",
-    siteName: "🌐 Globalismo",
+    siteName: "Globalismo",
     url: "https://globalismo.com.br"
   },
   alternates: {
@@ -56,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={`${playfair.variable} ${poppins.variable} ${inter.variable} antialiased bg-white dark:bg-slate-950 min-h-screen flex flex-col transition-colors`}>
+      <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`}>
         <Header />
         <main className="flex-1">
           {children}
