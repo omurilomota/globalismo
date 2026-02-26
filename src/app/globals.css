@@ -157,11 +157,32 @@ html.dark {
   box-shadow: 0 10px 25px -5px rgba(99, 179, 237, 0.15);
 }
 
-/* Focus styles */
+/* Focus styles - Improved accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline-color: var(--primary);
+}
+
+/* Remove default outline for mouse users, keep for keyboard */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 input:focus, textarea:focus, button:focus {
   outline: none;
-  ring: 2px;
-  ring-color: var(--primary);
+}
+
+input:focus-visible, textarea:focus-visible, button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dark input:focus-visible, .dark textarea:focus-visible, .dark button:focus-visible {
+  outline-color: var(--primary);
 }
 
 /* Prose overrides for typography */

@@ -10,14 +10,16 @@ interface ArticleHeroProps {
 
 export default function ArticleHero({ article }: ArticleHeroProps) {
   return (
-    <section className="relative text-white rounded-xl overflow-hidden mb-10 group">
-      <div className="absolute inset-0">
+    <section className="relative text-white rounded-xl overflow-hidden mb-10 group" aria-labelledby="hero-title">
+      <div className="absolute inset-0" aria-hidden="true">
         {article.imagemCapa ? (
           <Image
             src={article.imagemCapa}
-            alt={article.titulo}
+            alt=""
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-700" />
@@ -27,19 +29,23 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
       </div>
       
       <div className="relative z-10 px-6 py-12 md:py-16">
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-3" role="list" aria-label="Categorias do artigo">
           {article.categorias.map((categoria) => (
             <span 
               key={categoria}
               className="px-2.5 py-1 text-xs font-medium bg-white/20 rounded"
+              role="listitem"
             >
               {categoria}
             </span>
           ))}
         </div>
         
-        <Link href={`/artigos/${article.slug}`}>
-          <h1 className="text-2xl md:text-4xl font-bold mb-3 hover:text-gray-200 transition-colors font-serif leading-tight max-w-3xl">
+        <Link 
+          href={`/artigos/${article.slug}`}
+          className="block focus:outline-none focus:ring-2 focus:ring-white rounded"
+        >
+          <h1 id="hero-title" className="text-2xl md:text-4xl font-bold mb-3 hover:text-gray-200 transition-colors font-serif leading-tight max-w-3xl">
             {article.titulo}
           </h1>
         </Link>
@@ -50,23 +56,25 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
         
         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300">
           <span className="flex items-center gap-1.5">
-            <User className="w-4 h-4" />
+            <User className="w-4 h-4" aria-hidden="true" />
+            <span className="sr-only">Autor:</span>
             {article.autor}
           </span>
           <span className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4" />
+            <Clock className="w-4 h-4" aria-hidden="true" />
+            <span className="sr-only">Tempo de leitura:</span>
             {article.tempoLeitura} min de leitura
           </span>
-          <time>
+          <time dateTime={article.dataPublicacao}>
             {formatDate(article.dataPublicacao)}
           </time>
         </div>
 
         <Link 
           href={`/artigos/${article.slug}`}
-          className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 bg-white text-blue-900 font-medium rounded hover:bg-gray-100 transition-colors"
+          className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 bg-white text-blue-900 font-medium rounded hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-900"
         >
-          Ler artigo <ArrowRight className="w-4 h-4" />
+          Ler artigo <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </Link>
       </div>
     </section>

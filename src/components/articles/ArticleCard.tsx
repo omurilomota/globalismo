@@ -10,18 +10,23 @@ interface ArticleCardProps {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover">
-      <Link href={`/artigos/${article.slug}`}>
+    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover focus-within:ring-2 focus-within:ring-blue-900 dark:focus-within:ring-blue-400">
+      <Link 
+        href={`/artigos/${article.slug}`}
+        className="block focus:outline-none"
+        aria-label={`Ler artigo: ${article.titulo}`}
+      >
         <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-700">
           {article.imagemCapa ? (
             <Image
               src={article.imagemCapa}
-              alt={article.titulo}
+              alt={`Imagem de capa do artigo: ${article.titulo}`}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+            <div className="absolute inset-0 flex items-center justify-center text-gray-400" aria-hidden="true">
               <span className="text-4xl">🌐</span>
             </div>
           )}
@@ -29,18 +34,22 @@ export default function ArticleCard({ article }: ArticleCardProps) {
       </Link>
       
       <div className="p-4">
-        <div className="flex flex-wrap gap-2 mb-2">
+        <div className="flex flex-wrap gap-2 mb-2" role="list" aria-label="Categorias do artigo">
           {article.categorias.map((categoria) => (
             <span 
               key={categoria}
               className="px-2 py-0.5 text-xs font-medium rounded bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+              role="listitem"
             >
               {categoria}
             </span>
           ))}
         </div>
         
-        <Link href={`/artigos/${article.slug}`}>
+        <Link 
+          href={`/artigos/${article.slug}`}
+          className="block focus:outline-none focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-400 rounded"
+        >
           <h2 className="text-base font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-900 dark:group-hover:text-blue-300 transition-colors line-clamp-2 font-serif">
             {article.titulo}
           </h2>
@@ -52,15 +61,19 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         
         <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-3 border-t border-gray-100 dark:border-gray-700">
           <span className="flex items-center gap-1">
-            <User className="w-3 h-3" />
+            <User className="w-3 h-3" aria-hidden="true" />
+            <span className="sr-only">Autor:</span>
             {article.autor}
           </span>
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
+              <Clock className="w-3 h-3" aria-hidden="true" />
+              <span className="sr-only">Tempo de leitura:</span>
               {article.tempoLeitura} min
             </span>
-            <span>{formatDate(article.dataPublicacao)}</span>
+            <time dateTime={article.dataPublicacao}>
+              {formatDate(article.dataPublicacao)}
+            </time>
           </div>
         </div>
       </div>

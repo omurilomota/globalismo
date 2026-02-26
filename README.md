@@ -23,10 +23,55 @@ Globalismo é uma plataforma web dedicada à reflexão crítica sobre os impacto
 
 - **Framework**: Next.js 16 (App Router)
 - **Linguagem**: TypeScript
-- **Estilização**: Tailwind CSS
+- **Estilização**: Tailwind CSS v4
 - **Ícones**: Lucide React
 - **Imagens**: Unsplash (CDN)
 - **Hospedagem**: Vercel (recomendado)
+
+## Características
+
+### Acessibilidade
+- ✅ Skip links para navegação por teclado
+- ✅ Atributos ARIA completos
+- ✅ Labels em todos os formulários
+- ✅ Estilos de focus visíveis
+- ✅ Suporte a leitores de tela
+- ✅ Navegação por teclado otimizada
+- ✅ Contraste de cores adequado
+
+### SEO
+- ✅ Meta tags completas (Open Graph, Twitter Cards)
+- ✅ Structured Data (JSON-LD) para artigos
+- ✅ Breadcrumbs com schema.org
+- ✅ Sitemap.xml dinâmico
+- ✅ Robots.txt configurado
+- ✅ URLs canônicas
+- ✅ Meta descrições otimizadas
+
+### Performance
+- ✅ Otimização de imagens com Next.js Image
+- ✅ Lazy loading de imagens
+- ✅ Compressão de assets
+- ✅ Fontes otimizadas (display: swap)
+- ✅ Code splitting automático
+- ✅ Static Site Generation (SSG)
+
+### UX/UI
+- ✅ Modo escuro/claro
+- ✅ Design responsivo
+- ✅ Animações suaves
+- ✅ Loading states e skeletons
+- ✅ Toast notifications
+- ✅ Botão "voltar ao topo"
+- ✅ Breadcrumbs de navegação
+- ✅ Botões de compartilhamento social
+
+### Segurança
+- ✅ Headers de segurança (CSP, X-Frame-Options, etc.)
+- ✅ Sanitização de HTML
+- ✅ Validação de formulários
+- ✅ Proteção contra XSS
+- ✅ Environment variables
 
 ## Instalação
 
@@ -40,32 +85,67 @@ cd globalismo
 # Instalar dependências
 npm install
 
+# Configurar variáveis de ambiente (opcional)
+cp .env.example .env.local
+
 # Iniciar desenvolvimento
 npm run dev
+
+# Build para produção
+npm run build
+
+# Iniciar produção
+npm start
+```
+
+## Variáveis de Ambiente
+
+Crie um arquivo `.env.local` baseado no `.env.example`:
+
+```env
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=https://globalismo.com.br
+NEXT_PUBLIC_SITE_NAME=Globalismo
+
+# Analytics (Opcional)
+# NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Contact Form (Opcional)
+# CONTACT_EMAIL=contato@globalismo.com.br
+
+# Social Media (Opcional)
+# NEXT_PUBLIC_TWITTER_HANDLE=@globalismo
 ```
 
 ## Estrutura de Pastas
 
 ```
 globalismo/
-├── src/
-│   ├── app/                    # Páginas (App Router)
-│   │   ├── api/               # API Routes
-│   │   ├── artigos/           # Páginas de artigos
-│   │   ├── sobre/             # Página sobre
-│   │   ├── contato/           # Página contato
-│   │   └── layout.tsx         # Layout principal
-│   ├── components/
-│   │   ├── layout/            # Header, Footer
-│   │   ├── articles/          # Componentes de artigos
-│   │   └── ui/                # Componentes de UI
-│   ├── lib/                   # Funções utilitárias
-│   ├── data/                  # Dados JSON
-│   └── types/                 # Tipos TypeScript
-├── public/                     # Arquivos estáticos
-├── next.config.ts              # Configuração Next.js
-├── tailwind.config.ts          # Configuração Tailwind
-└── package.json
+ ├── src/
+ │   ├── app/                    # Páginas (App Router)
+ │   │   ├── api/               # API Routes
+ │   │   ├── artigos/           # Páginas de artigos
+ │   │   ├── sobre/             # Página sobre
+ │   │   ├── contato/           # Página contato
+ │   │   ├── layout.tsx         # Layout principal
+ │   │   ├── globals.css        # Estilos globais
+ │   │   ├── robots.ts          # Configuração robots.txt
+ │   │   └── sitemap.ts         # Configuração sitemap.xml
+ │   ├── components/
+ │   │   ├── layout/            # Header, Footer
+ │   │   ├── articles/          # Componentes de artigos
+ │   │   ├── forms/             # Formulários
+ │   │   ├── seo/               # Componentes SEO
+ │   │   └── ui/                # Componentes de UI reutilizáveis
+ │   ├── lib/                   # Funções utilitárias
+ │   ├── data/                  # Dados JSON
+ │   └── types/                 # Tipos TypeScript
+ ├── public/                     # Arquivos estáticos
+ ├── next.config.ts              # Configuração Next.js
+ ├── tsconfig.json              # Configuração TypeScript
+ ├── tailwind.config.ts         # Configuração Tailwind
+ ├── .env.example               # Exemplo de variáveis de ambiente
+ └── package.json
 ```
 
 ## Páginas
@@ -73,10 +153,33 @@ globalismo/
 | Página | URL | Descrição |
 |--------|-----|-----------|
 | Home | `/` | Página inicial com artigos em destaque |
-| Artigos | `/artigos` | Listagem completa de artigos |
+| Artigos | `/artigos` | Listagem completa de artigos com filtros |
 | Artigo | `/artigos/[slug]` | Página de artigo individual |
 | Sobre | `/sobre` | Informações sobre o projeto |
 | Contato | `/contato` | Formulário de contato |
+
+## Componentes
+
+### UI Components
+- `BackToTop` - Botão para voltar ao topo da página
+- `Breadcrumbs` - Navegação estrutural
+- `CategoryTag` - Tags de categorias
+- `Pagination` - Paginação de listas
+- `SearchBar` - Barra de busca
+- `Skeleton` - Loading states
+- `SocialShare` - Botões de compartilhamento social
+- `Toast` - Notificações toast
+
+### Article Components
+- `ArticleCard` - Card de artigo
+- `ArticleHero` - Hero de artigo em destaque
+- `RelatedArticles` - Artigos relacionados
+
+### Form Components
+- `ContactForm` - Formulário de contato com validação
+
+### SEO Components
+- `StructuredData` - JSON-LD para SEO
 
 ## Artigos Disponíveis
 
@@ -122,6 +225,15 @@ O site conta com artigos aprofundados sobre diversos temas relacionados ao globa
 - **Títulos**: Merriweather (Serif)
 - **Corpo**: Inter (Sans-serif)
 
+## Scripts Disponíveis
+
+```bash
+npm run dev      # Inicia servidor de desenvolvimento
+npm run build    # Build para produção
+npm start        # Inicia servidor de produção
+npm run lint     # Executa ESLint
+```
+
 ## Contribuição
 
 Contribuições são bem-vindas! Siga os passos:
@@ -131,6 +243,14 @@ Contribuições são bem-vindas! Siga os passos:
 3. Commit suas mudanças (`git commit -m 'feat: nova funcionalidade'`)
 4. Push para a branch (`git push origin feature/nova-funcionalidade`)
 5. Abra um Pull Request
+
+### Diretrizes de Contribuição
+
+- Siga o padrão de código existente
+- Use TypeScript para novos arquivos
+- Adicione testes quando apropriado
+- Atualize a documentação conforme necessário
+- Mantenha a acessibilidade em mente
 
 ## Licença
 
@@ -151,6 +271,13 @@ MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 - [Organização Mundial do Comércio (OMC)](https://www.wto.org)
 - [Forbes Brasil](https://forbes.com.br)
 - [CEBRI - Centro Brasileiro de Relações Internacionais](https://cebri.org)
+
+## Agradecimentos
+
+- Next.js team pelo excelente framework
+- Tailwind CSS pela excelente ferramenta de estilização
+- Lucide pelos ícones
+- Unsplash pelas imagens
 
 ---
 
