@@ -1,0 +1,22 @@
+#!/bin/sh
+
+GITMOJIS="✨ 🎨 🔧 ⚡ 🚀 📦 🐛 🔨 ✏️ 🧪 ✅ ❌ 🔒 🌐 ♻️ 👕"
+COMMIT_MSG=$(cat "$1")
+FIRST_WORD=$(echo "$COMMIT_MSG" | head -n1 | cut -d' ' -f1)
+
+VALID=false
+for emoji in $GITMOJIS; do
+  if [ "$FIRST_WORD" = "$emoji" ]; then
+    VALID=true
+    break
+  fi
+done
+
+if [ "$VALID" = false ]; then
+  echo "❌ Commit inválido: deve começar com um gitmoji válido."
+  echo "   Gitmojis válidos: $GITMOJIS"
+  echo "   Exemplo: 🔧 chore: adicionar nova funcionalidade"
+  exit 1
+fi
+
+exit 0
