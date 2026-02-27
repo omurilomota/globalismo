@@ -3,6 +3,7 @@ import ArticleHero from '@/components/articles/ArticleHero';
 import ArticleCard from '@/components/articles/ArticleCard';
 import Link from 'next/link';
 import CategoryTag from '@/components/ui/CategoryTag';
+import Newsletter from '@/components/ui/Newsletter';
 import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
@@ -38,6 +39,10 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="my-8">
+        <Newsletter />
       </section>
 
       <section className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllSlugs, getRelatedArticles, getCanonicalUrl } from '@/lib/articles';
 import { formatDate } from '@/lib/utils';
 import CategoryTag from '@/components/ui/CategoryTag';
+import ArticleContent from '@/components/articles/ArticleContent';
 import Link from 'next/link';
 
 interface PageProps {
@@ -79,10 +80,7 @@ export default async function ArtigoPage({ params }: PageProps) {
         </div>
       </header>
 
-      <div 
-        className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-gray-900 dark:prose-a:text-white"
-        dangerouslySetInnerHTML={{ __html: article.conteudo }}
-      />
+      <ArticleContent slug={article.slug} content={article.conteudo} />
 
       <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div className="flex flex-wrap gap-2">

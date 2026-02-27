@@ -193,3 +193,40 @@ blockquote {
   color: var(--foreground);
   opacity: 0.9;
 }
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  nav, 
+  header nav, 
+  footer, 
+  .no-print,
+  .hidden-print {
+    display: none !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  .prose {
+    max-width: 100% !important;
+  }
+
+  .prose h2,
+  .prose h3 {
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}

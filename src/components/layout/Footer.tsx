@@ -19,16 +19,16 @@ export default function Footer() {
               Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
+              <a href="https://x.com/omurilomota" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors" aria-label="Twitter/X">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="https://github.com/omurilomota" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
+              <a href="https://github.com/omurilomota" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors" aria-label="GitHub">
                 <Github className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/murilo-henrique-622354358/" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors" aria-label="LinkedIn">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="/contato" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
+              <a href="/contato" className="p-2 rounded bg-gray-200 dark:bg-gray-700 hover:bg-blue-900 hover:text-white transition-colors" aria-label="Email">
                 <Mail className="w-4 h-4" />
               </a>
             </div>
