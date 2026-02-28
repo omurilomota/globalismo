@@ -1,11 +1,11 @@
 /**
- * @fileoverview Componente de tag/link paraIndex categorias de artigos.
+ * @fileoverview Componente de tag/link para categorias de artigos.
  * 
  * Este componente é responsável por:
  * - Exibir categoria como tag clicável
  * - Suportar dois tamanhos (pequeno e médio)
  * - Indicar visualmente se a categoria está ativa
- * - Gerar link paraIndex filtrar artigos por categoria
+ * - Gerar link para filtrar artigos por categoria
  * 
  * Este é um componente server-side (sem 'use client') pois
  * não requer estado local - apenas renderiza links.
@@ -15,6 +15,7 @@
  * @version 1.0.0
  */
 
+import { memo } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -30,21 +31,23 @@ interface CategoryTagProps {
 
 /**
  * Componente de tag de categoria.
- * Renderiza um link paraIndex filtrar artigos pela categoria especificada.
- * Suporta dois tamanhos e estado ativo paraIndex destaque visual.
+ * Renderiza um link para filtrar artigos pela categoria especificada.
+ * Suporta dois tamanhos e estado ativo para destaque visual.
+ * 
+ * Usando memo para evitar re-renders desnecessários em listas.
  * 
  * @component
  * @param {CategoryTagProps} props - Props contendo categoria, tamanho e estado ativo
  * @returns {JSX.Element} Tag de categoria como link
  */
-export default function CategoryTag({ category, size = 'sm', isActive = false }: CategoryTagProps) {
+const CategoryTag = memo(function CategoryTag({ category, size = 'sm', isActive = false }: CategoryTagProps) {
   // Define classes base de tamanho
   const baseClasses = size === 'sm' 
     ? 'px-2.5 py-0.5 text-xs' 
     : 'px-3 py-1 text-sm';
   
-  // Gera URL paraIndex a página de artigos com filtro de categoria
-  // "Todas" redireciona paraIndex página sem filtro
+  // Gera URL para a página de artigos com filtro de categoria
+  // "Todas" redireciona para página sem filtro
   const href = category.toLowerCase() === 'todas' 
     ? '/artigos' 
     : `/artigos?categoria=${encodeURIComponent(category.toLowerCase())}`;
@@ -64,4 +67,6 @@ export default function CategoryTag({ category, size = 'sm', isActive = false }:
       {category}
     </Link>
   );
-}
+});
+
+export default CategoryTag;

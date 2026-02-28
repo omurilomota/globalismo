@@ -14,6 +14,7 @@
  * @version 1.0.0
  */
 
+import { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { IArticle } from '@/types';
@@ -27,21 +28,24 @@ interface ArticleCardProps {
 }
 
 /**
- * Componente de cartão paraIndex exibição de artigo em listas.
+ * Componente de cartão para exibição de artigo em listas.
  * Apresenta artigo em formato visual compacto com imagem, título,
  * resumo e metadados. Inclui efeitos de hover.
+ * 
+ * Usando memo para evitar re-renders desnecessários quando
+ * a lista de artigos é re-renderizada.
  * 
  * @component
  * @param {ArticleCardProps} props - Props contendo o artigo a ser exibido
  * @returns {JSX.Element} Cartão de artigo renderizado
  */
-export default function ArticleCard({ article }: ArticleCardProps) {
+const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
   return (
     // Container do cartão com bordas e efeito hover
     <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover">
-      {/* Link paraIndex a imagem de capa (envolve toda a imagem) */}
+      {/* Link para a imagem de capa (envolve toda a imagem) */}
       <Link href={`/artigos/${article.slug}`}>
-        {/* Container com aspecto 16:9 paraIndex a imagem */}
+        {/* Container com aspecto 16:9 para a imagem */}
         <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-700">
           {/* Verifica se existe imagem de capa */}
           {article.imagemCapa ? (
@@ -50,6 +54,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
               alt={article.titulo}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
             // Placeholder com ícone quando não há imagem
@@ -103,4 +108,10 @@ export default function ArticleCard({ article }: ArticleCardProps) {
       </div>
     </article>
   );
-}
+}, (prevProps, nextProps) => {
+  // Custom comparison function para otimizar re-renders
+  return prevProps.article.id === nextProps.article.id &&
+    prevProps.article.titulo === nextProps.article.titulo;
+});
+
+export default ArticleCard;
