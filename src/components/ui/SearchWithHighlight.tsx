@@ -89,31 +89,32 @@ export default function SearchWithHighlight({ results = [], onSearch }: SearchWi
     setIsOpen(false);
   };
 
-  /**
-   * Função paraIndex destacar termo buscado no texto.
-   * Usa regex paraIndex encontrar correspondências case-insensitive
-   * e envolve em tag mark paraIndex destaque visual.
-   * 
-   * @function highlightedText
-   * @param {string} text - Texto original
-   * @param {string} highlight - Termo a ser destacado
-   * @returns {React.ReactNode} Texto com highlight ou React nodes
-   */
-  const highlightedText = (text: string, highlight: string) => {
-    // Retorna texto original se não houver termo paraIndex highlight
+/**
+ * Função para destacar termo buscado no texto.
+ * Usa regex para encontrar correspondências case-insensitive
+ * e envolve em tag mark para destaque visual.
+ * 
+ * @function highlightedText
+ * @param {string} text - Texto original
+ * @param {string} highlight - Termo a ser destacado
+ * @returns {string} Texto com tags mark para highlight
+ */
+  const highlightedText = (text: string, highlight: string): string => {
+    // Retorna texto original se não houver termo para highlight
     if (!highlight.trim()) return text;
     
+    // Escapa caracteres especiais do regex no termo de busca
+    const escapedHighlight = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    
     // Divide texto em partes usando regex (captura grupo)
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    const parts = text.split(new RegExp(`(${escapedHighlight})`, 'gi'));
     
     // Mapeia partes: se for igual ao highlight, envolve em mark
     return parts.map((part, i) => 
-      part.toLowerCase() === highlight.toLowerCase() ? (
-        <mark key={i} className="bg-yellow-200 dark:bg-yellow-500/30 text-inherit px-0.5 rounded">
-          {part}
-        </mark>
-      ) : part
-    );
+      part.toLowerCase() === highlight.toLowerCase() 
+        ? `<mark key="${i}" class="bg-yellow-200 dark:bg-yellow-500/30 text-inherit px-0.5 rounded">${part}</mark>`
+        : part
+    ).join('');
   };
 
   return (
