@@ -173,20 +173,36 @@
       "fontes": ["ONU", "FMI"]
     },
     {
-      "id": "12",
-      "titulo": "Nacionalismo vs Globalismo: O Conflito Contemporâneo",
-      "slug": "nacionalismo-vs-globalismo-conflito",
-      "conteudo": "<p>O nacionalismo, movimento político que prioriza o interesse nacional",
-      "resumo": "Análise do conflito ideológico entre nacionalismo e globalismo",
-      "autor": "Vários autores",
-      "dataPublicacao": "2025-08-10",
-      "imagemCapa": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=450&fit=crop",
-      "categorias": ["Política", "Geopolítica"],
-      "tags": ["nacionalismo", "globalismo", "soberania", "cooperação", "conflito ideológico"],
+      "id": "13",
+      "titulo": "O Paradoxo Digital: Globalização vs. Neonacionalismo",
+      "slug": "paradoxo-digital-globalizacao-neonacionalismo",
+      "conteudo": "<p>Vivemos um paradoxo sem precedentes na história contemporânea. De um lado, os meios digitais — internet, redes sociais, telecomunicações — pressionam as populações para uma ampliação de contatos cada vez mais globais, rompendo fronteiras e conectando culturas. Do outro, governos e movimentos políticos respondem com protecionismo, neonacionalismo e fechamento de fronteiras.</p><p>A internet tem alto potencial de alcance e extensão da percepção humana, mas isso não impediu a ascensão de discursos xenófobos, intolerantes e nacionalistas em diversas partes do mundo. Compreender essa tensão revela que a globalização não é linear nem inevitável — ela gera reações de resistência.</p><h3>A Internet como Força Globalizante</h3><p>As tecnologias digitais permitem comunicação instantânea, acesso à informação global e formação de redes transnacionais. Redes sociais conectam pessoas de diferentes continentes, plataformas de vídeo disseminam cultura globalmente, e o comércio eletrônico elimina barreiras geográficas.</p><h3>A Reação Neonacionalista</h3><p>Paradoxalmente, a mesma era que trouxe conexão global testemunhou o ressurgimento de movimentos nacionalistas, discursos de \"primeiro nosso país\", políticas anti-imigração e xenofobia. Governos adotam posturas protecionistas, constroem muros físicos e digitais, e promovem intolerância cultural.</p><h3>O Sujeito Pós-Moderno Fragmentado</h3><p>O indivíduo contemporâneo está fragmentado entre identidade local e cidadania global, entre pertencimento nacional e exposição a culturas diversas. Este impasse amplifica incertezas e é uma das maiores marcas do nosso tempo.</p><h3>Incerteza como Marca do Tempo</h3><p>Este paradoxo entre globalização digital e neonacionalismo não é transitório — é estrutural. Compreendê-lo é essencial para enfrentar o aumento da xenofobia, da intolerância e dos movimentos desglobalizantes que caracterizam o início do século XXI.</p>",
+      "resumo": "Análise do paradoxo contemporâneo entre a globalização digital e a ascensão de movimentos neonacionalistas, protecionistas e xenófobos.",
+      "autor": "Pesquisa Globalismo",
+      "dataPublicacao": "2026-02-28",
+      "imagemCapa": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop",
+      "categorias": ["Cultura", "Geopolítica"],
+      "tags": ["globalização digital", "neonacionalismo", "xenofobia", "internet", "pós-modernidade"],
       "tempoLeitura": 6,
-      "visualizacoes": 1580,
+      "visualizacoes": 0,
       "destaque": false,
-      "fontes": ["Vários"]
+      "fontes": ["redalyc.org"]
+    },
+    {
+      "id": "14",
+      "titulo": "Justiça Social na Era Global: Caminhos Possíveis",
+      "slug": "justica-social-era-global-caminhos",
+      "conteudo": "<p>Diante das contradições apresentadas pelos processos de globalização, Ulrich Beck afirma que a justiça social precisa ser reformulada teórica e politicamente. Os textos analisados convergem para a necessidade de encontrar uma passagem sustentável para uma ordem social diferente.</p><h3>O Diagnóstico: O Que Precisa Mudar?</h3><p>A globalização, como está configurada atualmente, beneficia desproporcionalmente empresas transnacionais em detrimento de Estados, pequenas empresas e cidadãos comuns. O conceito de subpolítica demonstra que as regras do jogo econômico global são ditadas fora dos processos democráticos.</p><h3>Tributação Global e Justiça Fiscal</h3><p>Uma das propostas centrais é a implementação de mecanismos de tributação global que garantam que transnacionais contribuam proporcionalmente aos lucros auferidos em cada território. Isso inclui combater a arbitragem tributária e o conflito entre contribuintes virtuais e reais.</p><h3>Cidadania Para Além do Estado-Nação</h3><p>O modelo liberal clássico de cidadania está sob pressão quando o Estado perde capacidade regulatória. É necessário desenvolver mecanismos de cidadania que transcendam as fronteiras nacionais, garantindo direitos em escala global.</p><h3>Tecnologia como Inclusão</h3><p>As tecnologias digitais devem ser usadas como ferramenta de inclusão social e democratização, não apenas de consumo e massificação cultural. Isso implica acesso universal à internet, educação digital e regulação de plataformas.</p><h3>Globalização com Respeito à Diversidade</h3><p>Uma globalização verdadeiramente justa deve respeitar a diversidade cultural, promover intercâmbio equitativo entre nações e garantir que benefícios econômicos sejam distribuídos de forma mais igualitária.</p><h3>O Papel de Cada Cidadão</h3><p>Não há respostas simples — mas o debate informado é o primeiro passo. Cada cidadão tem o papel de se informar, participar politicamente e exigir mudanças que promovam uma globalização mais justa e sustentável.</p>",
+      "resumo": "Propostas e reflexões sobre caminhos para reformular a justiça social na era da globalização, incluindo tributação global, cidadania expandida e tecnologia inclusiva.",
+      "autor": "Pesquisa Globalismo",
+      "dataPublicacao": "2026-02-28",
+      "imagemCapa": "https://images.unsplash.com/photo-1573167507391-4e384aa77e79?w=800&h=450&fit=crop",
+      "categorias": ["Economia", "Política"],
+      "tags": ["justiça social", "globalização", "tributação global", "cidadania", "sustentabilidade"],
+      "tempoLeitura": 7,
+      "visualizacoes": 0,
+      "destaque": false,
+      "fontes": ["fiepr.org.br", "scielo.br"]
     }
   ]
 }
