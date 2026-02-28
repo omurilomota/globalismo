@@ -3,6 +3,8 @@ import { Merriweather, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import WebsiteSchema from "@/components/seo/WebsiteSchema";
 
 const merriweather = Merriweather({
   variable: "--font-merriweather",
@@ -50,6 +52,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <OrganizationSchema 
+          sameAs={[
+            "https://x.com/omurilomota",
+            "https://www.linkedin.com/in/murilo-henrique-622354358/",
+            "https://github.com/omurilomota"
+          ]}
+        />
+        <WebsiteSchema />
+      </head>
       <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`}>
         <Header />
         <main className="flex-1">
