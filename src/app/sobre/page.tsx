@@ -214,8 +214,114 @@ export default function SobrePage() {
 
       {/* Seção: Colaboradores */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Colaboradores</h2>
-        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Equipe e Colaboradores</h2>
+        
+        {/* Autores Principais */}
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Autores</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Murilo Mota */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                MM
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Murilo Mota</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Fundador e editor do Globalismo. Pesquisador independente interessado em geopolítica,
+                economia internacional e os impactos da globalização nas sociedades contemporâneas.
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href="https://github.com/omurilomota"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://x.com/omurilomota"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="Twitter/X"
+                >
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/murilo-henrique-622354358/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Matheus Pereira */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-green-900 dark:bg-green-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                MP
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Matheus Pereira</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Co-fundador e desenvolvedor do Globalismo. Engenheiro de software com foco em tecnologias web
+                e experiências digitais. Responsável pela arquitetura técnica e desenvolvimento da plataforma.
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href="https://github.com/MatheusPereira77"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+                <Link
+                  href="/contato"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="Contato"
+                >
+                  <Mail className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Colaborador de Pesquisa */}
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Colaboradores de Pesquisa</h3>
+        <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+          <div className="flex items-start gap-4">
+            <div className="w-16 h-16 rounded-full bg-purple-900 dark:bg-purple-700 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+              G
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Gian</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                Pesquisador e colaborador acadêmico. Contribuiu com a fundamentação teórica sobre globalização,
+                analisando obras de Ulrich Beck, John Locke e outros autores essenciais para o entendimento
+                do fenômeno global. Sua pesquisa foi crucial para estruturar os eixos temáticos do projeto.
+              </p>
+              <div className="flex gap-2">
+                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-300 text-xs rounded-full font-medium">
+                  Pesquisa Acadêmica
+                </span>
+                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-300 text-xs rounded-full font-medium">
+                  Teoria da Globalização
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mt-6">
           <div className="flex items-start gap-4 mb-4">
             <Users className="w-6 h-6 text-blue-900 dark:text-blue-400 flex-shrink-0 mt-1" />
             <div>

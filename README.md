@@ -162,6 +162,10 @@ MIT License - veja [LICENSE](LICENSE) para detalhes.
 | [@omurilomota](https://x.com/omurilomota) | |
 | [LinkedIn](https://www.linkedin.com/in/murilo-henrique-622354358/) | |
 
+## 🙏 Agradecimentos Especiais
+
+- **Gian** - Pesquisador e colaborador acadêmico. Contribuiu com a fundamentação teórica sobre globalização, analisando obras de Ulrich Beck, John Locke e outros autores essenciais para o entendimento do fenômeno global.
+
 ## 🤝 Contribuidores
 
 Agradecemos a todos que contribuem para o projeto! Veja como [contribuir](CONTRIBUTING.md).
