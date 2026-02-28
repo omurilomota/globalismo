@@ -24,7 +24,9 @@ import { sanitizeArticle } from '@/lib/sanitize';
 import CategoryTag from '@/components/ui/CategoryTag';
 import ArticleContent from '@/components/articles/ArticleContent';
 import Comments from '@/components/articles/Comments';
+import SocialShare from '@/components/articles/SocialShare';
 import Link from 'next/link';
+import { User, Calendar, Clock } from 'lucide-react';
 
 // Interface para tipagem dos parâmetros da rota dinâmica
 interface PageProps {
@@ -118,6 +120,9 @@ export default async function ArtigoPage({ params }: PageProps) {
   // Busca artigos relacionados baseados em categorias/tags em comum
   const relatedArticles = getRelatedArticles(slug);
 
+  // URL completa do artigo para compartilhamento
+  const articleUrl = getCanonicalUrl(`/artigos/${sanitizedArticle.slug}`);
+
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Cabeçalho do artigo com informações principais */}
@@ -128,37 +133,49 @@ export default async function ArtigoPage({ params }: PageProps) {
             <CategoryTag key={categoria} category={categoria} size="md" />
           ))}
         </div>
-        
+
         {/* Título principal do artigo */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           {sanitizedArticle.titulo}
         </h1>
-        
+
         {/* Resumo/subtítulo do artigo */}
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
           {sanitizedArticle.resumo}
         </p>
-        
+
         {/* Metadados: autor, data, tempo de leitura */}
-        <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400 text-sm">
-          <span className="font-medium text-gray-900 dark:text-gray-200">{sanitizedArticle.autor}</span>
-          <span>•</span>
-          <time dateTime={sanitizedArticle.dataPublicacao}>
-            {formatDate(sanitizedArticle.dataPublicacao)}
-          </time>
-          <span>•</span>
-          <span>{sanitizedArticle.tempoLeitura} min de leitura</span>
+        <div className="flex flex-wrap items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mb-6">
+          <span className="flex items-center gap-1.5">
+            <User className="w-4 h-4" />
+            <span className="font-medium text-gray-900 dark:text-gray-200">{sanitizedArticle.autor}</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Calendar className="w-4 h-4" />
+            <time dateTime={sanitizedArticle.dataPublicacao}>
+              {formatDate(sanitizedArticle.dataPublicacao)}
+            </time>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="w-4 h-4" />
+            <span>{sanitizedArticle.tempoLeitura} min de leitura</span>
+          </span>
+        </div>
+
+        {/* Botões de compartilhamento social */}
+        <div className="py-4 border-y border-gray-200 dark:border-gray-700">
+          <SocialShare title={sanitizedArticle.titulo} url={articleUrl} />
         </div>
       </header>
 
       {/* Conteúdo principal do artigo (HTML renderizado) */}
       <ArticleContent slug={sanitizedArticle.slug} content={sanitizedArticle.conteudo} />
 
-      {/* Rodapé do artigo com tags */}
+      {/* Tags do artigo */}
       <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-6">
           {sanitizedArticle.tags.map((tag) => (
-            <span 
+            <span
               key={tag}
               className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
             >
@@ -166,6 +183,37 @@ export default async function ArtigoPage({ params }: PageProps) {
             </span>
           ))}
         </div>
+
+        {/* Seção: Sobre o Autor */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Sobre o Autor</h3>
+          <div className="flex items-start gap-4">
+            <div className="w-16 h-16 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
+              {sanitizedArticle.autor.charAt(0)}
+            </div>
+            <div>
+              <p className="font-medium text-gray-900 dark:text-white mb-1">{sanitizedArticle.autor}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Pesquisador e colaborador do Globalismo. Especialista em análise de temas relacionados à
+                globalização, economia internacional e geopolítica.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Seção: Fontes e Referências */}
+        {sanitizedArticle.fontes && sanitizedArticle.fontes.length > 0 && (
+          <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Fontes e Referências</h3>
+            <ul className="space-y-2">
+              {sanitizedArticle.fontes.map((fonte, index) => (
+                <li key={index} className="text-sm text-gray-600 dark:text-gray-400">
+                  <span className="font-medium text-gray-900 dark:text-white">{fonte}.</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </footer>
 
       {/* Seção de artigos relacionados - apenas se houver artigos relacionados */}
