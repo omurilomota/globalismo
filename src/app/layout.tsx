@@ -3,7 +3,7 @@
  *
  * @module app/layout
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import type { Metadata } from "next";
@@ -72,6 +72,15 @@ export default function RootLayout({
           ]}
         />
         <WebsiteSchema />
+        {/* Umami Analytics */}
+        {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+          <script
+            async
+            defer
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || 'https://analytics.umami.is/script.js'}
+          />
+        )}
       </head>
 
       <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`} suppressHydrationWarning>
