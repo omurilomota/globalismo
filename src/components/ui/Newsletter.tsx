@@ -133,7 +133,7 @@ export default function Newsletter() {
         // Formulário de inscrição
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Container do input e botão */}
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col gap-1.5">
             {/* Input de email */}
             <input
               type="email"
@@ -148,7 +148,7 @@ export default function Newsletter() {
               }}
               placeholder="Seu melhor email"
               disabled={status === 'loading'}
-              className={`flex-1 px-3 py-1.5 text-sm rounded-lg border transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none ${
+              className={`w-full px-2.5 py-1.5 text-xs rounded-lg border transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none ${
                 status === 'error'
                   ? 'border-red-500 focus:ring-2 focus:ring-red-500'
                   : 'border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-400 focus:border-transparent'
@@ -159,15 +159,15 @@ export default function Newsletter() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-3 py-1.5 text-sm bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5 whitespace-nowrap"
+              className="w-full px-2.5 py-1.5 text-xs bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5 whitespace-nowrap"
             >
               {/* Spinner de carregamento ou ícone de envio */}
               {status === 'loading' ? (
-                <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <Send className="w-3.5 h-3.5 flex-shrink-0" />
-                  <span className="hidden sm:inline">Inscrever</span>
+                  <Send className="w-3 h-3 flex-shrink-0" />
+                  <span>Inscrever</span>
                 </>
               )}
             </button>
