@@ -60,14 +60,14 @@ const SECURITY_HEADERS = {
 /**
  * Middleware principal do Next.js.
  * Executa em cada requisição.
- * 
+ *
  * @function middleware
  * @param {NextRequest} request - Objeto de requisição do Next.js
  * @returns {NextResponse} Resposta com headers de segurança ou erro de rate limit
  */
 export function middleware(request: NextRequest): NextResponse | undefined {
   const { pathname } = request.nextUrl;
-  
+
   // 1. Aplica rate limiting para APIs
   if (pathname.startsWith('/api/')) {
     const rateLimitResponse = rateLimitMiddleware(request);
@@ -75,7 +75,7 @@ export function middleware(request: NextRequest): NextResponse | undefined {
       return rateLimitResponse;
     }
   }
-  
+
   // 2. Redirecionamentos forçados (HTTP -> HTTPS em produção)
   // Comentar em desenvolvimento
   // if (process.env.NODE_ENV === 'production' && request.headers.get('x-forwarded-proto') !== 'https') {
@@ -83,26 +83,31 @@ export function middleware(request: NextRequest): NextResponse | undefined {
   //   url.protocol = 'https:';
   //   return NextResponse.redirect(url);
   // }
-  
+
   // 3. CORS preflight para APIs
   if (pathname.startsWith('/api/') && request.method === 'OPTIONS') {
     const origin = request.headers.get('origin');
     const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
-    
+
     const response = new NextResponse(null, { status: 204 });
-    
+
     if (isAllowed) {
       response.headers.set('Access-Control-Allow-Origin', origin);
       response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
       response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       response.headers.set('Access-Control-Max-Age', '86400');
     }
-    
+
     return response;
   }
-  
-  // 4. Continua para próximo middleware se nenhuma condição acima
-  return NextResponse.next();
+
+  // 4. Aplica headers de segurança em todas as respostas
+  const response = NextResponse.next();
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
+
+  return response;
 }
 
 /**

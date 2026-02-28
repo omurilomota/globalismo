@@ -18,19 +18,12 @@
 
 'use client';
 
-// Hooks React utilizados no componente
-import { useState, useEffect } from 'react';
-
-// Componente Link do Next.js para navegação interna
+import { useState } from 'react';
 import Link from 'next/link';
-
-// Hook usePathname do Next.js para obter a rota atual
 import { usePathname } from 'next/navigation';
-
-// Ícones da biblioteca Lucide React
+import { useTheme } from 'next-themes';
 import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X } from 'lucide-react';
 
-// Array de links de navegação do site
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/sobre', label: 'Sobre', icon: BookOpen },
@@ -48,43 +41,17 @@ const navLinks = [
  * - Destaque para página atual
  */
 export default function Header() {
-  // Estado para controlar a abertura/fechamento do menu mobile
   const [isOpen, setIsOpen] = useState(false);
-
-  // Hook que retorna o pathname atual da rota
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
 
-  // Estado para gerenciar tema
-  const [isDark, setIsDark] = useState(false);
-
-  // useEffect para aplicar o tema inicial ao carregar a página
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add('dark');
-      setIsDark(true);
-    }
-  }, []);
-
-  // Função para alternar entre tema claro e escuro
   const toggleDarkMode = () => {
-    const currentlyDark = document.documentElement.classList.contains('dark');
-
-    if (currentlyDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDark(true);
-    }
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  // Função para fechar o drawer/menu mobile
   const closeDrawer = () => setIsOpen(false);
+
+  const isDark = theme === 'dark';
 
   return (
     <>

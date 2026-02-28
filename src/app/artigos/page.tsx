@@ -31,9 +31,8 @@ export const metadata: Metadata = {
 };
 
 // Interface para tipagem dos parâmetros de query string da URL
-// Next.js 15+ trata searchParams como Promise
 interface PageProps {
-  searchParams: Promise<{ page?: string; categoria?: string; busca?: string }>;
+  searchParams: { page?: string; categoria?: string; busca?: string };
 }
 
 /**
@@ -48,13 +47,10 @@ interface PageProps {
  * @returns {JSX.Element} Página renderizada com artigos filtrados/paginados
  */
 export default async function ArtigosPage({ searchParams }: PageProps) {
-  // Aguarda a resolução dos parâmetros de query string
-  const params = await searchParams;
-  
-  // Extrai e converte parâmetros da URL
-  const page = parseInt(params.page || '1');
-  const categoria = params.categoria;
-  const busca = params.busca;
+  // Extrai parâmetros de query string
+  const page = parseInt(searchParams.page || '1');
+  const categoria = searchParams.categoria;
+  const busca = searchParams.busca;
 
   // Busca artigos com paginação e filtros aplicados
   const result = getPaginatedArticles({

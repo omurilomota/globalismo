@@ -27,9 +27,8 @@ import Comments from '@/components/articles/Comments';
 import Link from 'next/link';
 
 // Interface para tipagem dos parâmetros da rota dinâmica
-// Next.js 15+ trata params como Promise
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 /**
@@ -55,9 +54,9 @@ export async function generateStaticParams() {
  * @returns {Promise<Metadata>} Metadados SEO para a página
  */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Aguarda resolução dos parâmetros da rota
-  const { slug } = await params;
-  
+  // Extrai o slug dos parâmetros
+  const { slug } = params;
+
   // Busca o artigo pelo slug
   const article = getArticleBySlug(slug);
 
@@ -102,9 +101,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
  * @returns {JSX.Element} Página do artigo renderizado
  */
 export default async function ArtigoPage({ params }: PageProps) {
-  // Aguarda resolução dos parâmetros da rota
-  const { slug } = await params;
-  
+  // Extrai o slug dos parâmetros
+  const { slug } = params;
+
   // Busca o artigo pelo slug
   const article = getArticleBySlug(slug);
 
