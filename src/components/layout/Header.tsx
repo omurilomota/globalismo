@@ -22,7 +22,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X } from 'lucide-react';
+import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X, Search } from 'lucide-react';
+import SearchBar from '@/components/ui/SearchBar';
 
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
@@ -67,7 +68,7 @@ export default function Header() {
                 Globalismo
               </span>
             </Link>
-            
+
             {/* Navegação desktop - oculta em mobile, visível a partir de md (768px) */}
             <nav className="hidden md:flex items-center space-x-1">
               {/* Mapeia os links de navegação */}
@@ -75,9 +76,9 @@ export default function Header() {
                 const Icon = link.icon;
                 const isActive = pathname === link.href;
                 return (
-                  <Link 
+                  <Link
                     key={link.href}
-                    href={link.href} 
+                    href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? 'text-blue-900 dark:text-white'
@@ -89,7 +90,16 @@ export default function Header() {
                   </Link>
                 );
               })}
-              
+
+              {/* Botão de busca */}
+              <button
+                onClick={() => document.getElementById('header-search')?.focus()}
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Buscar"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+
               {/* Botão de alternância de tema (dark mode) */}
               <button
                 onClick={toggleDarkMode}
@@ -119,15 +129,24 @@ export default function Header() {
                   <Moon className="w-5 h-5" />
                 )}
               </button>
-              
+
               {/* Botão de menu hamburger - abre o drawer mobile */}
-              <button 
+              <button
                 onClick={() => setIsOpen(true)}
                 className="p-2 rounded-lg text-gray-600 dark:text-gray-300"
                 aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Barra de busca - visível apenas em desktop */}
+        <div className="hidden md:block border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div id="header-search">
+              <SearchBar />
             </div>
           </div>
         </div>
