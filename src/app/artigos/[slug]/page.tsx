@@ -25,6 +25,7 @@ import CategoryTag from '@/components/ui/CategoryTag';
 import ArticleContent from '@/components/articles/ArticleContent';
 import Comments from '@/components/articles/Comments';
 import SocialShare from '@/components/articles/SocialShare';
+import ViewTracker from '@/components/articles/ViewTracker';
 import Link from 'next/link';
 import { User, Calendar, Clock } from 'lucide-react';
 
@@ -36,7 +37,7 @@ interface PageProps {
 /**
  * Gera os parâmetros estáticos para todas as páginas de artigos.
  * Função do Next.js para Static Site Generation (SSG).
- * 
+ *
  * @function generateStaticParams
  * @returns {Promise<Array<{slug: string}>>} Array de objetos com slugs para pré-renderização
  */
@@ -50,7 +51,7 @@ export async function generateStaticParams() {
 /**
  * Gera metadados SEO dinâmicos para cada artigo.
  * Inclui título, descrição, keywords, OpenGraph e URL canônica.
- * 
+ *
  * @function generateMetadata
  * @param {PageProps} props - Parâmetros da página incluindo slug do artigo
  * @returns {Promise<Metadata>} Metadados SEO para a página
@@ -90,6 +91,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 /**
+ * Registra visualização do artigo (client-side)
+ */
+async function registerView(slug: string) {
+  try {
+    await fetch('/api/views', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    });
+  } catch (err) {
+    console.error('Erro ao registrar visualização:', err);
+  }
+}
+
+/**
  * Componente de página individual de artigo.
  * Renderiza o artigo completo com:
  * - Cabeçalho (título, resumo, autor, data, tempo de leitura)
@@ -125,6 +141,9 @@ export default async function ArtigoPage({ params }: PageProps) {
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Componente para registrar visualização */}
+      <ViewTracker slug={sanitizedArticle.slug} />
+
       {/* Cabeçalho do artigo com informações principais */}
       <header className="mb-8">
         {/* Categorias do artigo */}
