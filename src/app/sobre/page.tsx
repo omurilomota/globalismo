@@ -212,12 +212,12 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Seção: Colaboradores */}
+      {/* Seção: Sobre os Autores */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Equipe e Colaboradores</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Quem Somos</h2>
         
         {/* Autores Principais */}
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Autores</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Criadores do Projeto</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* Murilo Mota */}
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
@@ -227,8 +227,7 @@ export default function SobrePage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Murilo Mota</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Fundador e editor do Globalismo. Pesquisador independente interessado em geopolítica,
-                economia internacional e os impactos da globalização nas sociedades contemporâneas.
+                Criador e editor do Globalismo. Responsável pela concepção do projeto, curadoria de conteúdo e direção editorial.
               </p>
               <div className="flex gap-3">
                 <a
@@ -270,8 +269,7 @@ export default function SobrePage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Matheus Pereira</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Co-fundador e desenvolvedor do Globalismo. Engenheiro de software com foco em tecnologias web
-                e experiências digitais. Responsável pela arquitetura técnica e desenvolvimento da plataforma.
+                Co-criador e desenvolvedor do Globalismo. Engenheiro de software responsável pela arquitetura técnica e desenvolvimento da plataforma.
               </p>
               <div className="flex gap-3">
                 <a
@@ -296,7 +294,7 @@ export default function SobrePage() {
         </div>
 
         {/* Colaborador de Pesquisa */}
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Colaboradores de Pesquisa</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Colaboradores</h3>
         <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
           <div className="flex items-start gap-4">
             <div className="w-16 h-16 rounded-full bg-purple-900 dark:bg-purple-700 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
