@@ -63,9 +63,12 @@ export interface IArticle {
   
   /** Número de visualizações do artigo */
   visualizacoes: number;
-  
+
   /** Indica se o artigo deve ser exibido em destaque na home */
   destaque: boolean;
+
+  /** Fontes e referências utilizadas no artigo (opcional) */
+  fontes?: string[];
 }
 
 /**

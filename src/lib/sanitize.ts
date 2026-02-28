@@ -188,6 +188,7 @@ export function sanitizeArticle<T extends {
   tempoLeitura?: number;
   id?: string;
   imagemCapa?: string;
+  fontes?: string[];
 }>(article: T): T & {
   titulo: string;
   resumo: string;
@@ -195,6 +196,7 @@ export function sanitizeArticle<T extends {
   autor: string;
   tags: string[];
   categorias: string[];
+  fontes: string[];
 } {
   return {
     ...article,
@@ -204,6 +206,7 @@ export function sanitizeArticle<T extends {
     autor: sanitizeText(article.autor || '').slice(0, 100),
     tags: (article.tags || []).map(tag => sanitizeText(tag).slice(0, 50)).filter(Boolean),
     categorias: (article.categorias || []).map(cat => sanitizeText(cat).slice(0, 50)).filter(Boolean),
+    fontes: (article.fontes || []).map(f => sanitizeText(f).slice(0, 200)).filter(Boolean),
   };
 }
 
