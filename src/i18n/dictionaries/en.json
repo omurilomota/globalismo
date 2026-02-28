@@ -1,4 +1,10 @@
 {
+  "metadata": {
+    "title": "Globalism - Reflections on Globalization",
+    "template": "%s | Globalism",
+    "description": "A space for critical reflection on the impacts of globalization on economy, politics, culture and society. Analyses based on reliable academic and journalistic sources.",
+    "keywords": "globalization, economy, politics, culture, society, world, geopolitics, world order"
+  },
   "common": {
     "home": "Home",
     "about": "About",

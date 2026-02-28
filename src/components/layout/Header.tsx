@@ -19,18 +19,13 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import Link from '@/i18n/routing';
+import { usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X, Search } from 'lucide-react';
 import SearchBar from '@/components/ui/SearchBar';
-
-const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/sobre', label: 'Sobre', icon: BookOpen },
-  { href: '/artigos', label: 'Artigos', icon: FileText },
-  { href: '/contato', label: 'Contato', icon: Mail },
-];
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 /**
  * Componente principal de cabeçalho/navegação.
@@ -39,12 +34,22 @@ const navLinks = [
  * - Navegação desktop com links para as principais páginas
  * - Menu mobile (drawer) responsivo
  * - Botão de alternância de tema (dark/light mode)
+ * - Seletor de idioma
  * - Destaque para página atual
  */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const t = useTranslations('header');
+  const tCommon = useTranslations('common');
+
+  const navLinks = [
+    { href: '/', label: tCommon('home'), icon: Home },
+    { href: '/sobre', label: tCommon('about'), icon: BookOpen },
+    { href: '/artigos', label: tCommon('articles'), icon: FileText },
+    { href: '/contato', label: tCommon('contact'), icon: Mail },
+  ];
 
   const toggleDarkMode = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -95,16 +100,21 @@ export default function Header() {
               <button
                 onClick={() => document.getElementById('header-search')?.focus()}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Buscar"
+                aria-label={t('search')}
               >
                 <Search className="w-5 h-5" />
               </button>
+
+              {/* Seletor de idioma */}
+              <div className="ml-2">
+                <LanguageSwitcher />
+              </div>
 
               {/* Botão de alternância de tema (dark mode) */}
               <button
                 onClick={toggleDarkMode}
                 className="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Alternar tema"
+                aria-label={t('toggle_theme')}
               >
                 {/* Condicional: mostra sol (claro) ou lua (escuro) */}
                 {isDark ? (
@@ -117,11 +127,16 @@ export default function Header() {
 
             {/* Container de botões para mobile - visível apenas em mobile */}
             <div className="flex items-center gap-2 md:hidden">
+              {/* Seletor de idioma mobile */}
+              <div className="hidden sm:block">
+                <LanguageSwitcher />
+              </div>
+
               {/* Botão de dark mode para mobile */}
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
-                aria-label="Alternar tema"
+                aria-label={t('toggle_theme')}
               >
                 {isDark ? (
                   <Sun className="w-5 h-5" />
@@ -134,7 +149,7 @@ export default function Header() {
               <button
                 onClick={() => setIsOpen(true)}
                 className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
-                aria-label="Abrir menu"
+                aria-label={t('open_menu')}
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -166,13 +181,13 @@ export default function Header() {
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <Globe className="w-6 h-6 text-blue-900 dark:text-blue-400" />
-            <span className="text-lg font-bold text-blue-900 dark:text-white">Menu</span>
+            <span className="text-lg font-bold text-blue-900 dark:text-white">{t('menu')}</span>
           </div>
           {/* Botão de fechar (X) */}
           <button
             onClick={closeDrawer}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-            aria-label="Fechar menu"
+            aria-label={t('close_menu')}
           >
             <X className="w-6 h-6" />
           </button>

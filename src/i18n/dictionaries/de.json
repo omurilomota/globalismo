@@ -1,4 +1,10 @@
 {
+  "metadata": {
+    "title": "Globalismus - Reflexionen über die Globalisierung",
+    "template": "%s | Globalismus",
+    "description": "Ein Raum für kritische Reflexion über die Auswirkungen der Globalisierung auf Wirtschaft, Politik, Kultur und Gesellschaft. Analysen basierend auf zuverlässigen akademischen und journalistischen Quellen.",
+    "keywords": "Globalisierung, Wirtschaft, Politik, Kultur, Gesellschaft, Welt, Geopolitik, Weltordnung"
+  },
   "common": {
     "home": "Startseite",
     "about": "Über uns",
