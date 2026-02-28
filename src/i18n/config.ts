@@ -27,3 +27,5 @@ export const localeDirections: Record<Locale, string> = {
   de: 'ltr',
   es: 'ltr',
 };
+
+export const localePrefix = 'as-needed' as const;
