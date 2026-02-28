@@ -184,19 +184,33 @@ export default async function ArtigoPage({ params }: PageProps) {
           ))}
         </div>
 
-        {/* Seção: Sobre o Autor */}
+        {/* Seção: Sobre os Autores */}
         <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Sobre o Autor</h3>
-          <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
-              {sanitizedArticle.autor.charAt(0)}
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Sobre os Autores</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+                MM
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Murilo Mota</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Pesquisador e colaborador. Especialista em análise de temas relacionados à
+                  globalização, economia internacional e geopolítica.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="font-medium text-gray-900 dark:text-white mb-1">{sanitizedArticle.autor}</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Pesquisador e colaborador do Globalismo. Especialista em análise de temas relacionados à
-                globalização, economia internacional e geopolítica.
-              </p>
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-green-900 dark:bg-green-700 flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+                MP
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Matheus Pereira</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Desenvolvedor e co-fundador. Engenheiro de software focado em tecnologias web
+                  e experiências digitais.
+                </p>
+              </div>
             </div>
           </div>
         </div>

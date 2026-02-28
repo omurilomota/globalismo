@@ -153,13 +153,18 @@ globalismo/
 
 MIT License - veja [LICENSE](LICENSE) para detalhes.
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
-**Murilo Mota**
+| | |
+|---|---|
+| **Murilo Mota** | **Matheus Pereira** |
+| [@omurilomota](https://github.com/omurilomota) | [@MatheusPereira77](https://github.com/MatheusPereira77) |
+| [@omurilomota](https://x.com/omurilomota) | |
+| [LinkedIn](https://www.linkedin.com/in/murilo-henrique-622354358/) | |
 
-- GitHub: [@omurilomota](https://github.com/omurilomota)
-- Twitter/X: [@omurilomota](https://x.com/omurilomota)
-- LinkedIn: [murilo-henrique](https://www.linkedin.com/in/murilo-henrique-622354358/)
+## 🤝 Contribuidores
+
+Agradecemos a todos que contribuem para o projeto! Veja como [contribuir](CONTRIBUTING.md).
 
 ## 🔗 Links Úteis
 

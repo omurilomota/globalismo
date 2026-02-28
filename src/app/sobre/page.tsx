@@ -101,17 +101,18 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Seção: Sobre o Autor */}
+      {/* Seção: Sobre os Autores */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Sobre o Autor</h2>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="w-24 h-24 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
-              MM
-            </div>
-            <div className="flex-1">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Sobre os Autores</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Murilo Mota */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                MM
+              </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Murilo Mota</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                 Fundador e editor do Globalismo. Pesquisador independente interessado em geopolítica,
                 economia internacional e os impactos da globalização nas sociedades contemporâneas.
               </p>
@@ -143,10 +144,35 @@ export default function SobrePage() {
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Matheus Pereira */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-green-900 dark:bg-green-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                MP
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Matheus Pereira</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Co-fundador e desenvolvedor do Globalismo. Engenheiro de software com foco em tecnologias web
+                e experiências digitais. Responsável pela arquitetura técnica e desenvolvimento da plataforma.
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href="https://github.com/MatheusPereira77"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
                 <Link
                   href="/contato"
                   className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                  aria-label="Email"
+                  aria-label="Contato"
                 >
                   <Mail className="w-5 h-5" />
                 </Link>
