@@ -1,0 +1,119 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "articles": "Articles",
+    "contact": "Contact",
+    "search": "Search",
+    "language": "Language",
+    "categories": "Categories",
+    "navigation": "Navigation",
+    "all": "All"
+  },
+  "header": {
+    "search_placeholder": "Search articles...",
+    "toggle_theme": "Toggle theme",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "menu": "Menu"
+  },
+  "home": {
+    "latest_articles": "Latest Articles",
+    "view_all": "View all",
+    "most_read": "Most Read",
+    "newsletter_title": "Newsletter",
+    "newsletter_description": "Receive the latest analyses on globalism directly in your email.",
+    "newsletter_placeholder": "Your best email",
+    "newsletter_subscribe": "Subscribe",
+    "newsletter_success": "Thank you! You have been successfully subscribed.",
+    "newsletter_error": "Error subscribing. Please try again."
+  },
+  "articles": {
+    "page_title": "Articles",
+    "page_description": "Explore our collection of articles on globalization and its impacts on society.",
+    "no_articles": "No articles found.",
+    "active_filters": "Active filters:",
+    "category_filter": "Category: {category}",
+    "search_filter": "Search: {query}",
+    "reading_time": "{minutes} min",
+    "views": "{count} views",
+    "back_to_articles": "Back to Articles"
+  },
+  "article": {
+    "reading_time": "{minutes} min read",
+    "published": "Published on",
+    "author": "Author",
+    "share": "Share",
+    "share_on_twitter": "Share on Twitter/X",
+    "share_on_facebook": "Share on Facebook",
+    "share_on_linkedin": "Share on LinkedIn",
+    "share_copy_link": "Copy link",
+    "link_copied": "Link copied!",
+    "sources": "Sources and References",
+    "related_articles": "Related Articles",
+    "comments": "Comments",
+    "comments_loading": "Loading comments...",
+    "comments_unavailable_title": "Comments coming soon",
+    "comments_unavailable_desc": "Comments are being configured. Soon you will be able to join the discussion using your GitHub account."
+  },
+  "about": {
+    "page_title": "About Globalism",
+    "page_subtitle": "A space for critical reflection on the impacts of globalization on economy, politics, culture and contemporary society.",
+    "mission_title": "Mission",
+    "mission_desc": "Promote critical understanding of globalization processes, presenting multiple perspectives and analyses based on reliable academic and journalistic sources.",
+    "education_title": "Education",
+    "education_desc": "Offer quality, accessible and free educational content for students, researchers and anyone interested in better understanding the globalized world.",
+    "critical_thinking_title": "Critical Thinking",
+    "critical_thinking_desc": "Stimulate critical thinking and informed debate on the challenges and opportunities of globalization in the 21st century.",
+    "topics_title": "Topics Covered",
+    "creators_title": "Project Creators",
+    "sources_title": "Sources and References",
+    "sources_desc": "We use reliable academic and journalistic sources to support our analyses:",
+    "about_us_title": "Who We Are",
+    "about_us_desc": "We are researchers and enthusiasts dedicated to promoting critical understanding of globalization and its impacts on contemporary society."
+  },
+  "contact": {
+    "page_title": "Contact",
+    "page_description": "Get in touch with us for questions, suggestions or partnerships.",
+    "form_title": "Send a message",
+    "name_label": "Name",
+    "name_placeholder": "Your name",
+    "email_label": "Email",
+    "email_placeholder": "your@email.com",
+    "message_label": "Message",
+    "message_placeholder": "Your message...",
+    "send_button": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Error sending. Please try again."
+  },
+  "footer": {
+    "description": "A space for critical reflection on the impacts of globalization on economy, politics, culture and contemporary society.",
+    "all_rights": "All rights reserved.",
+    "economy": "Economy",
+    "politics": "Politics",
+    "culture": "Culture",
+    "geopolitics": "Geopolitics"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of"
+  },
+  "categories": {
+    "economia": "Economy",
+    "politica": "Politics",
+    "cultura": "Culture",
+    "geopolitica": "Geopolitics",
+    "sociedade": "Society",
+    "historia": "History",
+    "filosofia": "Philosophy"
+  },
+  "errors": {
+    "not_found_title": "Page not found",
+    "not_found_desc": "The page you are looking for does not exist or has been moved.",
+    "go_home": "Go to homepage",
+    "back": "Back"
+  }
+}

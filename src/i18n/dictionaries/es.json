@@ -1,0 +1,119 @@
+{
+  "common": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "articles": "Artículos",
+    "contact": "Contacto",
+    "search": "Buscar",
+    "language": "Idioma",
+    "categories": "Categorías",
+    "navigation": "Navegación",
+    "all": "Todas"
+  },
+  "header": {
+    "search_placeholder": "Buscar artículos...",
+    "toggle_theme": "Cambiar tema",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú",
+    "menu": "Menú"
+  },
+  "home": {
+    "latest_articles": "Últimos Artículos",
+    "view_all": "Ver todos",
+    "most_read": "Más Leídos",
+    "newsletter_title": "Newsletter",
+    "newsletter_description": "Reciba los últimos análisis sobre globalismo directamente en su correo electrónico.",
+    "newsletter_placeholder": "Su mejor email",
+    "newsletter_subscribe": "Suscribirse",
+    "newsletter_success": "¡Gracias! Ha sido suscrito con éxito.",
+    "newsletter_error": "Error al suscribir. Intente nuevamente."
+  },
+  "articles": {
+    "page_title": "Artículos",
+    "page_description": "Explore nuestra colección de artículos sobre globalización y sus impactos en la sociedad.",
+    "no_articles": "No se encontraron artículos.",
+    "active_filters": "Filtros activos:",
+    "category_filter": "Categoría: {category}",
+    "search_filter": "Búsqueda: {query}",
+    "reading_time": "{minutes} min",
+    "views": "{count} visualizaciones",
+    "back_to_articles": "Volver a Artículos"
+  },
+  "article": {
+    "reading_time": "{minutes} min de lectura",
+    "published": "Publicado el",
+    "author": "Autor",
+    "share": "Compartir",
+    "share_on_twitter": "Compartir en Twitter/X",
+    "share_on_facebook": "Compartir en Facebook",
+    "share_on_linkedin": "Compartir en LinkedIn",
+    "share_copy_link": "Copiar enlace",
+    "link_copied": "¡Enlace copiado!",
+    "sources": "Fuentes y Referencias",
+    "related_articles": "Artículos Relacionados",
+    "comments": "Comentarios",
+    "comments_loading": "Cargando comentarios...",
+    "comments_unavailable_title": "Comentarios próximamente",
+    "comments_unavailable_desc": "Los comentarios están siendo configurados. Pronto podrá participar en la discusión usando su cuenta de GitHub."
+  },
+  "about": {
+    "page_title": "Acerca de Globalismo",
+    "page_subtitle": "Un espacio para la reflexión crítica sobre los impactos de la globalización en la economía, política, cultura y sociedad contemporánea.",
+    "mission_title": "Misión",
+    "mission_desc": "Promover la comprensión crítica de los procesos de globalización, presentando múltiples perspectivas y análisis basados en fuentes académicas y periodísticas confiables.",
+    "education_title": "Educación",
+    "education_desc": "Ofrecer contenido educativo de calidad, accesible y gratuito para estudiantes, investigadores y cualquier persona interesada en comprender mejor el mundo globalizado.",
+    "critical_thinking_title": "Pensamiento Crítico",
+    "critical_thinking_desc": "Estimular el pensamiento crítico y el debate informado sobre los desafíos y oportunidades de la globalización en el siglo XXI.",
+    "topics_title": "Temas Abordados",
+    "creators_title": "Creadores del Proyecto",
+    "sources_title": "Fuentes y Referencias",
+    "sources_desc": "Utilizamos fuentes académicas y periodísticas confiables para fundamentar nuestros análisis:",
+    "about_us_title": "Quiénes Somos",
+    "about_us_desc": "Somos investigadores y entusiastas dedicados a promover la comprensión crítica de la globalización y sus impactos en la sociedad contemporánea."
+  },
+  "contact": {
+    "page_title": "Contacto",
+    "page_description": "Contáctenos para dudas, sugerencias o asociaciones.",
+    "form_title": "Envíe un mensaje",
+    "name_label": "Nombre",
+    "name_placeholder": "Su nombre",
+    "email_label": "Email",
+    "email_placeholder": "su@email.com",
+    "message_label": "Mensaje",
+    "message_placeholder": "Su mensaje...",
+    "send_button": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado con éxito!",
+    "error": "Error al enviar. Intente nuevamente."
+  },
+  "footer": {
+    "description": "Un espacio para la reflexión crítica sobre los impactos de la globalización en la economía, política, cultura y sociedad contemporánea.",
+    "all_rights": "Todos los derechos reservados.",
+    "economy": "Economía",
+    "politics": "Política",
+    "culture": "Cultura",
+    "geopolitics": "Geopolítica"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página",
+    "of": "de"
+  },
+  "categories": {
+    "economia": "Economía",
+    "politica": "Política",
+    "cultura": "Cultura",
+    "geopolitica": "Geopolítica",
+    "sociedade": "Sociedad",
+    "historia": "Historia",
+    "filosofia": "Filosofía"
+  },
+  "errors": {
+    "not_found_title": "Página no encontrada",
+    "not_found_desc": "La página que busca no existe o ha sido movida.",
+    "go_home": "Ir a la página de inicio",
+    "back": "Volver"
+  }
+}
