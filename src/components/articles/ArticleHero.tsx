@@ -18,7 +18,7 @@ interface ArticleHeroProps {
 
 export default function ArticleHero({ article }: ArticleHeroProps) {
   return (
-    <section className="relative text-white rounded-xl overflow-hidden mb-10 group">
+    <section className="relative text-white rounded-xl overflow-hidden mb-10 group" suppressHydrationWarning>
       <div className="absolute inset-0">
         {article.imagemCapa ? (
           <Image

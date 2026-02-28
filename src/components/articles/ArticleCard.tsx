@@ -42,7 +42,7 @@ interface ArticleCardProps {
 const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
   return (
     // Container do cartão com bordas e efeito hover
-    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover">
+    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover" suppressHydrationWarning>
       {/* Link para a imagem de capa (envolve toda a imagem) */}
       <Link href={`/artigos/${article.slug}`}>
         {/* Container com aspecto 16:9 para a imagem */}

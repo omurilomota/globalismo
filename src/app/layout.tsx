@@ -74,7 +74,7 @@ export default function RootLayout({
         <WebsiteSchema />
       </head>
 
-      <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`}>
+      <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <main className="flex-1">
