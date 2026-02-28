@@ -41,8 +41,8 @@ interface ArticleCardProps {
  */
 const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
   return (
-    // Container do cartão com bordas e efeito hover
-    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover" suppressHydrationWarning>
+    // Container do cartão com bordas e efeito hover - h-full para alinhar altura
+    <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover h-full flex flex-col" suppressHydrationWarning>
       {/* Link para a imagem de capa (envolve toda a imagem) */}
       <Link href={`/artigos/${article.slug}`}>
         {/* Container com aspecto 16:9 para a imagem */}
@@ -87,12 +87,12 @@ const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
         </Link>
         
         {/* Resumo do artigo com limite de linhas */}
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2 flex-grow">
           {article.resumo}
         </p>
-        
-        {/* Metadados: autor, tempo de leitura, data */}
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-3 border-t border-gray-100 dark:border-gray-700">
+
+        {/* Metadados: autor, tempo de leitura, data - sempre no final do card */}
+        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-3 border-t border-gray-100 dark:border-gray-700 mt-auto">
           <span className="flex items-center gap-1">
             <User className="w-3 h-3" />
             {article.autor}
