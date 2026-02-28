@@ -1,5 +1,5 @@
 /**
- * @fileoverview Componente de tabela de conteúdos paraIndex artigos.
+ * @fileoverview Componente de tabela de conteúdos para artigos.
  * 
  * Este componente é responsável por:
  * - Extrair títulos (h2, h3) do conteúdo HTML do artigo
@@ -8,10 +8,11 @@
  * - Permitir navegação suave ao clicar em um título
  * 
  * Utiliza 'use client' pois requer:
- * - useMemo paraIndex parsing do HTML
- * - useState paraIndex gerenciar heading ativo
- * - useEffect paraIndex IntersectionObserver
- * - DOMParser paraIndex extrair títulos
+ * - useMemo para extração de títulos via regex
+ * - useState para gerenciar heading ativo
+ * - useEffect para IntersectionObserver
+ * 
+ * Nota: O conteúdo é esperado já com IDs nos headings (gerados no servidor).
  * 
  * @module components/ui/TableOfContents
  * @author Globalismo
@@ -20,12 +21,12 @@
 
 'use client';
 
-// Hooks React paraIndex estado, memoização e efeitos colaterais
+// Hooks React para estado, memoização e efeitos colaterais
 import { useMemo, useState, useEffect } from 'react';
 
-// Interface paraIndex item da tabela de conteúdos
+// Interface para item da tabela de conteúdos
 interface TocItem {
-  // ID único do heading (gerado pelo ArticleContent)
+  // ID único do heading (gerado pelo sanitizeHtml)
   id: string;
   // Texto/conteúdo do título
   text: string;
@@ -35,41 +36,48 @@ interface TocItem {
 
 // Interface de props do componente
 interface TableOfContentsProps {
-  // Conteúdo HTML do artigo paraIndex extrair títulos
+  // Conteúdo HTML do artigo para extrair títulos
   content: string;
 }
 
 /**
  * Componente de tabela de conteúdos.
  * Extrai títulos do artigo e exibe navegação lateral.
- * Utiliza IntersectionObserver paraIndex destacar seção ativa.
+ * Utiliza IntersectionObserver para destacar seção ativa.
+ * 
+ * Usa regex para extrair headings (server-side friendly).
  * 
  * @component
  * @param {TableOfContentsProps} props - Props contendo o conteúdo do artigo
  * @returns {JSX.Element | null} Tabela de conteúdos ou null se houver menos de 2 títulos
  */
 export default function TableOfContents({ content }: TableOfContentsProps) {
-  // Memoiza extração de títulos paraIndex evitar re-processamento desnecessário
+  // Memoiza extração de títulos para evitar re-processamento desnecessário
   const headings = useMemo<TocItem[]>(() => {
-    // Parser DOM paraIndex extrair elementos do HTML
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    const elements = doc.querySelectorAll('h2, h3');
+    // Extrai títulos usando regex - funciona server-side
+    const headingRegex = /<(h[23])(?:\s+[^>]*)?(?:\s+id="([^"]*)")?[^>]*>([^<]*)<\/\1>/gi;
+    const items: TocItem[] = [];
+    let match;
     
-    // Mapeia elementos paraIndex formato de item da tabela
-    return Array.from(elements).map((el, index) => ({
-      id: `heading-${index}`,
-      text: el.textContent || '',
-      level: parseInt(el.tagName.charAt(1)),
-    }));
+    while ((match = headingRegex.exec(content)) !== null) {
+      const [, tag, id, text] = match;
+      const level = parseInt(tag.charAt(1));
+      items.push({
+        id: id || `heading-${items.length}`,
+        text: text.trim(),
+        level,
+      });
+    }
+    
+    return items;
   }, [content]);
 
-  // Estado paraIndex armazenar ID do heading atualmente visível
+  // Estado para armazenar ID do heading atualmente visível
   const [activeId, setActiveId] = useState<string>('');
 
-  // Effect paraIndex observar scroll e atualizar heading ativo
+  // Effect para observar scroll e atualizar heading ativo
   useEffect(() => {
-    // Cria observer paraIndex detectar headings visíveis na viewport
+    // Cria observer para detectar headings visíveis na viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -98,15 +106,15 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
   /**
    * Handler de clique em título.
-   * Realiza scroll suave paraIndex o heading correspondente.
+   * Realiza scroll suave para o heading correspondente.
    * 
    * @function handleClick
-   * @param {string} id - ID do heading paraIndex navegar
+   * @param {string} id - ID do heading para navegar
    */
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Calcula posição com offset paraIndex considerar header fixo
+      // Calcula posição com offset para considerar header fixo
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
@@ -132,10 +140,10 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         {headings.map((heading) => (
           <li
             key={heading.id}
-            // Aplica recuo paraIndex títulos h3 (nível 3)
+            // Aplica recuo para títulos h3 (nível 3)
             style={{ paddingLeft: `${(heading.level - 2) * 12}px` }}
           >
-            {/* Botão do título com estilo condicional paraIndex ativo */}
+            {/* Botão do título com estilo condicional para ativo */}
             <button
               onClick={() => handleClick(heading.id)}
               className={`text-sm text-left transition-colors ${

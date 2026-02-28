@@ -2,15 +2,16 @@
  * @fileoverview Componente de inscrição na newsletter.
  * 
  * Este componente é responsável por:
- * - Coletar email do usuário paraIndex newsletter
+ * - Coletar email do usuário para inscrição na newsletter
  * - Validar formato do email antes do envio
+ * - Enviar dados para API server-side
  * - Exibir estados de feedback (sucesso, erro, carregamento)
- * - Simular envio com delay (em produção seria uma API real)
+ * - Tratar erros da API
  * 
  * Utiliza 'use client' pois requer:
- * - useState paraIndex gerenciar email, status e mensagens
+ * - useState para gerenciar email, status e mensagens
  * - Validação de email no cliente
- * - Simulação de requisição assíncrona
+ * - Fetch API para chamada server-side
  * 
  * @module components/ui/Newsletter
  * @author Globalismo
@@ -19,7 +20,7 @@
 
 'use client';
 
-// Hook React paraIndex gerenciamento de estado
+// Hook React para gerenciamento de estado
 import { useState } from 'react';
 
 // Ícones da biblioteca Lucide React
@@ -28,24 +29,24 @@ import { Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 /**
  * Componente de newsletter.
  * Renderiza formulário de inscrição com validação de email
- * e estados de feedback visuais. Simula envio bem-sucedido.
+ * e estados de feedback visuais. Envia dados para API server-side.
  * 
  * @component
  * @returns {JSX.Element} Container com formulário de newsletter
  */
 export default function Newsletter() {
-  // Estado paraIndex armazenar email inserido
+  // Estado para armazenar email inserido
   const [email, setEmail] = useState('');
   
-  // Estado paraIndex gerenciar status: idle, loading, success, error
+  // Estado para gerenciar status: idle, loading, success, error
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   
-  // Estado paraIndex mensagem de feedback
+  // Estado para mensagem de feedback
   const [message, setMessage] = useState('');
 
   /**
    * Handler de submissão do formulário.
-   * Valida email e simula requisição de inscrição.
+   * Valida email e envia para API server-side.
    * 
    * @async
    * @param {React.FormEvent} e - Evento de submissão do formulário
@@ -71,17 +72,36 @@ export default function Newsletter() {
 
     // Define estado como carregando
     setStatus('loading');
+    setMessage('');
 
     try {
-      // Simula delay de API (em produção seria uma chamada real)
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Envia dados para API server-side
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      // Parse da resposta
+      const data = await response.json();
+      
+      // Verifica se houve erro na API
+      if (!response.ok) {
+        setStatus('error');
+        setMessage(data.message || data.error || 'Erro ao inscribir. Tente novamente.');
+        return;
+      }
       
       // Sucesso - limpa campos e exibe mensagem
       setStatus('success');
       setMessage('Obrigado! Você foi inscrito com sucesso.');
       setEmail('');
-    } catch {
-      // Erro na requisição
+      
+    } catch (error) {
+      // Erro de rede ou conexão
+      console.error('Erro ao enviar inscrição:', error);
       setStatus('error');
       setMessage('Erro ao inscribir. Tente novamente.');
     }
@@ -118,9 +138,21 @@ export default function Newsletter() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                // Limpa erro quando usuário começa a digitar
+                if (status === 'error') {
+                  setStatus('idle');
+                  setMessage('');
+                }
+              }}
               placeholder="Seu melhor email"
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-400 focus:border-transparent outline-none transition-colors"
+              disabled={status === 'loading'}
+              className={`flex-1 px-4 py-2 rounded-lg border transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none ${
+                status === 'error'
+                  ? 'border-red-500 focus:ring-2 focus:ring-red-500'
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-400 focus:border-transparent'
+              }`}
               aria-label="Email para newsletter"
             />
             {/* Botão de submissão */}

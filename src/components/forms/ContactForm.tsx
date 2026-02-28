@@ -3,14 +3,15 @@
  * 
  * Este componente é responsável por:
  * - Coletar dados do usuário (nome, email, assunto, mensagem)
- * - Validar campos obrigatórios
- * - Simular envio de mensagem com feedback visual
- * - Exibir mensagem de sucesso após envio
+ * - Validar campos obrigatórios no cliente
+ * - Enviar dados para API server-side
+ * - Exibir feedback visual durante envio
+ * - Tratar erros da API
  * 
  * Utiliza 'use client' pois requer:
- * - useState paraIndex gerenciar dados do formulário e status
+ * - useState para gerenciar dados do formulário e status
+ * - fetch API para chamada server-side
  * - Validação e manipulação de DOM
- * - Simulação de requisição assíncrona
  * 
  * @module components/forms/ContactForm
  * @author Globalismo
@@ -19,33 +20,36 @@
 
 'use client';
 
-// Hook React paraIndex gerenciamento de estado
+// Hook React para gerenciamento de estado
 import { useState } from 'react';
 
 /**
- * Interface paraIndex dados do formulário de contato.
+ * Interface para dados do formulário de contato.
  */
 interface FormData {
-  // Nome completo do remetente
   nome: string;
-  // Email do remetente
   email: string;
-  // Assunto da mensagem
   assunto: string;
-  // Corpo da mensagem
   mensagem: string;
 }
 
 /**
+ * Interface para erros de validação da API.
+ */
+interface ApiErrors {
+  [key: string]: string;
+}
+
+/**
  * Componente de formulário de contato.
- * Renderiza formulário com campos paraIndex nome, email, assunto e mensagem.
- * Exibe feedback visual durante envio e mensagem de sucesso após enviar.
+ * Renderiza formulário com campos para nome, email, assunto e mensagem.
+ * Envia dados para API server-side e exibe feedback visual.
  * 
  * @component
  * @returns {JSX.Element} Formulário de contato ou mensagem de sucesso
  */
 export default function ContactForm() {
-  // Estado paraIndex armazenar dados do formulário
+  // Estado para armazenar dados do formulário
   const [formData, setFormData] = useState<FormData>({
     nome: '',
     email: '',
@@ -53,12 +57,15 @@ export default function ContactForm() {
     mensagem: ''
   });
   
-  // Estado paraIndex gerenciar status do formulário
+  // Estado para gerenciar status do formulário
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  
+  // Estado para armazenar erros da API
+  const [errors, setErrors] = useState<ApiErrors>({});
 
   /**
    * Handler de submissão do formulário.
-   * Valida campos e simula envio de mensagem.
+   * Envia dados para API server-side.
    * 
    * @async
    * @param {React.FormEvent} e - Evento de submissão do formulário
@@ -67,15 +74,47 @@ export default function ContactForm() {
     // Previne comportamento padrão de submissão
     e.preventDefault();
     
+    // Limpa erros anteriores
+    setErrors({});
+    
     // Define status como enviando
     setStatus('sending');
     
-    // Simula delay de API (em produção seria uma chamada real)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Sucesso - exibe mensagem e limpa formulário
-    setStatus('success');
-    setFormData({ nome: '', email: '', assunto: '', mensagem: '' });
+    try {
+      // Envia dados para API server-side
+      const response = await fetch('/api/contato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      // Parse da resposta
+      const data = await response.json();
+      
+      // Verifica se houve erro na API
+      if (!response.ok) {
+        // Se há erros de validação, exibe eles
+        if (data.errors) {
+          setErrors(data.errors);
+          setStatus('error');
+        } else {
+          // Erro genérico da API
+          setStatus('error');
+        }
+        return;
+      }
+      
+      // Sucesso - exibe mensagem e limpa formulário
+      setStatus('success');
+      setFormData({ nome: '', email: '', assunto: '', mensagem: '' });
+      
+    } catch (error) {
+      // Erro de rede ou conexão
+      console.error('Erro ao enviar formulário:', error);
+      setStatus('error');
+    }
   };
 
   // Se mensagem foi enviada com sucesso, exibe confirmação
@@ -91,7 +130,7 @@ export default function ContactForm() {
         <h3 className="text-lg font-semibold text-green-800 dark:text-green-400 mb-2">Mensagem enviada!</h3>
         {/* Descrição */}
         <p className="text-green-700 dark:text-green-500">Obrigado pelo contato. Responderemos em breve.</p>
-        {/* Botão paraIndex enviar outra mensagem */}
+        {/* Botão para enviar outra mensagem */}
         <button
           onClick={() => setStatus('idle')}
           className="mt-4 text-sm text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 underline"
@@ -116,8 +155,17 @@ export default function ContactForm() {
           required
           value={formData.nome}
           onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent outline-none transition-colors"
+          disabled={status === 'sending'}
+          className={`w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors ${
+            errors.nome 
+              ? 'border-red-500 focus:ring-red-500' 
+              : 'border-gray-300 dark:border-gray-600 focus:ring-gray-900 dark:focus:ring-white'
+          } focus:ring-2 focus:border-transparent outline-none`}
         />
+        {/* Erro de validação */}
+        {errors.nome && (
+          <p className="mt-1 text-sm text-red-500">{errors.nome}</p>
+        )}
       </div>
 
       {/* Campo: Email */}
@@ -131,8 +179,17 @@ export default function ContactForm() {
           required
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent outline-none transition-colors"
+          disabled={status === 'sending'}
+          className={`w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors ${
+            errors.email 
+              ? 'border-red-500 focus:ring-red-500' 
+              : 'border-gray-300 dark:border-gray-600 focus:ring-gray-900 dark:focus:ring-white'
+          } focus:ring-2 focus:border-transparent outline-none`}
         />
+        {/* Erro de validação */}
+        {errors.email && (
+          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+        )}
       </div>
 
       {/* Campo: Assunto */}
@@ -146,8 +203,17 @@ export default function ContactForm() {
           required
           value={formData.assunto}
           onChange={(e) => setFormData({ ...formData, assunto: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent outline-none transition-colors"
+          disabled={status === 'sending'}
+          className={`w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors ${
+            errors.assunto 
+              ? 'border-red-500 focus:ring-red-500' 
+              : 'border-gray-300 dark:border-gray-600 focus:ring-gray-900 dark:focus:ring-white'
+          } focus:ring-2 focus:border-transparent outline-none`}
         />
+        {/* Erro de validação */}
+        {errors.assunto && (
+          <p className="mt-1 text-sm text-red-500">{errors.assunto}</p>
+        )}
       </div>
 
       {/* Campo: Mensagem */}
@@ -161,9 +227,27 @@ export default function ContactForm() {
           required
           value={formData.mensagem}
           onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent outline-none transition-colors resize-none"
+          disabled={status === 'sending'}
+          className={`w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors resize-none ${
+            errors.mensagem 
+              ? 'border-red-500 focus:ring-red-500' 
+              : 'border-gray-300 dark:border-gray-600 focus:ring-gray-900 dark:focus:ring-white'
+          } focus:ring-2 focus:border-transparent outline-none`}
         />
+        {/* Erro de validação */}
+        {errors.mensagem && (
+          <p className="mt-1 text-sm text-red-500">{errors.mensagem}</p>
+        )}
       </div>
+
+      {/* Mensagem de erro geral */}
+      {status === 'error' && !Object.keys(errors).length && (
+        <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-sm text-red-600 dark:text-red-400">
+            Erro ao enviar mensagem. Tente novamente.
+          </p>
+        </div>
+      )}
 
       {/* Botão de submissão */}
       <button

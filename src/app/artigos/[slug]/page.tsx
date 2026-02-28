@@ -6,6 +6,7 @@
  * - Renderizar metadados SEO (OpenGraph, Twitter Cards, canonical)
  * - Mostrar artigos relacionados baseados em categorias/tags
  * - Fornecer navegação de volta para listagem de artigos
+ * - Sanitizar conteúdo HTML para previnir XSS (no servidor)
  * 
  * Utiliza Static Site Generation (SSG) do Next.js para geração
  * estática de todas as páginas de artigos em build time.
@@ -19,6 +20,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getArticleBySlug, getAllSlugs, getRelatedArticles, getCanonicalUrl } from '@/lib/articles';
 import { formatDate } from '@/lib/utils';
+import { sanitizeArticle } from '@/lib/sanitize';
 import CategoryTag from '@/components/ui/CategoryTag';
 import ArticleContent from '@/components/articles/ArticleContent';
 import Link from 'next/link';
@@ -110,6 +112,9 @@ export default async function ArtigoPage({ params }: PageProps) {
     notFound();
   }
 
+  // Sanitiza o artigo para previnir XSS (SSR)
+  const sanitizedArticle = sanitizeArticle(article);
+
   // Busca artigos relacionados baseados em categorias/tags em comum
   const relatedArticles = getRelatedArticles(slug);
 
@@ -119,40 +124,40 @@ export default async function ArtigoPage({ params }: PageProps) {
       <header className="mb-8">
         {/* Categorias do artigo */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {article.categorias.map((categoria) => (
+          {sanitizedArticle.categorias.map((categoria) => (
             <CategoryTag key={categoria} category={categoria} size="md" />
           ))}
         </div>
         
         {/* Título principal do artigo */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          {article.titulo}
+          {sanitizedArticle.titulo}
         </h1>
         
         {/* Resumo/subtítulo do artigo */}
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-          {article.resumo}
+          {sanitizedArticle.resumo}
         </p>
         
         {/* Metadados: autor, data, tempo de leitura */}
         <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400 text-sm">
-          <span className="font-medium text-gray-900 dark:text-gray-200">{article.autor}</span>
+          <span className="font-medium text-gray-900 dark:text-gray-200">{sanitizedArticle.autor}</span>
           <span>•</span>
-          <time dateTime={article.dataPublicacao}>
-            {formatDate(article.dataPublicacao)}
+          <time dateTime={sanitizedArticle.dataPublicacao}>
+            {formatDate(sanitizedArticle.dataPublicacao)}
           </time>
           <span>•</span>
-          <span>{article.tempoLeitura} min de leitura</span>
+          <span>{sanitizedArticle.tempoLeitura} min de leitura</span>
         </div>
       </header>
 
       {/* Conteúdo principal do artigo (HTML renderizado) */}
-      <ArticleContent slug={article.slug} content={article.conteudo} />
+      <ArticleContent slug={sanitizedArticle.slug} content={sanitizedArticle.conteudo} />
 
       {/* Rodapé do artigo com tags */}
       <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div className="flex flex-wrap gap-2">
-          {article.tags.map((tag) => (
+          {sanitizedArticle.tags.map((tag) => (
             <span 
               key={tag}
               className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
