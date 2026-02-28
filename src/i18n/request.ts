@@ -9,12 +9,17 @@
  */
 
 import { getRequestConfig } from 'next-intl/server';
-import { defaultLocale } from './config';
+import { defaultLocale, type Locale } from './config';
 
-export default getRequestConfig(async ({ locale }) => ({
-  messages: (
-    locale === defaultLocale
-      ? (await import('./dictionaries/pt.json')).default
-      : (await import(`./dictionaries/${locale}.json`)).default
-  ) as Record<string, string>
-}));
+export default getRequestConfig(async ({ locale }) => {
+  const currentLocale = (locale || defaultLocale) as Locale;
+  
+  return {
+    locale: currentLocale,
+    messages: (
+      currentLocale === defaultLocale
+        ? (await import('./dictionaries/pt.json')).default
+        : (await import(`./dictionaries/${currentLocale}.json`)).default
+    ) as Record<string, string>
+  };
+});

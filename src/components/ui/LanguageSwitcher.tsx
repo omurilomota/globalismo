@@ -1,7 +1,8 @@
 /**
  * @fileoverview Componente de seletor de idioma.
  *
- * Permite ao usuário alternar entre os idiomas suportados.
+ * Permite ao usuário ver o idioma atual e selecionar um novo.
+ * Nota: A troca de idioma ainda está em implementação.
  *
  * @module components/ui/LanguageSwitcher
  * @author Globalismo
@@ -10,38 +11,25 @@
 
 'use client';
 
-import { useState, useTransition } from 'react';
-import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from '@/i18n/routing';
+import { useState } from 'react';
 import { Globe, ChevronDown, Check } from 'lucide-react';
 import { locales, localeNames, type Locale } from '@/i18n/config';
 
 export default function LanguageSwitcher() {
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleLocaleChange = (newLocale: Locale) => {
-    startTransition(() => {
-      router.replace(pathname, { locale: newLocale });
-      setIsOpen(false);
-    });
-  };
+  const currentLocale: Locale = 'pt';
 
   return (
     <div className="relative">
       {/* Botão principal */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        disabled={isPending}
         className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
         aria-label="Selecionar idioma"
         aria-expanded={isOpen}
       >
         <Globe className="w-4 h-4" />
-        <span className="text-sm font-medium">{localeNames[locale as Locale]}</span>
+        <span className="text-sm font-medium">{localeNames[currentLocale]}</span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -60,17 +48,21 @@ export default function LanguageSwitcher() {
               {locales.map((loc) => (
                 <button
                   key={loc}
-                  onClick={() => handleLocaleChange(loc)}
+                  disabled={loc === currentLocale}
                   className={`w-full flex items-center justify-between px-4 py-2 text-sm transition-colors ${
-                    locale === loc
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-300'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    currentLocale === loc
+                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-300 cursor-default'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-not-allowed'
                   }`}
+                  title={loc === currentLocale ? 'Idioma atual' : 'Em breve'}
                 >
                   <span>{localeNames[loc]}</span>
-                  {locale === loc && <Check className="w-4 h-4" />}
+                  {currentLocale === loc && <Check className="w-4 h-4" />}
                 </button>
               ))}
+            </div>
+            <div className="px-4 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+              Mais idiomas em breve
             </div>
           </div>
         </>

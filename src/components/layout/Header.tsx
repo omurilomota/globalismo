@@ -1,31 +1,38 @@
 /**
  * @fileoverview Componente de cabeçalho/navegação principal do site Globalismo.
- * 
+ *
  * Este componente é responsável por:
  * - Exibir o logo e nome do site
  * - Mostrar navegação desktop com links para as principais páginas
  * - Fornecer menu mobile (drawer) responsivo
  * - Implementar alternância de tema claro/escuro (dark mode)
  * - Indicar visualmente a página ativa
- * 
+ * - Seletor de idioma
+ *
  * Utiliza 'use client' por ser um componente interativo que requer
  * estado React e manipulação do DOM para o tema e menu mobile.
- * 
+ *
  * @module components/layout/Header
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import Link from '@/i18n/routing';
-import { usePathname } from '@/i18n/routing';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X, Search } from 'lucide-react';
 import SearchBar from '@/components/ui/SearchBar';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+
+const navLinks = [
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/sobre', label: 'Sobre', icon: BookOpen },
+  { href: '/artigos', label: 'Artigos', icon: FileText },
+  { href: '/contato', label: 'Contato', icon: Mail },
+];
 
 /**
  * Componente principal de cabeçalho/navegação.
@@ -41,15 +48,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const t = useTranslations('header');
-  const tCommon = useTranslations('common');
-
-  const navLinks = [
-    { href: '/', label: tCommon('home'), icon: Home },
-    { href: '/sobre', label: tCommon('about'), icon: BookOpen },
-    { href: '/artigos', label: tCommon('articles'), icon: FileText },
-    { href: '/contato', label: tCommon('contact'), icon: Mail },
-  ];
 
   const toggleDarkMode = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -100,7 +98,7 @@ export default function Header() {
               <button
                 onClick={() => document.getElementById('header-search')?.focus()}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={t('search')}
+                aria-label="Buscar"
               >
                 <Search className="w-5 h-5" />
               </button>
@@ -114,7 +112,7 @@ export default function Header() {
               <button
                 onClick={toggleDarkMode}
                 className="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label={t('toggle_theme')}
+                aria-label="Alternar tema"
               >
                 {/* Condicional: mostra sol (claro) ou lua (escuro) */}
                 {isDark ? (
@@ -127,16 +125,11 @@ export default function Header() {
 
             {/* Container de botões para mobile - visível apenas em mobile */}
             <div className="flex items-center gap-2 md:hidden">
-              {/* Seletor de idioma mobile */}
-              <div className="hidden sm:block">
-                <LanguageSwitcher />
-              </div>
-
               {/* Botão de dark mode para mobile */}
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
-                aria-label={t('toggle_theme')}
+                aria-label="Alternar tema"
               >
                 {isDark ? (
                   <Sun className="w-5 h-5" />
@@ -149,7 +142,7 @@ export default function Header() {
               <button
                 onClick={() => setIsOpen(true)}
                 className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
-                aria-label={t('open_menu')}
+                aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -169,7 +162,7 @@ export default function Header() {
 
       {/* Overlay/backdrop do menu mobile - aparece quando o menu está aberto */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
           onClick={closeDrawer}
         />
@@ -181,18 +174,18 @@ export default function Header() {
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <Globe className="w-6 h-6 text-blue-900 dark:text-blue-400" />
-            <span className="text-lg font-bold text-blue-900 dark:text-white">{t('menu')}</span>
+            <span className="text-lg font-bold text-blue-900 dark:text-white">Menu</span>
           </div>
           {/* Botão de fechar (X) */}
           <button
             onClick={closeDrawer}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-            aria-label={t('close_menu')}
+            aria-label="Fechar menu"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
-        
+
         {/* Navegação do drawer */}
         <nav className="p-4 space-y-2">
           {/* Mapeia links para o menu mobile */}

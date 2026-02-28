@@ -1,26 +1,31 @@
 /**
  * @fileoverview Página inicial (Home) do site Globalismo.
- * 
+ *
  * Esta é a página principal do site, exibida quando o usuário
  * acessa a raiz do domínio (/)
- * 
- * @module app/page
+ *
+ * @module app/[locale]/page
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { getFeaturedArticle, getRecentArticles } from '@/lib/articles';
 import ArticleHero from '@/components/articles/ArticleHero';
 import ArticleCard from '@/components/articles/ArticleCard';
 import MostRead from '@/components/ui/MostRead';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import Newsletter from '@/components/ui/Newsletter';
 import { ArrowRight } from 'lucide-react';
 
-export default function Home() {
+interface Props {
+  params: Promise<{ locale: string }>;
+}
+
+export default function Home({ params }: Props) {
   const featured = getFeaturedArticle();
   const recentArticles = getRecentArticles(6, featured?.id);
-
+  
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {featured && <ArticleHero article={featured} />}

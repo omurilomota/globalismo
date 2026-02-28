@@ -6,16 +6,11 @@
  * - Otimização de imagens
  * - Compressão e caching
  * - Header de security e performance
- * - Internacionalização (i18n) com next-intl
  *
  * @module next.config
  * @author Globalismo
  * @version 1.1.0
  */
-
-import createNextIntlPlugin from 'next-intl/plugin';
-
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -72,4 +67,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
