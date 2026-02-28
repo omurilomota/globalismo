@@ -23,6 +23,7 @@ import { formatDate } from '@/lib/utils';
 import { sanitizeArticle } from '@/lib/sanitize';
 import CategoryTag from '@/components/ui/CategoryTag';
 import ArticleContent from '@/components/articles/ArticleContent';
+import Comments from '@/components/articles/Comments';
 import Link from 'next/link';
 
 // Interface para tipagem dos parâmetros da rota dinâmica
@@ -190,6 +191,9 @@ export default async function ArtigoPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* Seção de comentários */}
+      <Comments articleSlug={slug} />
 
       {/* Link para voltar à listagem de artigos */}
       <div className="mt-12">

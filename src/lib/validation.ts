@@ -163,6 +163,53 @@ export function sanitizeNewsletterForm(data: {
   };
 }
 
+/**
+ * Valida dados de um comentário.
+ * 
+ * @function validateComment
+ * @param {Object} data - Dados do comentário
+ * @returns {ValidationResult} Resultado da validação
+ */
+export function validateComment(data: {
+  author?: string;
+  email?: string;
+  content?: string;
+  articleSlug?: string;
+}): ValidationResult & { error?: string } {
+  const errors: Record<string, string> = {};
+  
+  if (!data.articleSlug || data.articleSlug.trim().length === 0) {
+    errors.articleSlug = 'Artigo é obrigatório';
+  }
+  
+  if (!data.author || data.author.trim().length === 0) {
+    errors.author = 'Nome é obrigatório';
+  } else if (!SAFE_STRING_REGEX.test(data.author) || data.author.length > 100) {
+    errors.author = 'Nome contém caracteres inválidos';
+  }
+  
+  if (!data.email || data.email.trim().length === 0) {
+    errors.email = 'Email é obrigatório';
+  } else if (!EMAIL_REGEX.test(data.email)) {
+    errors.email = 'Email inválido';
+  }
+  
+  if (!data.content || data.content.trim().length === 0) {
+    errors.content = 'Comentário é obrigatório';
+  } else if (data.content.trim().length < 3) {
+    errors.content = 'Comentário deve ter pelo menos 3 caracteres';
+  } else if (data.content.trim().length > 2000) {
+    errors.content = 'Comentário excede o limite de 2000 caracteres';
+  }
+  
+  const valid = Object.keys(errors).length === 0;
+  return {
+    valid,
+    errors,
+    error: valid ? undefined : Object.values(errors)[0],
+  };
+}
+
 export default {
   validateContactForm,
   validateNewsletterForm,

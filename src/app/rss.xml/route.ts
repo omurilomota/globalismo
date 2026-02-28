@@ -1,15 +1,15 @@
 /**
  * @fileoverview Rota de feed RSS do site Globalismo.
- * 
+ *
  * Este arquivo é responsável por:
  * - Gerar um feed RSS 2.0 válido com todos os artigos do blog
  * - Fornecer feed Atom paraIndex leitores de feed
  * - Incluir metadados completos (título, link, descrição, categorias)
  * - Permitir que leitores de feed acompanhem novas publicações
- * 
+ *
  * A rota GET é chamada quando acesso /rss.xml e retorna XML válido.
  * Feed inclui até 20 artigos mais recentes ordenados por data.
- * 
+ *
  * @module app/rss.xml/route
  * @author Globalismo
  * @version 1.0.0
@@ -23,16 +23,17 @@ const SITE_NAME = 'Globalismo';
 const SITE_DESCRIPTION = 'Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.';
 
 /**
- * Gera o conteúdo XML do feed RSS com os artigos do blog.
- * Ordena artigos por data (mais recente primeiro) e limita a 20 itens.
- * 
- * @function generateRssFeed
- * @returns {Promise<string>} String contendo o XML do feed RSS completo
+ * Handler da rota GET paraIndex geração do feed RSS.
+ * Retorna resposta XML com headers apropriados paraIndex caching.
+ *
+ * @async
+ * @function GET
+ * @returns {Promise<Response>} Resposta HTTP com conteúdo XML do feed RSS
  */
-export async function generateRssFeed() {
+export async function GET() {
   // Busca todos os artigos do banco de dados
   const articles = getAllArticles();
-  
+
   // Ordena artigos por data de publicação (mais recente primeiro)
   const sortedArticles = [...articles].sort(
     (a, b) => new Date(b.dataPublicacao).getTime() - new Date(a.dataPublicacao).getTime()
@@ -45,7 +46,7 @@ export async function generateRssFeed() {
       // Converte a data de publicação paraIndex formato UTC
       const pubDate = new Date(article.dataPublicacao).toUTCString();
       const articleUrl = `${SITE_URL}/artigos/${article.slug}`;
-      
+
       // Gera o XML do item com CDATA paraIndex evitar problemas com caracteres especiais
       return `
     <item>
@@ -79,21 +80,6 @@ export async function generateRssFeed() {
   </channel>
 </rss>`;
 
-  return rss;
-}
-
-/**
- * Handler da rota GET paraIndex geração do feed RSS.
- * Retorna resposta XML com headers apropriados paraIndex caching.
- * 
- * @async
- * @function GET
- * @returns {Promise<Response>} Resposta HTTP com conteúdo XML do feed RSS
- */
-export async function GET() {
-  // Gera o feed RSS
-  const rss = await generateRssFeed();
-  
   // Retorna a resposta com content-type XML e caching de 1 hora
   return new Response(rss, {
     headers: {

@@ -1,28 +1,22 @@
 /**
  * @fileoverview Configurações do Next.js para otimização de performance.
- * 
+ *
  * Este arquivo define configurações para:
  * - Análise de bundle (bundle analyzer)
  * - Otimização de imagens
  * - Compressão e caching
  * - Header de security e performance
- * 
+ *
  * @module next.config
  * @author Globalismo
  * @version 1.0.0
  */
 
-import type { NextConfig } from "next";
-
-/**
- * Configuração principal do Next.js.
- * 
- * @constant {NextConfig} nextConfig
- */
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // Otimização de imagens
   images: {
-    // Patterns para允许 remote images do Unsplash
+    // Patterns para permitir remote images do Unsplash
     remotePatterns: [
       {
         protocol: 'https',
@@ -70,12 +64,6 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
-  },
-
-  // Configurações experimentais de performance
-  experimental: {
-    // Otimização de package.json
-    optimizePackageImports: ['lucide-react'],
   },
 };
 

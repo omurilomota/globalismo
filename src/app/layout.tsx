@@ -1,6 +1,6 @@
 /**
  * @fileoverview Layout raiz da aplicação Next.js (App Router).
- * 
+ *
  * @module app/layout
  * @author Globalismo
  * @version 1.0.0
@@ -8,8 +8,6 @@
 
 import type { Metadata } from "next";
 import { Merriweather, Inter } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -63,28 +61,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <PlausibleProvider domain="globalismo.com.br" enabled={process.env.NODE_ENV === 'production'}>
-      <html lang="pt-BR" suppressHydrationWarning>
-        <head>
-          <OrganizationSchema 
-            sameAs={[
-              "https://x.com/omurilomota",
-              "https://www.linkedin.com/in/murilo-henrique-622354358/",
-              "https://github.com/omurilomota"
-            ]}
-          />
-          <WebsiteSchema />
-        </head>
-        
-        <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`}>
-          <SpeedInsights />
-          <Header />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </body>
-      </html>
-    </PlausibleProvider>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <OrganizationSchema
+          sameAs={[
+            "https://x.com/omurilomota",
+            "https://www.linkedin.com/in/murilo-henrique-622354358/",
+            "https://github.com/omurilomota"
+          ]}
+        />
+        <WebsiteSchema />
+      </head>
+
+      <body className={`${merriweather.variable} ${inter.variable} antialiased bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-colors`}>
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
   );
 }

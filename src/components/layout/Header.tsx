@@ -19,7 +19,7 @@
 'use client';
 
 // Hooks React utilizados no componente
-import { useState, useEffect, useSyncExternalStore } from 'react';
+import { useState, useEffect } from 'react';
 
 // Componente Link do Next.js para navegação interna
 import Link from 'next/link';
@@ -39,31 +39,6 @@ const navLinks = [
 ];
 
 /**
- * Função para obter o estado atual do tema (claro ou escuro).
- * Retorna true se a classe 'dark' está presente no elemento HTML.
- * Função snapshot usada pelo useSyncExternalStore para SSR.
- */
-function getThemeSnapshot() {
-  if (typeof window === 'undefined') return false;
-  return document.documentElement.classList.contains('dark');
-}
-
-/**
- * Função subscribe para observar mudanças na classe 'dark' do HTML.
- * Usa MutationObserver para detectar alterações no elemento HTML.
- */
-function subscribeToTheme(callback: () => void) {
-  const observer = new MutationObserver(callback);
-  if (typeof document !== 'undefined') {
-    observer.observe(document.documentElement, { 
-      attributes: true, 
-      attributeFilter: ['class'] 
-    });
-  }
-  return () => observer.disconnect();
-}
-
-/**
  * Componente principal de cabeçalho/navegação.
  * Funcionalidades:
  * - Logo com link para home
@@ -75,37 +50,36 @@ function subscribeToTheme(callback: () => void) {
 export default function Header() {
   // Estado para controlar a abertura/fechamento do menu mobile
   const [isOpen, setIsOpen] = useState(false);
-  
+
   // Hook que retorna o pathname atual da rota
   const pathname = usePathname();
-  
-  // Hook useSyncExternalStore para gerenciar estado do tema
-  const isDark = useSyncExternalStore(
-    subscribeToTheme,
-    getThemeSnapshot,
-    () => false
-  );
+
+  // Estado para gerenciar tema
+  const [isDark, setIsDark] = useState(false);
 
   // useEffect para aplicar o tema inicial ao carregar a página
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       document.documentElement.classList.add('dark');
+      setIsDark(true);
     }
   }, []);
 
   // Função para alternar entre tema claro e escuro
   const toggleDarkMode = () => {
     const currentlyDark = document.documentElement.classList.contains('dark');
-    
+
     if (currentlyDark) {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      setIsDark(false);
     } else {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      setIsDark(true);
     }
   };
 
