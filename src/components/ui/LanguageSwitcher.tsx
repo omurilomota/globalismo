@@ -20,7 +20,7 @@ export default function LanguageSwitcher() {
   const currentLocale: Locale = 'pt';
 
   return (
-    <div className="relative">
+    <div className="relative" suppressHydrationWarning>
       {/* Botão principal */}
       <button
         onClick={() => setIsOpen(!isOpen)}

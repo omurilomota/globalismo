@@ -19,7 +19,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -46,8 +46,13 @@ const navLinks = [
  */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleDarkMode = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -55,7 +60,7 @@ export default function Header() {
 
   const closeDrawer = () => setIsOpen(false);
 
-  const isDark = theme === 'dark';
+  const isDark = mounted ? (resolvedTheme === 'dark') : false;
 
   return (
     <>
@@ -113,6 +118,7 @@ export default function Header() {
                 onClick={toggleDarkMode}
                 className="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Alternar tema"
+                suppressHydrationWarning
               >
                 {/* Condicional: mostra sol (claro) ou lua (escuro) */}
                 {isDark ? (
@@ -130,6 +136,7 @@ export default function Header() {
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
                 aria-label="Alternar tema"
+                suppressHydrationWarning
               >
                 {isDark ? (
                   <Sun className="w-5 h-5" />
