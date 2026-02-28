@@ -1,34 +1,97 @@
+/**
+ * @fileoverview Componente de formulário de contato.
+ * 
+ * Este componente é responsável por:
+ * - Coletar dados do usuário (nome, email, assunto, mensagem)
+ * - Validar campos obrigatórios
+ * - Simular envio de mensagem com feedback visual
+ * - Exibir mensagem de sucesso após envio
+ * 
+ * Utiliza 'use client' pois requer:
+ * - useState paraIndex gerenciar dados do formulário e status
+ * - Validação e manipulação de DOM
+ * - Simulação de requisição assíncrona
+ * 
+ * @module components/forms/ContactForm
+ * @author Globalismo
+ * @version 1.0.0
+ */
+
 'use client';
 
+// Hook React paraIndex gerenciamento de estado
 import { useState } from 'react';
 
+/**
+ * Interface paraIndex dados do formulário de contato.
+ */
+interface FormData {
+  // Nome completo do remetente
+  nome: string;
+  // Email do remetente
+  email: string;
+  // Assunto da mensagem
+  assunto: string;
+  // Corpo da mensagem
+  mensagem: string;
+}
+
+/**
+ * Componente de formulário de contato.
+ * Renderiza formulário com campos paraIndex nome, email, assunto e mensagem.
+ * Exibe feedback visual durante envio e mensagem de sucesso após enviar.
+ * 
+ * @component
+ * @returns {JSX.Element} Formulário de contato ou mensagem de sucesso
+ */
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  // Estado paraIndex armazenar dados do formulário
+  const [formData, setFormData] = useState<FormData>({
     nome: '',
     email: '',
     assunto: '',
     mensagem: ''
   });
+  
+  // Estado paraIndex gerenciar status do formulário
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
+  /**
+   * Handler de submissão do formulário.
+   * Valida campos e simula envio de mensagem.
+   * 
+   * @async
+   * @param {React.FormEvent} e - Evento de submissão do formulário
+   */
   const handleSubmit = async (e: React.FormEvent) => {
+    // Previne comportamento padrão de submissão
     e.preventDefault();
+    
+    // Define status como enviando
     setStatus('sending');
     
+    // Simula delay de API (em produção seria uma chamada real)
     await new Promise(resolve => setTimeout(resolve, 1000));
     
+    // Sucesso - exibe mensagem e limpa formulário
     setStatus('success');
     setFormData({ nome: '', email: '', assunto: '', mensagem: '' });
   };
 
+  // Se mensagem foi enviada com sucesso, exibe confirmação
   if (status === 'success') {
     return (
+      // Container de sucesso com styling verde
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 text-center">
+        {/* Ícone de checkmark */}
         <svg className="w-12 h-12 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
+        {/* Título da mensagem de sucesso */}
         <h3 className="text-lg font-semibold text-green-800 dark:text-green-400 mb-2">Mensagem enviada!</h3>
+        {/* Descrição */}
         <p className="text-green-700 dark:text-green-500">Obrigado pelo contato. Responderemos em breve.</p>
+        {/* Botão paraIndex enviar outra mensagem */}
         <button
           onClick={() => setStatus('idle')}
           className="mt-4 text-sm text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 underline"
@@ -40,7 +103,9 @@ export default function ContactForm() {
   }
 
   return (
+    // Formulário de contato
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Campo: Nome */}
       <div>
         <label htmlFor="nome" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Nome
@@ -55,6 +120,7 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Campo: Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Email
@@ -69,6 +135,7 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Campo: Assunto */}
       <div>
         <label htmlFor="assunto" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Assunto
@@ -83,6 +150,7 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Campo: Mensagem */}
       <div>
         <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Mensagem
@@ -97,6 +165,7 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Botão de submissão */}
       <button
         type="submit"
         disabled={status === 'sending'}

@@ -1,81 +1,217 @@
+/**
+ * @fileoverview Estilos globais do projeto Globalismo.
+ * 
+ * Este arquivo contém:
+ * - Importação do Tailwind CSS e plugins
+ * - Variáveis CSS para tema claro e escuro (dark mode)
+ * - Configurações de fontes
+ * - Estilos de scrollbar personalizada
+ * - Animações personalizadas
+ * - Estilos de componentes (cards, botões, etc.)
+ * - Estilos para impressão
+ * 
+ * @author Globalismo
+ * @version 1.0.0
+ */
+
+/* ============================================
+   IMPORTAÇÕES DO TAILWIND CSS
+   ============================================ */
+
+/**
+ * Importação principal do Tailwind CSS.
+ * O Tailwind processa todas as classes utility aqui.
+ */
 @import "tailwindcss";
+
+/**
+ * Plugin @tailwindcss/typography.
+ * Fornece estilos automáticos para conteúdo HTML
+ * (útil para artigos com parágrafos, títulos, listas, etc.)
+ */
 @plugin "@tailwindcss/typography";
 
+
+/* ============================================
+   VARIÁVEIS CSS - TEMA CLARO
+   Definidas no :root para uso em todo o site
+   ============================================ */
+
 :root {
+  /* Cor de fundo principal */
   --background: #ffffff;
+  
+  /* Cor do texto principal */
   --foreground: #2d3748;
+  
+  /* Cor primária (azul escuro) */
   --primary: #1a365d;
+  
+  /* Cor primária em hover */
   --primary-hover: #2c5282;
+  
+  /* Cor secundária */
   --secondary: #2b6cb0;
+  
+  /* Cor de destaque/ação */
   --accent: #38a169;
+  
+  /* Cor de destaque em hover */
   --accent-hover: #2f855a;
+  
+  /* Secondary accent (amarelo/dourado) */
   --accent-secondary: #d69e2e;
 }
 
+
+/* ============================================
+   VARIÁVEIS CSS - TEMA ESCURO
+   Aplicadas quando a classe .dark está ativa
+   ============================================ */
+
 .dark {
+  /* Cor de fundo escura */
   --background: #1a202c;
+  
+  /* Cor do texto clara */
   --foreground: #f7fafc;
+  
+  /* Cor primária mais clara no tema escuro */
   --primary: #63b3ed;
+  
+  /* Cor primária hover */
   --primary-hover: #4299e1;
+  
+  /* Cor secundária */
   --secondary: #90cdf4;
+  
+  /* Cor de destaque */
   --accent: #68d391;
+  
+  /* Cor de destaque hover */
   --accent-hover: #48bb78;
+  
+  /* Secondary accent */
   --accent-secondary: #f6e05e;
 }
 
+
+/* ============================================
+   CONFIGURAÇÃO DO TEMA TAILWIND
+   Mapeia variáveis CSS para classes do Tailwind
+   ============================================ */
+
 @theme inline {
+  /* Mapeia a variável --background para uso no Tailwind */
   --color-background: var(--background);
+  
+  /* Mapeia a variável --foreground para uso no Tailwind */
   --color-foreground: var(--foreground);
+  
+  /* Define a fonte serif como sendo a Merriweather */
   --font-serif: var(--font-merriweather);
+  
+  /* Define a fonte sans-serif como sendo a Inter */
   --font-sans: var(--font-inter);
+  
+  /* Define a fonte do corpo como Inter */
   --font-body: var(--font-inter);
 }
 
+
+/* ============================================
+   ESTILOS BASE DO CORPO DA PÁGINA
+   ============================================ */
+
 body {
+  /* Cor de fundo usando variável CSS */
   background: var(--background);
+  
+  /* Cor do texto usando variável CSS */
   color: var(--foreground);
+  
+  /* Fonte principal: Inter do Google Fonts, com fallback do sistema */
   font-family: var(--font-inter), system-ui, sans-serif;
+  
+  /* Altura da linha para melhor legibilidade */
   line-height: 1.6;
 }
 
+
+/* ============================================
+   ESTILOS PARA TÍTULOS
+   Usam fonte serif (Merriweather) para elegância
+   ============================================ */
+
 h1, h2, h3, h4, h5, h6 {
+  /* Fonte serif para títulos */
   font-family: var(--font-merriweather), Georgia, serif;
+  
+  /* Altura de linha menor para títulos */
   line-height: 1.3;
 }
 
+
+/* ============================================
+   CONFIGURAÇÕES DO HTML
+   ============================================ */
+
 html {
+  /* Rolagem suave ao clicar em links internos (âncoras) */
   scroll-behavior: smooth;
 }
 
+
+/* ============================================
+   TEMA ESCURO NO HTML
+   ============================================ */
+
+/* Define o esquema de cores como escuro quando .dark está ativo */
 html.dark {
   color-scheme: dark;
 }
 
+
+/* ============================================
+   ESTILOS DE SELEÇÃO DE TEXTO
+   ============================================ */
+
+/* Cor de destaque ao selecionar texto (tema claro) */
 ::selection {
   background-color: var(--primary);
   color: white;
 }
 
+/* Cor de destaque ao selecionar texto (tema escuro) */
 .dark ::selection {
   background-color: var(--primary);
   color: white;
 }
 
-/* Custom Scrollbar - Professional */
+
+/* ============================================
+   CUSTOM SCROLLBAR - WEBKIT
+   (Chrome, Safari, Edge, Opera)
+   ============================================ */
+
+/* Largura e altura da scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
+/* Fundo da trilha da scrollbar (onde elarola) */
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
   border-radius: 5px;
 }
 
+/* Fundo da trilha no modo escuro */
 .dark ::-webkit-scrollbar-track {
   background: #2d3748;
 }
 
+/*thumb (parte arrastável) com gradiente azul */
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #1a365d, #2b6cb0);
   border-radius: 5px;
@@ -83,31 +219,49 @@ html.dark {
   background-clip: padding-box;
 }
 
+/* Efeito hover no thumb */
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #2c5282, #3182ce);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
+/* Canto da scrollbar transparente */
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
 
+/* Oculta botões da scrollbar */
 ::-webkit-scrollbar-button {
   display: none;
 }
 
-/* Firefox */
+
+/* ============================================
+   CUSTOM SCROLLBAR - FIREFOX
+   ============================================ */
+
+/* Scrollbar fina no Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #1a365d #f1f5f9;
 }
 
+/* Scrollbar no modo escuro (Firefox) */
 .dark * {
   scrollbar-color: #63b3ed #2d3748;
 }
 
-/* Animations - Subtle */
+
+/* ============================================
+   ANIMAÇÕES PERSONALIZADAS
+   ============================================ */
+
+/**
+ * Animação fadeInUp.
+ * Elemento sobe e aparece suavemente.
+ * Uso: class="animate-fade-in-up"
+ */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -119,6 +273,11 @@ html.dark {
   }
 }
 
+/**
+ * Animação pulse-subtle.
+ * Pulsação suave e sutil.
+ * Uso: class="animate-pulse-subtle"
+ */
 @keyframes pulse-subtle {
   0%, 100% {
     opacity: 1;
@@ -128,64 +287,105 @@ html.dark {
   }
 }
 
+/* Classe para aplicar animação fadeInUp */
 .animate-fade-in-up {
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
+/* Classe para aplicar animação pulse-subtle */
 .animate-pulse-subtle {
   animation: pulse-subtle 3s infinite;
 }
 
-/* Stagger delays */
+
+/* ============================================
+   DELAYS DE ANIMAÇÃO (STAGGER)
+   Usados para criar efeito de cascata em listas
+   ============================================ */
+
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 
-/* Card hover effects - Professional */
+
+/* ============================================
+   EFEITOS HOVER EM CARDS
+   ============================================ */
+
+/**
+ * Classe base para cards com efeito hover.
+ * Adiciona transição suave de 0.3 segundos.
+ */
 .card-hover {
   transition: all 0.3s ease;
 }
 
+/* Efeito ao passar o mouse (tema claro) */
 .card-hover:hover {
+  /* Move o card para cima */
   transform: translateY(-4px);
+  /* Adiciona sombra suave */
   box-shadow: 0 10px 25px -5px rgba(26, 54, 93, 0.15);
 }
 
+/* Efeito hover no tema escuro */
 .dark .card-hover:hover {
   box-shadow: 0 10px 25px -5px rgba(99, 179, 237, 0.15);
 }
 
-/* Focus styles */
+
+/* ============================================
+   ESTILOS DE FOCUS
+   Aplicados quando elementos recebem foco
+   ============================================ */
+
 input:focus, textarea:focus, button:focus {
+  /* Remove outline padrão */
   outline: none;
+  /* Adiciona ring (borda) de 2px */
   ring: 2px;
+  /* Cor do ring usa a cor primária */
   ring-color: var(--primary);
 }
 
-/* Prose overrides for typography */
+
+/* ============================================
+   ESTILOS DO PROSE (TYPOGRAPHY PLUGIN)
+   Personaliza a aparência do conteúdo de artigos
+   ============================================ */
+
+/* Largura máxima do texto para legibilidade */
 .prose {
   max-width: 65ch;
 }
 
+/* Estilo dos parágrafos */
 .prose p {
   margin-bottom: 1.25em;
   text-align: justify;
 }
 
+/* Estilo dos títulos h2 */
 .prose h2 {
   margin-top: 1.5em;
   margin-bottom: 0.75em;
 }
 
+/* Estilo de blockquotes */
 .prose blockquote {
   border-left-color: var(--primary);
   font-style: italic;
 }
 
-/* Quote styling */
+
+/* ============================================
+   ESTILOS DE CITAÇÕES (BLOCKQUOTE)
+   ============================================ */
+
 blockquote {
+  /* Borda lateral esquerda com cor primária */
   border-left: 4px solid var(--primary);
   padding-left: 1rem;
   margin-left: 0;
@@ -194,14 +394,21 @@ blockquote {
   opacity: 0.9;
 }
 
-/* Print styles */
+
+/* ============================================
+   ESTILOS PARA IMPRESSÃO
+   Optimizam a aparência ao imprimir páginas
+   ============================================ */
+
 @media print {
+  /* Fundo branco e texto preto para impressão */
   body {
     background: white !important;
     color: black !important;
     font-size: 12pt;
   }
 
+  /* Oculta elementos desnecessários na impressão */
   nav, 
   header nav, 
   footer, 
@@ -210,21 +417,25 @@ blockquote {
     display: none !important;
   }
 
+  /* Adiciona URL após links impressos */
   a[href]::after {
     content: " (" attr(href) ")";
     font-size: 10pt;
     color: #666;
   }
 
+  /* Largura máxima do conteúdo impresso */
   .prose {
     max-width: 100% !important;
   }
 
+  /* Evita quebra de página após títulos */
   .prose h2,
   .prose h3 {
     page-break-after: avoid;
   }
 
+  /* Controla orphans e widows para parágrafos */
   p {
     orphans: 3;
     widows: 3;
