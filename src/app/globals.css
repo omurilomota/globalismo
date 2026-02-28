@@ -40,25 +40,25 @@
 :root {
   /* Cor de fundo principal */
   --background: #ffffff;
-  
-  /* Cor do texto principal */
-  --foreground: #2d3748;
-  
+
+  /* Cor do texto principal (mais escuro para melhor contraste) */
+  --foreground: #1a202c;
+
   /* Cor primária (azul escuro) */
   --primary: #1a365d;
-  
+
   /* Cor primária em hover */
   --primary-hover: #2c5282;
-  
+
   /* Cor secundária */
   --secondary: #2b6cb0;
-  
+
   /* Cor de destaque/ação */
   --accent: #38a169;
-  
+
   /* Cor de destaque em hover */
   --accent-hover: #2f855a;
-  
+
   /* Secondary accent (amarelo/dourado) */
   --accent-secondary: #d69e2e;
 }
@@ -72,25 +72,25 @@
 .dark {
   /* Cor de fundo escura */
   --background: #1a202c;
-  
+
   /* Cor do texto clara */
   --foreground: #f7fafc;
-  
+
   /* Cor primária mais clara no tema escuro */
   --primary: #63b3ed;
-  
+
   /* Cor primária hover */
   --primary-hover: #4299e1;
-  
+
   /* Cor secundária */
   --secondary: #90cdf4;
-  
+
   /* Cor de destaque */
   --accent: #68d391;
-  
+
   /* Cor de destaque hover */
   --accent-hover: #48bb78;
-  
+
   /* Secondary accent */
   --accent-secondary: #f6e05e;
 }
@@ -202,7 +202,7 @@ html.dark {
 
 /* Fundo da trilha da scrollbar (onde elarola) */
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #e2e8f0;
   border-radius: 5px;
 }
 
@@ -244,7 +244,7 @@ html.dark {
 /* Scrollbar fina no Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1a365d #f1f5f9;
+  scrollbar-color: #1a365d #e2e8f0;
 }
 
 /* Scrollbar no modo escuro (Firefox) */
@@ -365,18 +365,33 @@ input:focus, textarea:focus, button:focus {
 .prose p {
   margin-bottom: 1.25em;
   text-align: justify;
+  color: #1a202c;
+}
+
+.dark .prose p {
+  color: #e2e8f0;
 }
 
 /* Estilo dos títulos h2 */
 .prose h2 {
   margin-top: 1.5em;
   margin-bottom: 0.75em;
+  color: #1a365d;
+}
+
+.dark .prose h2 {
+  color: #63b3ed;
 }
 
 /* Estilo de blockquotes */
 .prose blockquote {
   border-left-color: var(--primary);
   font-style: italic;
+  color: #2d3748;
+}
+
+.dark .prose blockquote {
+  color: #cbd5e0;
 }
 
 
@@ -390,8 +405,12 @@ blockquote {
   padding-left: 1rem;
   margin-left: 0;
   font-style: italic;
-  color: var(--foreground);
+  color: #2d3748;
   opacity: 0.9;
+}
+
+.dark blockquote {
+  color: #cbd5e0;
 }
 
 

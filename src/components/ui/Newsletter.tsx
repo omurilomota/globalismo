@@ -119,7 +119,7 @@ export default function Newsletter() {
       </div>
       
       {/* Descrição do serviço */}
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
         Receba as últimas análises sobre globalismo diretamente no seu email.
       </p>
       

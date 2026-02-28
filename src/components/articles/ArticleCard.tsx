@@ -87,12 +87,12 @@ const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
         </Link>
         
         {/* Resumo do artigo com limite de linhas */}
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 line-clamp-2">
           {article.resumo}
         </p>
-        
+
         {/* Metadados: autor, tempo de leitura, data */}
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-3 border-t border-gray-100 dark:border-gray-700">
+        <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 pt-3 border-t border-gray-200 dark:border-gray-700">
           <span className="flex items-center gap-1">
             <User className="w-3 h-3" />
             {article.autor}

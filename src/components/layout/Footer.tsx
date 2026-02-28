@@ -24,7 +24,7 @@ export default function Footer() {
               </h3>
             </div>
             
-            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
               Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.
             </p>
             
@@ -54,22 +54,22 @@ export default function Footer() {
             
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-white transition-colors">
+                <Link href="/" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/sobre" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-white transition-colors">
+                <Link href="/sobre" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white transition-colors">
                   Sobre
                 </Link>
               </li>
               <li>
-                <Link href="/artigos" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-white transition-colors">
+                <Link href="/artigos" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white transition-colors">
                   Artigos
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-white transition-colors">
+                <Link href="/contato" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white transition-colors">
                   Contato
                 </Link>
               </li>
@@ -83,22 +83,22 @@ export default function Footer() {
             
             <ul className="space-y-2">
               <li>
-                <Link href="/artigos?categoria=economia" className="text-sm text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <Link href="/artigos?categoria=economia" className="text-sm text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                   Economia
                 </Link>
               </li>
               <li>
-                <Link href="/artigos?categoria=politica" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-white transition-colors">
+                <Link href="/artigos?categoria=politica" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white transition-colors">
                   Política
                 </Link>
               </li>
               <li>
-                <Link href="/artigos?categoria=cultura" className="text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                <Link href="/artigos?categoria=cultura" className="text-sm text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Cultura
                 </Link>
               </li>
               <li>
-                <Link href="/artigos?categoria=geopolitica" className="text-sm text-gray-600 dark:text-gray-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+                <Link href="/artigos?categoria=geopolitica" className="text-sm text-gray-700 dark:text-gray-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
                   Geopolítica
                 </Link>
               </li>
@@ -107,7 +107,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-6 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             © {currentYear} Globalismo. Todos os direitos reservados.
           </p>
         </div>

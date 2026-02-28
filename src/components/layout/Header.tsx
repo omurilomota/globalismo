@@ -82,7 +82,7 @@ export default function Header() {
                     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? 'text-blue-900 dark:text-white'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-white'
                     }`}
                   >
                     <Icon className={`w-4 h-4 ${isActive ? 'text-green-600 dark:text-green-400' : ''}`} />
@@ -94,7 +94,7 @@ export default function Header() {
               {/* Botão de busca */}
               <button
                 onClick={() => document.getElementById('header-search')?.focus()}
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Buscar"
               >
                 <Search className="w-5 h-5" />
@@ -103,7 +103,7 @@ export default function Header() {
               {/* Botão de alternância de tema (dark mode) */}
               <button
                 onClick={toggleDarkMode}
-                className="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="ml-2 p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Alternar tema"
               >
                 {/* Condicional: mostra sol (claro) ou lua (escuro) */}
@@ -120,7 +120,7 @@ export default function Header() {
               {/* Botão de dark mode para mobile */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300"
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
                 aria-label="Alternar tema"
               >
                 {isDark ? (
@@ -133,7 +133,7 @@ export default function Header() {
               {/* Botão de menu hamburger - abre o drawer mobile */}
               <button
                 onClick={() => setIsOpen(true)}
-                className="p-2 rounded-lg text-gray-600 dark:text-gray-300"
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300"
                 aria-label="Abrir menu"
               >
                 <Menu className="w-6 h-6" />
@@ -143,7 +143,7 @@ export default function Header() {
         </div>
 
         {/* Barra de busca - visível apenas em desktop */}
-        <div className="hidden md:block border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+        <div className="hidden md:block border-t border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/50">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div id="header-search">
               <SearchBar />
@@ -169,9 +169,9 @@ export default function Header() {
             <span className="text-lg font-bold text-blue-900 dark:text-white">Menu</span>
           </div>
           {/* Botão de fechar (X) */}
-          <button 
+          <button
             onClick={closeDrawer}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
+            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
             aria-label="Fechar menu"
           >
             <X className="w-6 h-6" />
@@ -192,7 +192,7 @@ export default function Header() {
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
                   isActive
                     ? 'bg-blue-900 text-white'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 <Icon className="w-5 h-5" />
