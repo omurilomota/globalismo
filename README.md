@@ -1,86 +1,126 @@
 # Globalismo
 
-> Um site informativo sobre globalismo, geopolítica e economia global.
+> Um site informativo sobre globalização, geopolítica e economia global.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/omurilomota/globalismo/releases/tag/v1.0.0)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## Descrição
+## 🚀 Demo
 
-Globalismo é uma plataforma web dedicada à reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea. O projeto busca apresentar múltiplas perspectivas sobre o tema, sempre baseadas em fontes acadêmicas e jornalísticas confiáveis.
+**[https://globalismo.com.br](https://globalismo.com.br)**
 
-## Objetivos
+## 📖 Descrição
 
-- Disponibilizar conteúdo informativo neutro e embasado
-- Apresentar múltiplas perspectivas sobre globalismo
-- Fornecer dados visuais interativos
-- Criar recursos educacionais
-- Estabelecer credibilidade através de fontes primárias
+Globalismo é uma plataforma web dedicada à reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea. O projeto apresenta múltiplas perspectivas sobre o tema, sempre baseadas em fontes acadêmicas e jornalísticas confiáveis.
 
-## Tecnologias
+## ✨ Features
 
-- **Framework**: Next.js 16 (App Router)
-- **Linguagem**: TypeScript
-- **Estilização**: Tailwind CSS
-- **Ícones**: Lucide React
-- **Imagens**: Unsplash (CDN)
-- **Hospedagem**: Vercel (recomendado)
+- 📝 **12 Artigos** sobre globalização, economia e geopolítica
+- 💬 **Comentários** via Giscus (GitHub Issues)
+- 🌓 **Dark Mode** automático
+- 📱 **100% Responsivo** (mobile-first)
+- 🔍 **Busca e Filtros** por categoria
+- 📧 **Newsletter** e formulário de contato
+- 🎨 **SEO Otimizado** (sitemap, RSS, schema.org)
+- ⚡ **Performance** (Static Site Generation)
+- 🔒 **Seguro** (headers, rate limiting, sanitização)
+- 🆓 **100% Free** (sem serviços pagos, sem login)
 
-## Instalação
+## 🛠️ Tecnologias
+
+| Tecnologia | Versão | Descrição |
+|------------|--------|-----------|
+| **Next.js** | 14.2.28 | Framework React com SSG |
+| **TypeScript** | 5.x | Type safety |
+| **Tailwind CSS** | 4.x | Estilização utilitária |
+| **Giscus** | 3.1.0 | Comentários (GitHub) |
+| **Lucide React** | 0.575.0 | Ícones |
+
+## 📦 Instalação
 
 ```bash
-# Clonar o repositório
+# Clonar repositório
 git clone https://github.com/omurilomota/globalismo.git
-
-# Entrar no diretório
 cd globalismo
 
 # Instalar dependências
 npm install
 
-# Iniciar desenvolvimento
+# Desenvolvimento
 npm run dev
 ```
 
-## Estrutura de Pastas
+Acesse: http://localhost:3000
+
+## 🚀 Deploy (Vercel)
+
+1. Acesse [vercel.com/new](https://vercel.com/new)
+2. Importe o repositório `omurilomota/globalismo`
+3. Clique em **Deploy**
+
+**Pronto!** Site no ar em segundos.
+
+### Variáveis de Ambiente (Opcional)
+
+Para ativar comentários Giscus:
+
+```env
+# .env.local
+NEXT_PUBLIC_GISCUS_REPO="seu-usuario/globalismo"
+NEXT_PUBLIC_GISCUS_REPO_ID="R_kgDO..."
+NEXT_PUBLIC_GISCUS_CATEGORY="Comments"
+NEXT_PUBLIC_GISCUS_CATEGORY_ID="DIC_kwDO..."
+```
+
+Obtenha as credenciais em: [giscus.app/pt](https://giscus.app/pt)
+
+## 📁 Estrutura
 
 ```
 globalismo/
 ├── src/
 │   ├── app/                    # Páginas (App Router)
-│   │   ├── api/               # API Routes
+│   │   ├── api/               # APIs (contato, newsletter)
 │   │   ├── artigos/           # Páginas de artigos
-│   │   ├── sobre/             # Página sobre
 │   │   ├── contato/           # Página contato
-│   │   └── layout.tsx         # Layout principal
+│   │   ├── sobre/             # Página sobre
+│   │   └── layout.tsx         # Layout raiz
 │   ├── components/
-│   │   ├── layout/            # Header, Footer
 │   │   ├── articles/          # Componentes de artigos
-│   │   └── ui/                # Componentes de UI
-│   ├── lib/                   # Funções utilitárias
+│   │   ├── forms/             # Formulários
+│   │   ├── layout/            # Header, Footer
+│   │   ├── seo/               # Schema.org
+│   │   └── ui/                # UI components
+│   ├── lib/                   # Utilitários
 │   ├── data/                  # Dados JSON
-│   └── types/                 # Tipos TypeScript
-├── public/                     # Arquivos estáticos
-├── next.config.ts              # Configuração Next.js
-├── tailwind.config.ts          # Configuração Tailwind
-└── package.json
+│   └── types/                 # TypeScript types
+├── public/                     # Estáticos
+├── CHANGELOG.md               # Histórico de versões
+└── .env.example               # Variáveis de ambiente
 ```
 
-## Páginas
+## 📄 Scripts
 
-| Página | URL | Descrição |
-|--------|-----|-----------|
-| Home | `/` | Página inicial com artigos em destaque |
-| Artigos | `/artigos` | Listagem completa de artigos |
-| Artigo | `/artigos/[slug]` | Página de artigo individual |
-| Sobre | `/sobre` | Informações sobre o projeto |
-| Contato | `/contato` | Formulário de contato |
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` | Build de produção |
+| `npm start` | Start servidor produção |
+| `npm run lint` | ESLint |
+| `npm run test` | Testes (Vitest) |
+| `npm run test:run` | Testes (CI mode) |
 
-## Artigos Disponíveis
+## 📊 Status
 
-O site conta com artigos aprofundados sobre diversos temas relacionados ao globalismo:
+- ✅ Build: Passando
+- ✅ Testes: 25/25
+- ✅ TypeScript: Sem erros
+- ✅ ESLint: 2 warnings (anonymous exports)
+
+## 📝 Artigos Incluídos
 
 1. O Poder das Empresas Transnacionais na Era da Globalização
 2. Cidadania e Direitos na Sociedade Capitalista
@@ -95,63 +135,39 @@ O site conta com artigos aprofundados sobre diversos temas relacionados ao globa
 11. O Papel das Instituições Supranacionais
 12. Nacionalismo vs Globalismo: O Conflito Contemporâneo
 
-### Categorias
+## ⚠️ Limitações (v1.0.0)
 
-- Economia
-- Política
-- Cultura
-- Geopolítica
-- Filosofia
-- Mídia
+- **APIs de Contato/Newsletter**: Simulam envio. Para produção, integrar com SendGrid/Resend.
+- **Comentários**: Requer configuração no Giscus (GitHub OAuth)
+- **Analytics**: Não incluído (pode adicionar Google Analytics)
 
-## Design
-
-### Paleta de Cores
-
-| Cor | Hex | Uso |
-|-----|-----|-----|
-| Azul Marinho | `#1a365d` | Primary |
-| Azul Céu | `#2b6cb0` | Secondary |
-| Verde | `#38a169` | Accent |
-| Dourado | `#d69e2e` | Destaque |
-| Cinza Gelo | `#f7fafc` | Background |
-| Cinza Escuro | `#1a202c` | Dark Background |
-
-### Tipografia
-
-- **Títulos**: Merriweather (Serif)
-- **Corpo**: Inter (Sans-serif)
-
-## Contribuição
-
-Contribuições são bem-vindas! Siga os passos:
+## 🤝 Contribuindo
 
 1. Fork o projeto
 2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -m 'feat: nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
+3. Commit (`git commit -m '✨ feat: nova funcionalidade'`)
+4. Push (`git push origin feature/nova-funcionalidade`)
+5. Pull Request
 
-## Licença
+## 📄 Licença
 
-MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
+MIT License - veja [LICENSE](LICENSE) para detalhes.
 
-## Autor
+## 👨‍💻 Autor
 
 **Murilo Mota**
 
 - GitHub: [@omurilomota](https://github.com/omurilomota)
-- Email: [murilomota@email.com](mailto:murilomota@email.com)
+- Twitter/X: [@omurilomota](https://x.com/omurilomota)
+- LinkedIn: [murilo-henrique](https://www.linkedin.com/in/murilo-henrique-622354358/)
 
-## Links Úteis
+## 🔗 Links Úteis
 
-- [Organização das Nações Unidas (ONU)](https://www.un.org)
-- [Fundo Monetário Internacional (FMI)](https://www.imf.org)
+- [ONU](https://www.un.org)
+- [FMI](https://www.imf.org)
 - [Banco Mundial](https://www.worldbank.org)
-- [Organização Mundial do Comércio (OMC)](https://www.wto.org)
-- [Forbes Brasil](https://forbes.com.br)
-- [CEBRI - Centro Brasileiro de Relações Internacionais](https://cebri.org)
+- [OMC](https://www.wto.org)
 
 ---
 
-Desenvolvido com Next.js e Tailwind CSS
+**Feito com ❤️ usando Next.js e Tailwind CSS**
