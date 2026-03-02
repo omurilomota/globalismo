@@ -4,7 +4,7 @@
  * Esta é a página principal do site, exibida quando o usuário
  * acessa a raiz do domínio (/)
  *
- * @module app/[locale]/page
+ * @module app/page
  * @author Globalismo
  * @version 1.1.0
  */
@@ -13,16 +13,11 @@ import { getFeaturedArticle, getRecentArticles } from '@/lib/articles';
 import ArticleHero from '@/components/articles/ArticleHero';
 import ArticleCard from '@/components/articles/ArticleCard';
 import MostRead from '@/components/ui/MostRead';
-import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import Link from 'next/link';
 import Newsletter from '@/components/ui/Newsletter';
 import { ArrowRight } from 'lucide-react';
 
-interface Props {
-  params: Promise<{ locale: string }>;
-}
-
-export default function Home({ params }: Props) {
+export default function Home() {
   const featured = getFeaturedArticle();
   const recentArticles = getRecentArticles(6, featured?.id);
   

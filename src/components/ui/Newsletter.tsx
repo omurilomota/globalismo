@@ -119,7 +119,7 @@ export default function Newsletter() {
       </div>
       
       {/* Descrição do serviço */}
-      <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
         Receba as últimas análises sobre globalismo diretamente no seu email.
       </p>
       
@@ -133,7 +133,7 @@ export default function Newsletter() {
         // Formulário de inscrição
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Container do input e botão */}
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col lg:flex-row gap-2">
             {/* Input de email */}
             <input
               type="email"
@@ -167,7 +167,7 @@ export default function Newsletter() {
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  <span className="sm:hidden lg:inline">Inscrever</span>
+                  <span>Inscrever</span>
                 </>
               )}
             </button>
