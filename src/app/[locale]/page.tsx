@@ -4,7 +4,7 @@
  * Esta é a página principal do site, exibida quando o usuário
  * acessa a raiz do domínio (/)
  *
- * @module app/page
+ * @module app/[locale]/page
  * @author Globalismo
  * @version 1.1.0
  */
@@ -17,7 +17,12 @@ import Link from 'next/link';
 import Newsletter from '@/components/ui/Newsletter';
 import { ArrowRight } from 'lucide-react';
 
-export default function Home() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Home({ params }: PageProps) {
+  const { locale } = await params;
   const featured = getFeaturedArticle();
   const recentArticles = getRecentArticles(6, featured?.id);
   
@@ -31,14 +36,14 @@ export default function Home() {
           <section className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white font-serif">
-                Últimos Artigos
+                {locale === 'es' ? 'Últimos Artículos' : locale === 'en' ? 'Latest Articles' : locale === 'de' ? 'Neueste Artikel' : 'Últimos Artigos'}
               </h2>
 
               <Link
-                href="/artigos"
+                href={`/${locale}/artigos`}
                 className="flex items-center gap-2 text-sm font-medium text-blue-900 dark:text-blue-300 hover:underline"
               >
-                Ver todos <ArrowRight className="w-4 h-4" />
+                {locale === 'es' ? 'Ver todos' : locale === 'en' ? 'View all' : locale === 'de' ? 'Alle ansehen' : 'Ver todos'} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 

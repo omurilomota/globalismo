@@ -11,7 +11,7 @@
  * Os parâmetros de query (page, categoria, busca) são tratados como promise
  * conforme nova API do Next.js 15+.
  * 
- * @module app/artigos/page
+ * @module app/[locale]/artigos/page
  * @author Globalismo
  * @version 1.0.0
  */
@@ -24,56 +24,65 @@ import SearchBar from '@/components/ui/SearchBar';
 import CategoryTag from '@/components/ui/CategoryTag';
 import Pagination from '@/components/ui/Pagination';
 
-// Configuração de metadados SEO para a página de artigos
-export const metadata: Metadata = {
-  title: 'Artigos',
-  description: 'Explore todos os artigos sobre globalização, economia, política e cultura.'
-};
-
-// Interface para tipagem dos parâmetros de query string da URL
 interface PageProps {
-  searchParams: { page?: string; categoria?: string; busca?: string };
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ page?: string; categoria?: string; busca?: string }>;
 }
 
-/**
- * Página principal de listagem de artigos.
- * Renderiza grid de artigos com suporte a:
- * - Paginação (parâmetro 'page')
- * - Filtro por categoria (parâmetro 'categoria')
- * - Busca por termo (parâmetro 'busca')
- * 
- * @component
- * @param {PageProps} props - Parâmetros da página incluindo searchParams
- * @returns {JSX.Element} Página renderizada com artigos filtrados/paginados
- */
-export default async function ArtigosPage({ searchParams }: PageProps) {
-  // Extrai parâmetros de query string
-  const page = parseInt(searchParams.page || '1');
-  const categoria = searchParams.categoria;
-  const busca = searchParams.busca;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const titles: Record<string, string> = {
+    pt: 'Artigos',
+    en: 'Articles',
+    de: 'Artikel',
+    es: 'Artículos'
+  };
+  
+  const descriptions: Record<string, string> = {
+    pt: 'Explore todos os artigos sobre globalização, economia, política e cultura.',
+    en: 'Explore all articles about globalization, economy, politics and culture.',
+    de: 'Entdecken Sie alle Artikel über Globalisierung, Wirtschaft, Politik und Kultur.',
+    es: 'Explora todos los artículos sobre globalización, economía, política y cultura.'
+  };
 
-  // Busca artigos com paginação e filtros aplicados
+  return {
+    title: titles[locale] || 'Artigos',
+    description: descriptions[locale] || titles[locale]
+  };
+}
+
+export default async function ArtigosPage({ params, searchParams }: PageProps) {
+  const { locale } = await params;
+  const resolvedSearchParams = await searchParams;
+  
+  const page = parseInt(resolvedSearchParams.page || '1');
+  const categoria = resolvedSearchParams.categoria;
+  const busca = resolvedSearchParams.busca;
+
   const result = getPaginatedArticles({
     page,
     category: categoria,
     search: busca
   });
 
-  // Redireciona para primeira página se a página atual exceder o total
   if (page > result.totalPages && result.totalPages > 0) {
-    redirect('/artigos');
+    redirect(`/${locale}/artigos`);
   }
 
-  // Carrega todas as categorias disponíveis para o filtro
   const allCategories = getAllCategories();
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Cabeçalho da página com título e descrição */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Artigos</h1>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          {locale === 'es' ? 'Artículos' : locale === 'en' ? 'Articles' : locale === 'de' ? 'Artikel' : 'Artigos'}
+        </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Explore nossa coleção de artigos sobre globalização e seus impactos na sociedade.
+          {locale === 'es' ? 'Explora nuestra colección de artículos sobre globalización y sus impactos en la sociedad.' 
+            : locale === 'en' ? 'Explore our collection of articles about globalization and its impacts on society.'
+            : locale === 'de' ? 'Entdecken Sie unsere Sammlung von Artikeln über Globalisierung und ihre Auswirkungen auf die Gesellschaft.'
+            : 'Explore nossa coleção de artigos sobre globalização e seus impactos na sociedade.'}
         </p>
         {/* Componente de busca */}
         <div className="max-w-md">
@@ -84,7 +93,11 @@ export default async function ArtigosPage({ searchParams }: PageProps) {
       {/* Filtros de categoria */}
       <div className="flex flex-wrap gap-2 mb-8">
         {/* Opção "Todas" para remover filtro de categoria */}
-        <CategoryTag category="Todas" size="md" isActive={!categoria} />
+        <CategoryTag 
+          category={locale === 'es' ? 'Todas' : locale === 'en' ? 'All' : locale === 'de' ? 'Alle' : 'Todas'} 
+          size="md" 
+          isActive={!categoria} 
+        />
         {/* Mapeia todas as categorias disponíveis */}
         {allCategories.map((cat) => (
           <CategoryTag 
@@ -99,17 +112,17 @@ export default async function ArtigosPage({ searchParams }: PageProps) {
       {/* Exibe filtros ativos quando há categoria ou busca */}
       {(categoria || busca) && (
         <div className="mb-6 flex items-center gap-2 flex-wrap">
-          <span className="text-gray-600 dark:text-gray-400">Filtros ativos:</span>
-          {/* Tag indicating the active category filter */}
+          <span className="text-gray-600 dark:text-gray-400">
+            {locale === 'es' ? 'Filtros activos:' : locale === 'en' ? 'Active filters:' : locale === 'de' ? 'Aktive Filter:' : 'Filtros ativos:'}
+          </span>
           {categoria && (
             <span className="px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm rounded-full">
-              Categoria: {categoria}
+              {locale === 'es' ? 'Categoría:' : locale === 'en' ? 'Category:' : locale === 'de' ? 'Kategorie:' : 'Categoria:'} {categoria}
             </span>
           )}
-          {/* Tag indicating the active search filter */}
           {busca && (
             <span className="px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm rounded-full">
-              Busca: {busca}
+              {locale === 'es' ? 'Búsqueda:' : locale === 'en' ? 'Search:' : locale === 'de' ? 'Suche:' : 'Busca:'} {busca}
             </span>
           )}
         </div>
@@ -117,9 +130,10 @@ export default async function ArtigosPage({ searchParams }: PageProps) {
 
       {/* Verifica se há artigos para exibir */}
       {result.artigos.length === 0 ? (
-        // Mensagem quando não há artigos encontrados
         <div className="text-center py-12">
-          <p className="text-gray-500 dark:text-gray-400 text-lg">Nenhum artigo encontrado.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">
+            {locale === 'es' ? 'No se encontraron artículos.' : locale === 'en' ? 'No articles found.' : locale === 'de' ? 'Keine Artikel gefunden.' : 'Nenhum artigo encontrado.'}
+          </p>
         </div>
       ) : (
         <>
@@ -134,7 +148,7 @@ export default async function ArtigosPage({ searchParams }: PageProps) {
           <Pagination 
             currentPage={page} 
             totalPages={result.totalPages} 
-            baseUrl="/artigos"
+            baseUrl={`/${locale}/artigos`}
           />
         </>
       )}

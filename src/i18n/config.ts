@@ -28,4 +28,4 @@ export const localeDirections: Record<Locale, string> = {
   es: 'ltr',
 };
 
-export const localePrefix = 'as-needed' as const;
+export const localePrefix = 'always' as const;

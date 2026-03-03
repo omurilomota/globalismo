@@ -19,36 +19,33 @@ import { MetadataRoute } from 'next';
 import { IArticle } from '@/types';
 import artigosData from '@/data/artigos.json';
 
-/**
- * Função que gera o sitemap do site.
- * Retorna array de URLs com metadados paraIndex crawling SEO.
- * 
- * @function sitemap
- * @returns {MetadataRoute.Sitemap} Array de entradas do sitemap com URLs, datas e prioridades
- */
 export default function sitemap(): MetadataRoute.Sitemap {
-  // URL base do site paraIndex todas as URLs
   const baseUrl = 'https://globalismo.com.br';
-  
-  // Extrai artigos do arquivo JSON de dados
   const artigos = (artigosData as { artigos: IArticle[] }).artigos;
+  const locales = ['pt', 'en', 'de', 'es'];
 
-  // Define as páginas estáticas do site com prioridades
-  const staticPages = [
-    { url: baseUrl, lastModified: new Date(), priority: 1 },
-    { url: `${baseUrl}/sobre`, lastModified: new Date(), priority: 0.8 },
-    { url: `${baseUrl}/artigos`, lastModified: new Date(), priority: 0.9 },
-    { url: `${baseUrl}/contato`, lastModified: new Date(), priority: 0.7 }
-  ];
+  const staticPages: MetadataRoute.Sitemap = [];
 
-  // Gera URLs paraIndex cada artigo individualmente
-  const articlePages = artigos.map((article) => ({
-    url: `${baseUrl}/artigos/${article.slug}`,
-    // Usa a data de publicação do artigo como última modificação
-    lastModified: new Date(article.dataPublicacao),
-    priority: 0.7
-  }));
+  for (const locale of locales) {
+    staticPages.push(
+      { url: `${baseUrl}/${locale}`, lastModified: new Date(), priority: 1 },
+      { url: `${baseUrl}/${locale}/sobre`, lastModified: new Date(), priority: 0.8 },
+      { url: `${baseUrl}/${locale}/artigos`, lastModified: new Date(), priority: 0.9 },
+      { url: `${baseUrl}/${locale}/contato`, lastModified: new Date(), priority: 0.7 }
+    );
+  }
 
-  // Combina páginas estáticas com páginas de artigos e retorna
+  const articlePages: MetadataRoute.Sitemap = [];
+
+  for (const locale of locales) {
+    for (const article of artigos) {
+      articlePages.push({
+        url: `${baseUrl}/${locale}/artigos/${article.slug}`,
+        lastModified: new Date(article.dataPublicacao),
+        priority: 0.7
+      });
+    }
+  }
+
   return [...staticPages, ...articlePages];
 }
