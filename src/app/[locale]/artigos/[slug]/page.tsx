@@ -27,7 +27,7 @@ import Comments from '@/components/articles/Comments';
 import SocialShare from '@/components/articles/SocialShare';
 import ViewTracker from '@/components/articles/ViewTracker';
 import Link from 'next/link';
-import { User, Calendar, Clock, TrendingUp } from 'lucide-react';
+import { User, Calendar, Clock, TrendingUp, Eye } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -139,6 +139,10 @@ export default async function ArtigoPage({ params }: PageProps) {
             <Clock className="w-4 h-4" />
             <span>{sanitizedArticle.tempoLeitura} min de leitura</span>
           </span>
+          <span className="flex items-center gap-1.5">
+            <Eye className="w-4 h-4" />
+            <span>{sanitizedArticle.visualizacoes?.toLocaleString() || 0} visualizações</span>
+          </span>
         </div>
 
         <div className="py-4 border-y border-gray-200 dark:border-gray-700">
@@ -162,9 +166,23 @@ export default async function ArtigoPage({ params }: PageProps) {
 
         <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-            {locale === 'es' ? 'Sobre los Autores' : locale === 'en' ? 'About the Authors' : locale === 'de' ? 'Über die Autoren' : 'Sobre os Autores'}
+            {locale === 'es' ? 'Sobre los Colaboradores' : locale === 'en' ? 'About the Contributors' : locale === 'de' ? 'Über die Mitwirkenden' : 'Sobre os Colaboradores'}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-purple-900 dark:bg-purple-700 flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+                G
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Gian</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {locale === 'es' ? 'Investigador académico. Contribuyó con la fundamentación teórica sobre globalización.'
+                    : locale === 'en' ? 'Academic researcher. Contributed with theoretical foundation on globalization.'
+                    : locale === 'de' ? 'Akademischer Forscher. Trug zur theoretischen Grundlage über Globalisierung bei.'
+                    : 'Pesquisador acadêmico. Contribuiu com a fundamentação teórica sobre globalização.'}
+                </p>
+              </div>
+            </div>
             <div className="flex items-start gap-3">
               <div className="w-12 h-12 rounded-full bg-blue-900 dark:bg-blue-700 flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
                 MM
@@ -172,10 +190,10 @@ export default async function ArtigoPage({ params }: PageProps) {
               <div>
                 <p className="font-medium text-gray-900 dark:text-white">Murilo Mota</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {locale === 'es' ? 'Investigador y colaborador. Especialista en análisis de temas relacionados con la globalización, economía internacional y geopolítica.' 
-                    : locale === 'en' ? 'Researcher and collaborator. Specialist in analyzing topics related to globalization, international economy and geopolitics.'
-                    : locale === 'de' ? 'Forscher und Mitarbeiter. Spezialist auf die Analyse von Themen im Zusammenhang mit Globalisierung, internationaler Wirtschaft und Geopolitik.'
-                    : 'Pesquisador e colaborador. Especialista em análise de temas relacionados à globalização, economia internacional e geopolítica.'}
+                  {locale === 'es' ? 'Fundador y editor. Analista de temas relacionados con la globalización, economía internacional y geopolítica.' 
+                    : locale === 'en' ? 'Founder and editor. Analyst of topics related to globalization, international economy and geopolitics.'
+                    : locale === 'de' ? 'Gründer und Herausgeber. Analytiker zu Themen wie Globalisierung, internationale Wirtschaft und Geopolitik.'
+                    : 'Fundador e editor. Analista de temas relacionados à globalização, economia internacional e geopolítica.'}
                 </p>
               </div>
             </div>

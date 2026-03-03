@@ -138,9 +138,25 @@ export default async function SobrePage({ params }: PageProps) {
       {/* Seção: Sobre os Autores */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-          {locale === 'es' ? 'Sobre los Autores' : locale === 'en' ? 'About the Authors' : locale === 'de' ? 'Über die Autoren' : 'Sobre os Autores'}
+          {locale === 'es' ? 'Sobre los Colaboradores' : locale === 'en' ? 'About the Contributors' : locale === 'de' ? 'Über die Mitwirkenden' : 'Sobre os Colaboradores'}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Gian - Researcher */}
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-purple-900 dark:bg-purple-700 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                G
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Gian</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                {locale === 'es' ? 'Investigador académico y colaborador. Contribuyó con la fundamentación teórica sobre globalización, analizando obras de Ulrich Beck y otros autores esenciales.'
+                  : locale === 'en' ? 'Academic researcher and collaborator. Contributed with theoretical foundation on globalization, analyzing works by Ulrich Beck and other essential authors.'
+                  : locale === 'de' ? 'Akademischer Forscher und Mitarbeiter. Trug zur theoretischen Grundlage über Globalisierung bei, analysierte Werke von Ulrich Beck und anderen wichtigen Autoren.'
+                  : 'Pesquisador acadêmico e colaborador. Contribuiu com a fundamentação teórica sobre globalização, analisando obras de Ulrich Beck e outros autores essenciais.'}
+              </p>
+            </div>
+          </div>
+
           {/* Murilo Mota */}
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
             <div className="flex flex-col items-center text-center">
@@ -149,10 +165,10 @@ export default async function SobrePage({ params }: PageProps) {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Murilo Mota</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {locale === 'es' ? 'Fundador y editor del Globalismo. Investigador independiente interesado en geopolítica, economía internacional y los impactos de la globalización en las sociedades contemporáneas.'
-                  : locale === 'en' ? 'Founder and editor of Globalismo. Independent researcher interested in geopolitics, international economy and the impacts of globalization on contemporary societies.'
-                  : locale === 'de' ? 'Gründer und Herausgeber von Globalismo. Unabhängiger Forscher an Geopolitik, internationaler Wirtschaft und den Auswirkungen der Globalisierung auf zeitgenössische Gesellschaften.'
-                  : 'Fundador e editor do Globalismo. Pesquisador independente interessado em geopolítica, economia internacional e os impactos da globalização nas sociedades contemporâneas.'}
+                {locale === 'es' ? 'Fundador y editor del Globalismo. Analista interesado en geopolítica, economía internacional y los impactos de la globalización en las sociedades contemporáneas.'
+                  : locale === 'en' ? 'Founder and editor of Globalismo. Analyst interested in geopolitics, international economy and the impacts of globalization on contemporary societies.'
+                  : locale === 'de' ? 'Gründer und Herausgeber von Globalismo. Analytiker interessiert an Geopolitik, internationaler Wirtschaft und den Auswirkungen der Globalisierung auf zeitgenössische Gesellschaften.'
+                  : 'Fundador e editor do Globalismo. Analista interessado em geopolítica, economia internacional e os impactos da globalização nas sociedades contemporâneas.'}
               </p>
               <div className="flex gap-3">
                 <a href="https://github.com/omurilomota" target="_blank" rel="noopener noreferrer" className="p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" aria-label="GitHub">

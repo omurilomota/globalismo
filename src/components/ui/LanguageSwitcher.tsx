@@ -23,7 +23,8 @@ export default function LanguageSwitcher() {
   const locale = useLocale();
 
   const handleLocaleChange = (newLocale: Locale) => {
-    const newPath = pathname === '/' ? `/${newLocale}` : `/${newLocale}${pathname}`;
+    const pathWithoutLocale = pathname.replace(/^\/(pt|en|de|es)/, '') || '/';
+    const newPath = pathWithoutLocale === '/' ? `/${newLocale}` : `/${newLocale}${pathWithoutLocale}`;
     router.push(newPath);
     setIsOpen(false);
   };

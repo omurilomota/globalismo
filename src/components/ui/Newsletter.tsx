@@ -159,7 +159,7 @@ export default function Newsletter() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-4 py-2 bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full lg:w-auto px-4 py-2 bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {/* Spinner de carregamento ou ícone de envio */}
               {status === 'loading' ? (

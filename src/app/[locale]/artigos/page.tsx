@@ -138,7 +138,7 @@ export default async function ArtigosPage({ params, searchParams }: PageProps) {
       ) : (
         <>
           {/* Grid de artigos - 1 coluna mobile, 2 tablet, 3 desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
             {result.artigos.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))}

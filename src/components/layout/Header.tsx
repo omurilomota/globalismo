@@ -23,16 +23,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import { useLocale } from 'next-intl';
 import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X, Search } from 'lucide-react';
 import SearchBar from '@/components/ui/SearchBar';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
-
-const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/sobre', label: 'Sobre', icon: BookOpen },
-  { href: '/artigos', label: 'Artigos', icon: FileText },
-  { href: '/contato', label: 'Contato', icon: Mail },
-];
+import { locales, type Locale } from '@/i18n/config';
 
 /**
  * Componente principal de cabeçalho/navegação.
@@ -48,7 +43,30 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale() as Locale;
   const { theme, setTheme, resolvedTheme } = useTheme();
+
+  const getLocalizedPath = (path: string) => {
+    if (path === '/') return `/${locale}`;
+    return `/${locale}${path}`;
+  };
+
+  const navLinks = [
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/sobre', label: 'Sobre', icon: BookOpen },
+    { href: '/artigos', label: 'Artigos', icon: FileText },
+    { href: '/contato', label: 'Contato', icon: Mail },
+  ];
+
+  const getNavLabel = (href: string) => {
+    const labels: Record<string, Record<string, string>> = {
+      '/': { pt: 'Home', en: 'Home', de: 'Startseite', es: 'Inicio' },
+      '/sobre': { pt: 'Sobre', en: 'About', de: 'Über', es: 'Sobre' },
+      '/artigos': { pt: 'Artigos', en: 'Articles', de: 'Artikel', es: 'Artículos' },
+      '/contato': { pt: 'Contato', en: 'Contact', de: 'Kontakt', es: 'Contacto' },
+    };
+    return labels[href]?.[locale] || href;
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -70,7 +88,7 @@ export default function Header() {
           {/* Container flex para alinhar logo, nav e botões */}
           <div className="flex items-center justify-between h-16">
             {/* Logo do site com link para home */}
-            <Link href="/" className="flex items-center space-x-2 group">
+            <Link href={getLocalizedPath('/')} className="flex items-center space-x-2 group">
               <Globe className="w-7 h-7 text-blue-900 dark:text-blue-400" />
               <span className="text-xl font-bold text-blue-900 dark:text-white font-serif">
                 Globalismo
@@ -82,11 +100,12 @@ export default function Header() {
               {/* Mapeia os links de navegação */}
               {navLinks.map((link) => {
                 const Icon = link.icon;
-                const isActive = pathname === link.href;
+                const localizedHref = getLocalizedPath(link.href);
+                const isActive = pathname === localizedHref;
                 return (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={localizedHref}
                     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? 'text-blue-900 dark:text-white'
@@ -94,7 +113,7 @@ export default function Header() {
                     }`}
                   >
                     <Icon className={`w-4 h-4 ${isActive ? 'text-green-600 dark:text-green-400' : ''}`} />
-                    {link.label}
+                    {getNavLabel(link.href)}
                   </Link>
                 );
               })}
@@ -198,11 +217,12 @@ export default function Header() {
           {/* Mapeia links para o menu mobile */}
           {navLinks.map((link) => {
             const Icon = link.icon;
-            const isActive = pathname === link.href;
+            const localizedHref = getLocalizedPath(link.href);
+            const isActive = pathname === localizedHref;
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={localizedHref}
                 onClick={closeDrawer}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
                   isActive
@@ -211,7 +231,7 @@ export default function Header() {
                 }`}
               >
                 <Icon className="w-5 h-5" />
-                {link.label}
+                {getNavLabel(link.href)}
               </Link>
             );
           })}
