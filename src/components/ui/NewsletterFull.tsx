@@ -71,37 +71,30 @@ export default function NewsletterFull() {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 dark:from-blue-950 dark:via-blue-900 dark:to-purple-950 rounded-2xl p-8 md:p-16 my-12 overflow-hidden relative shadow-xl">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Cabeçalho com ícone e título */}
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl">
-            <Mail className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white font-serif">
+    <section className="w-full bg-gray-50 dark:bg-gray-800 rounded-lg p-6 md:p-8 my-8 border border-gray-200 dark:border-gray-700">
+      <div className="max-w-3xl mx-auto text-center">
+        {/* Cabeçalho com título */}
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Mail className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             Newsletter
           </h2>
         </div>
 
         {/* Descrição */}
-        <p className="text-lg md:text-xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
           Receba as últimas análises sobre globalismo diretamente no seu email.
         </p>
 
         {/* Formulário */}
         {status === 'success' ? (
-          <div className="flex items-center justify-center gap-3 text-green-300 bg-green-900/30 p-6 rounded-xl max-w-md mx-auto">
-            <CheckCircle className="w-8 h-8 flex-shrink-0" />
-            <span className="text-lg">{message}</span>
+          <div className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+            <CheckCircle className="w-5 h-5 flex-shrink-0" />
+            <span className="text-sm">{message}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-2">
               <div className="flex-1">
                 <input
                   type="email"
@@ -115,10 +108,10 @@ export default function NewsletterFull() {
                   }}
                   placeholder="Seu melhor email"
                   disabled={status === 'loading'}
-                  className={`w-full px-6 py-4 rounded-xl border-2 transition-all bg-white/95 dark:bg-gray-800 text-lg text-gray-900 dark:text-white outline-none focus:ring-4 focus:border-transparent ${
+                  className={`w-full px-4 py-2.5 rounded-lg border transition-colors bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:border-transparent ${
                     status === 'error'
-                      ? 'border-red-400 focus:ring-red-400/50'
-                      : 'border-transparent focus:ring-blue-400/50'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-300 dark:border-gray-600 focus:ring-gray-400'
                   }`}
                   aria-label="Seu melhor email"
                 />
@@ -126,23 +119,23 @@ export default function NewsletterFull() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full sm:w-auto px-8 py-4 bg-white text-blue-900 font-bold rounded-xl hover:bg-blue-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 min-w-[180px] shadow-lg hover:shadow-xl"
+                className="w-full sm:w-auto px-6 py-2.5 bg-gray-900 dark:bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {status === 'loading' ? (
-                  <span className="w-6 h-6 border-3 border-blue-900 border-t-transparent rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <>
-                    <Send className="w-6 h-6" />
-                    <span className="text-lg">Inscrever</span>
+                    <Send className="w-4 h-4" />
+                    <span>Inscrever</span>
                   </>
                 )}
               </button>
             </div>
 
             {status === 'error' && (
-              <div className="flex items-center justify-center gap-2 text-red-300 mt-4">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-base">{message}</span>
+              <div className="flex items-center justify-center gap-1 text-red-600 dark:text-red-400 mt-3">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <span className="text-sm">{message}</span>
               </div>
             )}
           </form>
