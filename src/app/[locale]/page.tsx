@@ -52,9 +52,9 @@ export default async function Home({ params }: PageProps) {
                 <div
                   key={article.id}
                   className="animate-fade-in-up"
-                  style={{ animationDelay: `${idx * 100}ms` }}
+                  style={{ animationFillMode: 'both' }}
                 >
-                  <ArticleCard article={article} />
+                  <ArticleCard article={article} locale={locale} />
                 </div>
               ))}
             </div>

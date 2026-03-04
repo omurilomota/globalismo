@@ -25,8 +25,16 @@ interface Article {
 export default function MostRead() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentLocale, setCurrentLocale] = useState('pt');
 
   useEffect(() => {
+    // Get locale from URL pathname
+    const pathname = window.location.pathname;
+    const localeMatch = pathname.match(/^\/(pt|en|de|es)/);
+    if (localeMatch) {
+      setCurrentLocale(localeMatch[1]);
+    }
+    
     fetch('/api/views?top=5')
       .then(res => res.json())
       .then(data => {
@@ -66,7 +74,7 @@ export default function MostRead() {
         {articles.map((article, index) => (
           <Link
             key={article.id}
-            href={`/artigos/${article.slug}`}
+            href={`/${currentLocale}/artigos/${article.slug}`}
             className="flex items-start gap-3 p-2 rounded-lg hover:bg-white dark:hover:bg-gray-800 transition-colors group"
           >
             <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-blue-900 dark:bg-blue-700 text-white text-xs font-bold rounded-full">

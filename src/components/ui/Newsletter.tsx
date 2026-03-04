@@ -133,7 +133,7 @@ export default function Newsletter() {
         // Formulário de inscrição
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Container do input e botão */}
-          <div className="flex flex-col lg:flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             {/* Input de email */}
             <input
               type="email"
@@ -148,7 +148,7 @@ export default function Newsletter() {
               }}
               placeholder="Seu melhor email"
               disabled={status === 'loading'}
-              className={`flex-1 px-4 py-2 rounded-lg border transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none ${
+              className={`flex-1 px-4 py-2 rounded-lg border transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none h-[42px] ${
                 status === 'error'
                   ? 'border-red-500 focus:ring-2 focus:ring-red-500'
                   : 'border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-400 focus:border-transparent'
@@ -159,7 +159,7 @@ export default function Newsletter() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full lg:w-auto px-4 py-2 bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="sm:w-auto w-full px-4 py-2 bg-blue-900 dark:bg-blue-600 text-white rounded-lg hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 h-[42px] whitespace-nowrap"
             >
               {/* Spinner de carregamento ou ícone de envio */}
               {status === 'loading' ? (

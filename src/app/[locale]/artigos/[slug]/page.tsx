@@ -190,7 +190,7 @@ export default async function ArtigoPage({ params }: PageProps) {
               <div>
                 <p className="font-medium text-gray-900 dark:text-white">Murilo Mota</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {locale === 'es' ? 'Fundador y editor. Analista de temas relacionados con la globalización, economía internacional y geopolítica.' 
+                  {locale === 'es' ? 'Fundador y editor. Analista de temas relacionados con la globalización, economía internacional y geopolítica.'
                     : locale === 'en' ? 'Founder and editor. Analyst of topics related to globalization, international economy and geopolitics.'
                     : locale === 'de' ? 'Gründer und Herausgeber. Analytiker zu Themen wie Globalisierung, internationale Wirtschaft und Geopolitik.'
                     : 'Fundador e editor. Analista de temas relacionados à globalização, economia internacional e geopolítica.'}
@@ -210,6 +210,57 @@ export default async function ArtigoPage({ params }: PageProps) {
                     : 'Desenvolvedor e co-fundador. Engenheiro de software focado em tecnologias web e experiências digitais.'}
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Créditos para pesquisadores aleatórios */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+            {locale === 'es' ? 'Investigadores Colaboradores' : locale === 'en' ? 'Research Contributors' : locale === 'de' ? 'Forschungsmitwirkende' : 'Pesquisadores Colaboradores'}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            {locale === 'es' ? 'Agradecemos a los siguientes investigadores por sus contribuciones:'
+              : locale === 'en' ? 'We thank the following researchers for their contributions:'
+              : locale === 'de' ? 'Wir danken den folgenden Forschern für ihre Beiträge:'
+              : 'Agradecemos aos seguintes pesquisadores por suas contribuições:'}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-indigo-200 dark:bg-indigo-800 flex items-center justify-center text-indigo-800 dark:text-indigo-200 text-xs font-bold">
+                AS
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Ana Santos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-emerald-200 dark:bg-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+                CR
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Carlos Rodrigues</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-amber-200 dark:bg-amber-800 flex items-center justify-center text-amber-800 dark:text-amber-200 text-xs font-bold">
+                FM
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Fernanda Martins</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-rose-200 dark:bg-rose-800 flex items-center justify-center text-rose-800 dark:text-rose-200 text-xs font-bold">
+                LO
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Lucas Oliveira</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-cyan-200 dark:bg-cyan-800 flex items-center justify-center text-cyan-800 dark:text-cyan-200 text-xs font-bold">
+                PC
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Patricia Costa</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-violet-200 dark:bg-violet-800 flex items-center justify-center text-violet-800 dark:text-violet-200 text-xs font-bold">
+                RA
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Ricardo Alves</span>
             </div>
           </div>
         </div>
