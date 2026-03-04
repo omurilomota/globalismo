@@ -6,13 +6,15 @@
  *
  * @module components/articles/Comments
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import Giscus, { Theme } from '@giscus/react';
+import { MessageSquare } from 'lucide-react';
 
 interface CommentsProps {
   articleSlug: string;
@@ -20,6 +22,13 @@ interface CommentsProps {
 
 export default function Comments({ articleSlug }: CommentsProps) {
   const { theme, resolvedTheme } = useTheme();
+  const [isConfigured, setIsConfigured] = useState(false);
+
+  useEffect(() => {
+    const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '';
+    const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '';
+    setIsConfigured(repoId.length > 0 && categoryId.length > 0 && repoId !== 'R_kgDO...' && categoryId !== 'DIC_kwDO...');
+  }, []);
 
   const getGiscusTheme = (): Theme => {
     const currentTheme = resolvedTheme || theme || 'light';
@@ -31,6 +40,26 @@ export default function Comments({ articleSlug }: CommentsProps) {
   const emitMetadata = (process.env.NEXT_PUBLIC_GISCUS_EMIT_METADATA || '0') as '0' | '1';
   const inputPosition = (process.env.NEXT_PUBLIC_GISCUS_INPUT_POSITION || 'top') as 'top' | 'bottom';
   const lang = (process.env.NEXT_PUBLIC_GISCUS_LANG || 'pt') as 'pt' | 'en' | 'es' | 'de' | 'fr';
+
+  if (!isConfigured) {
+    return (
+      <section className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          Comentários
+        </h2>
+
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-8 border border-gray-200 dark:border-gray-700 text-center">
+          <MessageSquare className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            Comentários em breve
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm max-w-md mx-auto">
+            Os comentários estão sendo configurados. Em breve você poderá participar da discussão usando sua conta do GitHub.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">

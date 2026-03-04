@@ -21,6 +21,7 @@ import { getAllArticles } from '@/lib/articles';
 const SITE_URL = 'https://globalismo.com.br';
 const SITE_NAME = 'Globalismo';
 const SITE_DESCRIPTION = 'Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.';
+const DEFAULT_LOCALE = 'pt';
 
 /**
  * Handler da rota GET paraIndex geração do feed RSS.
@@ -45,7 +46,7 @@ export async function GET() {
     .map((article) => {
       // Converte a data de publicação paraIndex formato UTC
       const pubDate = new Date(article.dataPublicacao).toUTCString();
-      const articleUrl = `${SITE_URL}/artigos/${article.slug}`;
+      const articleUrl = `${SITE_URL}/${DEFAULT_LOCALE}/artigos/${article.slug}`;
 
       // Gera o XML do item com CDATA paraIndex evitar problemas com caracteres especiais
       return `

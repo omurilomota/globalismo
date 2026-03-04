@@ -56,11 +56,11 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
@@ -72,7 +72,6 @@ export default function RootLayout({
           ]}
         />
         <WebsiteSchema />
-        {/* Umami Analytics */}
         {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <script
             async

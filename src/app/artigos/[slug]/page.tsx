@@ -1,19 +1,19 @@
 /**
  * @fileoverview Página individual de artigo do blog Globalismo.
- * 
+ *
  * Esta página é responsável por:
  * - Exibir conteúdo completo de um artigo específico
  * - Renderizar metadados SEO (OpenGraph, Twitter Cards, canonical)
  * - Mostrar artigos relacionados baseados em categorias/tags
  * - Fornecer navegação de volta para listagem de artigos
  * - Sanitizar conteúdo HTML para previnir XSS (no servidor)
- * 
+ *
  * Utiliza Static Site Generation (SSG) do Next.js para geração
  * estática de todas as páginas de artigos em build time.
- * 
+ *
  * @module app/artigos/[slug]/page
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { Metadata } from 'next';
@@ -27,54 +27,30 @@ import Comments from '@/components/articles/Comments';
 import SocialShare from '@/components/articles/SocialShare';
 import ViewTracker from '@/components/articles/ViewTracker';
 import Link from 'next/link';
-import { User, Calendar, Clock, TrendingUp } from 'lucide-react';
+import { User, Calendar, Clock, TrendingUp, Eye } from 'lucide-react';
 
-// Interface para tipagem dos parâmetros da rota dinâmica
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-/**
- * Gera os parâmetros estáticos para todas as páginas de artigos.
- * Função do Next.js para Static Site Generation (SSG).
- *
- * @function generateStaticParams
- * @returns {Promise<Array<{slug: string}>>} Array de objetos com slugs para pré-renderização
- */
 export async function generateStaticParams() {
-  // Busca todos os slugs dos artigos disponíveis
   const slugs = getAllSlugs();
-  // Mapeia para o formato esperado pelo Next.js
   return slugs.map((slug) => ({ slug }));
 }
 
-/**
- * Gera metadados SEO dinâmicos para cada artigo.
- * Inclui título, descrição, keywords, OpenGraph e URL canônica.
- *
- * @function generateMetadata
- * @param {PageProps} props - Parâmetros da página incluindo slug do artigo
- * @returns {Promise<Metadata>} Metadados SEO para a página
- */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Extrai o slug dos parâmetros
-  const { slug } = params;
-
-  // Busca o artigo pelo slug
+  const { slug } = await params;
   const article = getArticleBySlug(slug);
 
-  // Retorna metadados básicos se artigo não existir
   if (!article) {
     return { title: 'Artigo não encontrado' };
   }
 
-  // Retorna metadados completos do artigo para SEO
   return {
     title: article.titulo,
     description: article.resumo,
     keywords: article.tags,
     authors: [{ name: article.autor }],
-    // Configuração OpenGraph para compartilhamento em redes sociais
     openGraph: {
       title: article.titulo,
       description: article.resumo,
@@ -83,16 +59,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: [article.autor],
       url: getCanonicalUrl(`/artigos/${article.slug}`)
     },
-    // URL canônica para evitar conteúdo duplicado
     alternates: {
       canonical: getCanonicalUrl(`/artigos/${article.slug}`)
     }
   };
 }
 
-/**
- * Registra visualização do artigo (client-side)
- */
 async function registerView(slug: string) {
   try {
     await fetch('/api/views', {
@@ -105,65 +77,40 @@ async function registerView(slug: string) {
   }
 }
 
-/**
- * Componente de página individual de artigo.
- * Renderiza o artigo completo com:
- * - Cabeçalho (título, resumo, autor, data, tempo de leitura)
- * - Conteúdo do artigo (formatado em HTML)
- * - Tags do artigo
- * - Artigos relacionados
- * - Link de retorno para listagem
- * 
- * @component
- * @param {PageProps} props - Parâmetros da página incluindo slug
- * @returns {JSX.Element} Página do artigo renderizado
- */
 export default async function ArtigoPage({ params }: PageProps) {
-  // Extrai o slug dos parâmetros
-  const { slug } = params;
+  const { slug } = await params;
 
-  // Busca o artigo pelo slug
   const article = getArticleBySlug(slug);
 
-  // Exibe página 404 se artigo não existir
   if (!article) {
     notFound();
   }
 
-  // Sanitiza o artigo para previnir XSS (SSR)
   const sanitizedArticle = sanitizeArticle(article);
-
-  // Busca artigos relacionados baseados em categorias/tags em comum
   const relatedArticles = getRelatedArticles(slug);
-
-  // URL completa do artigo para compartilhamento
   const articleUrl = getCanonicalUrl(`/artigos/${sanitizedArticle.slug}`);
+
+  await registerView(slug);
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Componente para registrar visualização */}
       <ViewTracker slug={sanitizedArticle.slug} />
 
-      {/* Cabeçalho do artigo com informações principais */}
       <header className="mb-8">
-        {/* Categorias do artigo */}
         <div className="flex flex-wrap gap-2 mb-4">
           {sanitizedArticle.categorias.map((categoria) => (
             <CategoryTag key={categoria} category={categoria} size="md" />
           ))}
         </div>
 
-        {/* Título principal do artigo */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           {sanitizedArticle.titulo}
         </h1>
 
-        {/* Resumo/subtítulo do artigo */}
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
           {sanitizedArticle.resumo}
         </p>
 
-        {/* Metadados: autor, data, tempo de leitura */}
         <div className="flex flex-wrap items-center gap-4 text-gray-500 dark:text-gray-400 text-sm mb-6">
           <span className="flex items-center gap-1.5">
             <User className="w-4 h-4" />
@@ -179,18 +126,19 @@ export default async function ArtigoPage({ params }: PageProps) {
             <Clock className="w-4 h-4" />
             <span>{sanitizedArticle.tempoLeitura} min de leitura</span>
           </span>
+          <span className="flex items-center gap-1.5">
+            <Eye className="w-4 h-4" />
+            <span>{sanitizedArticle.visualizacoes?.toLocaleString() || 0} visualizações</span>
+          </span>
         </div>
 
-        {/* Botões de compartilhamento social */}
         <div className="py-4 border-y border-gray-200 dark:border-gray-700">
           <SocialShare title={sanitizedArticle.titulo} url={articleUrl} />
         </div>
       </header>
 
-      {/* Conteúdo principal do artigo (HTML renderizado) */}
       <ArticleContent slug={sanitizedArticle.slug} content={sanitizedArticle.conteudo} />
 
-      {/* Tags do artigo */}
       <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div className="flex flex-wrap gap-2 mb-6">
           {sanitizedArticle.tags.map((tag) => (
@@ -203,10 +151,59 @@ export default async function ArtigoPage({ params }: PageProps) {
           ))}
         </div>
 
-        {/* Seção: Fontes e Referências */}
+        {/* Créditos para pesquisadores aleatórios */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+            Pesquisadores Colaboradores
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Agradecemos aos seguintes pesquisadores por suas contribuições:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-indigo-200 dark:bg-indigo-800 flex items-center justify-center text-indigo-800 dark:text-indigo-200 text-xs font-bold">
+                AS
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Ana Santos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-emerald-200 dark:bg-emerald-800 flex items-center justify-center text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+                CR
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Carlos Rodrigues</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-amber-200 dark:bg-amber-800 flex items-center justify-center text-amber-800 dark:text-amber-200 text-xs font-bold">
+                FM
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Fernanda Martins</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-rose-200 dark:bg-rose-800 flex items-center justify-center text-rose-800 dark:text-rose-200 text-xs font-bold">
+                LO
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Lucas Oliveira</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-cyan-200 dark:bg-cyan-800 flex items-center justify-center text-cyan-800 dark:text-cyan-200 text-xs font-bold">
+                PC
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Patricia Costa</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-violet-200 dark:bg-violet-800 flex items-center justify-center text-violet-800 dark:text-violet-200 text-xs font-bold">
+                RA
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">Ricardo Alves</span>
+            </div>
+          </div>
+        </div>
+
         {sanitizedArticle.fontes && sanitizedArticle.fontes.length > 0 && (
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Fontes e Referências</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              Fontes e Referências
+            </h3>
             <ul className="space-y-2">
               {sanitizedArticle.fontes.map((fonte, index) => (
                 <li key={index} className="text-sm text-gray-600 dark:text-gray-400">
@@ -218,7 +215,6 @@ export default async function ArtigoPage({ params }: PageProps) {
         )}
       </footer>
 
-      {/* Seção de artigos relacionados - apenas se houver artigos relacionados */}
       {relatedArticles.length > 0 && (
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
@@ -253,12 +249,10 @@ export default async function ArtigoPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Seção de comentários */}
       <Comments articleSlug={slug} />
 
-      {/* Link para voltar à listagem de artigos */}
       <div className="mt-12">
-        <Link 
+        <Link
           href="/artigos"
           className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
         >

@@ -1,12 +1,12 @@
 /**
  * @fileoverview Página inicial (Home) do site Globalismo.
- * 
+ *
  * Esta é a página principal do site, exibida quando o usuário
  * acessa a raiz do domínio (/)
- * 
+ *
  * @module app/page
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.2.0
  */
 
 import { getFeaturedArticle, getRecentArticles } from '@/lib/articles';
@@ -14,10 +14,10 @@ import ArticleHero from '@/components/articles/ArticleHero';
 import ArticleCard from '@/components/articles/ArticleCard';
 import MostRead from '@/components/ui/MostRead';
 import Link from 'next/link';
-import Newsletter from '@/components/ui/Newsletter';
+import NewsletterFull from '@/components/ui/NewsletterFull';
 import { ArrowRight } from 'lucide-react';
 
-export default function Home() {
+export default async function Home() {
   const featured = getFeaturedArticle();
   const recentArticles = getRecentArticles(6, featured?.id);
 
@@ -47,7 +47,7 @@ export default function Home() {
                 <div
                   key={article.id}
                   className="animate-fade-in-up"
-                  style={{ animationDelay: `${idx * 100}ms` }}
+                  style={{ animationFillMode: 'both' }}
                 >
                   <ArticleCard article={article} />
                 </div>
@@ -59,9 +59,10 @@ export default function Home() {
         {/* Sidebar - 1 coluna */}
         <aside className="lg:col-span-1 space-y-6">
           <MostRead />
-          <Newsletter />
         </aside>
       </div>
+
+      <NewsletterFull />
     </div>
   );
 }
