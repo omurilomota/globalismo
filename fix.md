@@ -1,9 +1,13 @@
-gostaria que remontasse esse newsletter bugado que está mais grande o botão de colocar e enviar email. 
+Newsletter
+Receba as últimas análises sobre globalismo diretamente no seu email.
 
-Nenhuma língua funciona e dá 404 e manda voltar pra home ( Nem muda de língua ). E o espaçamento dos artigos está desigual está errado, os do meio estão mais para baixo.
+Seu melhor email
 
-Está faltando crédito para nosso querido pesquisador do site, Gian.
+Inscrever
 
-Remova essa parte que tem na maioria dos arquios e fica muito repetitiva, sabendo que eu E Matheus só programamos e não pesquisamos para o site. Coloque crédito para pessoas aleatórias por enquanto.
 
-Coloque um contador de views funcional também para o site.
+Tire essa newsletter da home e recrie outro semelhante com esse, só que maior e perto da footer da home.
+
+Tire também tudo o que tem nesse projeto sobre idioma e tradução, deixe somente o principal em portgues sem colocar api em /pt. 
+
+Comite com 1 linha com gitmoji e gitflow.

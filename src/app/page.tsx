@@ -4,9 +4,9 @@
  * Esta é a página principal do site, exibida quando o usuário
  * acessa a raiz do domínio (/)
  *
- * @module app/[locale]/page
+ * @module app/page
  * @author Globalismo
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 import { getFeaturedArticle, getRecentArticles } from '@/lib/articles';
@@ -14,18 +14,13 @@ import ArticleHero from '@/components/articles/ArticleHero';
 import ArticleCard from '@/components/articles/ArticleCard';
 import MostRead from '@/components/ui/MostRead';
 import Link from 'next/link';
-import Newsletter from '@/components/ui/Newsletter';
+import NewsletterFull from '@/components/ui/NewsletterFull';
 import { ArrowRight } from 'lucide-react';
 
-interface PageProps {
-  params: Promise<{ locale: string }>;
-}
-
-export default async function Home({ params }: PageProps) {
-  const { locale } = await params;
+export default async function Home() {
   const featured = getFeaturedArticle();
   const recentArticles = getRecentArticles(6, featured?.id);
-  
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {featured && <ArticleHero article={featured} />}
@@ -36,14 +31,14 @@ export default async function Home({ params }: PageProps) {
           <section className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white font-serif">
-                {locale === 'es' ? 'Últimos Artículos' : locale === 'en' ? 'Latest Articles' : locale === 'de' ? 'Neueste Artikel' : 'Últimos Artigos'}
+                Últimos Artigos
               </h2>
 
               <Link
-                href={`/${locale}/artigos`}
+                href="/artigos"
                 className="flex items-center gap-2 text-sm font-medium text-blue-900 dark:text-blue-300 hover:underline"
               >
-                {locale === 'es' ? 'Ver todos' : locale === 'en' ? 'View all' : locale === 'de' ? 'Alle ansehen' : 'Ver todos'} <ArrowRight className="w-4 h-4" />
+                Ver todos <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
@@ -54,7 +49,7 @@ export default async function Home({ params }: PageProps) {
                   className="animate-fade-in-up"
                   style={{ animationFillMode: 'both' }}
                 >
-                  <ArticleCard article={article} locale={locale} />
+                  <ArticleCard article={article} />
                 </div>
               ))}
             </div>
@@ -64,9 +59,10 @@ export default async function Home({ params }: PageProps) {
         {/* Sidebar - 1 coluna */}
         <aside className="lg:col-span-1 space-y-6">
           <MostRead />
-          <Newsletter />
         </aside>
       </div>
+
+      <NewsletterFull />
     </div>
   );
 }

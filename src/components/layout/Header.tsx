@@ -7,14 +7,13 @@
  * - Fornecer menu mobile (drawer) responsivo
  * - Implementar alternância de tema claro/escuro (dark mode)
  * - Indicar visualmente a página ativa
- * - Seletor de idioma
  *
  * Utiliza 'use client' por ser um componente interativo que requer
  * estado React e manipulação do DOM para o tema e menu mobile.
  *
  * @module components/layout/Header
  * @author Globalismo
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 'use client';
@@ -23,11 +22,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { useLocale } from 'next-intl';
 import { Home, BookOpen, FileText, Mail, Sun, Moon, Globe, Menu, X, Search } from 'lucide-react';
 import SearchBar from '@/components/ui/SearchBar';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
-import { locales, type Locale } from '@/i18n/config';
 
 /**
  * Componente principal de cabeçalho/navegação.
@@ -36,20 +32,13 @@ import { locales, type Locale } from '@/i18n/config';
  * - Navegação desktop com links para as principais páginas
  * - Menu mobile (drawer) responsivo
  * - Botão de alternância de tema (dark/light mode)
- * - Seletor de idioma
  * - Destaque para página atual
  */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const locale = useLocale() as Locale;
   const { theme, setTheme, resolvedTheme } = useTheme();
-
-  const getLocalizedPath = (path: string) => {
-    if (path === '/') return `/${locale}`;
-    return `/${locale}${path}`;
-  };
 
   const navLinks = [
     { href: '/', label: 'Home', icon: Home },
@@ -57,16 +46,6 @@ export default function Header() {
     { href: '/artigos', label: 'Artigos', icon: FileText },
     { href: '/contato', label: 'Contato', icon: Mail },
   ];
-
-  const getNavLabel = (href: string) => {
-    const labels: Record<string, Record<string, string>> = {
-      '/': { pt: 'Home', en: 'Home', de: 'Startseite', es: 'Inicio' },
-      '/sobre': { pt: 'Sobre', en: 'About', de: 'Über', es: 'Sobre' },
-      '/artigos': { pt: 'Artigos', en: 'Articles', de: 'Artikel', es: 'Artículos' },
-      '/contato': { pt: 'Contato', en: 'Contact', de: 'Kontakt', es: 'Contacto' },
-    };
-    return labels[href]?.[locale] || href;
-  };
 
   useEffect(() => {
     setMounted(true);
@@ -88,7 +67,7 @@ export default function Header() {
           {/* Container flex para alinhar logo, nav e botões */}
           <div className="flex items-center justify-between h-16">
             {/* Logo do site com link para home */}
-            <Link href={getLocalizedPath('/')} className="flex items-center space-x-2 group">
+            <Link href="/" className="flex items-center space-x-2 group">
               <Globe className="w-7 h-7 text-blue-900 dark:text-blue-400" />
               <span className="text-xl font-bold text-blue-900 dark:text-white font-serif">
                 Globalismo
@@ -100,12 +79,11 @@ export default function Header() {
               {/* Mapeia os links de navegação */}
               {navLinks.map((link) => {
                 const Icon = link.icon;
-                const localizedHref = getLocalizedPath(link.href);
-                const isActive = pathname === localizedHref;
+                const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.href}
-                    href={localizedHref}
+                    href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? 'text-blue-900 dark:text-white'
@@ -113,7 +91,7 @@ export default function Header() {
                     }`}
                   >
                     <Icon className={`w-4 h-4 ${isActive ? 'text-green-600 dark:text-green-400' : ''}`} />
-                    {getNavLabel(link.href)}
+                    {link.label}
                   </Link>
                 );
               })}
@@ -126,11 +104,6 @@ export default function Header() {
               >
                 <Search className="w-5 h-5" />
               </button>
-
-              {/* Seletor de idioma */}
-              <div className="ml-2">
-                <LanguageSwitcher />
-              </div>
 
               {/* Botão de alternância de tema (dark mode) */}
               <button
@@ -217,12 +190,11 @@ export default function Header() {
           {/* Mapeia links para o menu mobile */}
           {navLinks.map((link) => {
             const Icon = link.icon;
-            const localizedHref = getLocalizedPath(link.href);
-            const isActive = pathname === localizedHref;
+            const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
-                href={localizedHref}
+                href={link.href}
                 onClick={closeDrawer}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
                   isActive
@@ -231,7 +203,7 @@ export default function Header() {
                 }`}
               >
                 <Icon className="w-5 h-5" />
-                {getNavLabel(link.href)}
+                {link.label}
               </Link>
             );
           })}

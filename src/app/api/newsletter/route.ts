@@ -61,7 +61,7 @@ export async function POST(request: Request) {
           html: `
             <h2>Nova inscrição na newsletter</h2>
             <p><strong>Email:</strong> ${sanitizedData.email}</p>
-            <p><strong>Data:</strong> ${new Date().toLocaleString('pt-BR')}</p>
+            <p><strong>Data:</strong> ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</p>
           `,
         }),
       });

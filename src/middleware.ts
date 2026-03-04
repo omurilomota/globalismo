@@ -1,21 +1,18 @@
 /**
  * @fileoverview Middleware principal do Next.js.
- * 
+ *
  * Este middleware aplica:
- * - Internacionalização (i18n)
  * - Rate limiting para APIs
  * - Headers de segurança (CSP, HSTS, etc)
  * - Redirecionamentos forçados
- * 
+ *
  * @module middleware
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
-import { locales, localePrefix, defaultLocale } from './i18n/config';
 import { rateLimitMiddleware } from './rateLimit';
 
 const ALLOWED_ORIGINS = [
@@ -29,13 +26,13 @@ const SECURITY_HEADERS = {
   'X-XSS-Protection': '1; mode=block',
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 
+  'Permissions-Policy':
     'camera=(), ' +
     'microphone=(), ' +
     'geolocation=(), ' +
     'payment=(), ' +
     'usb=()',
-  'Content-Security-Policy': 
+  'Content-Security-Policy':
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://giscus.app; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
@@ -46,22 +43,13 @@ const SECURITY_HEADERS = {
     "frame-ancestors 'none';",
 };
 
-const intlMiddleware = createIntlMiddleware({
-  locales,
-  localePrefix,
-  defaultLocale,
-  localeDetection: true,
-});
-
 export default function middleware(request: NextRequest): NextResponse | undefined {
   const { pathname } = request.nextUrl;
 
-  const response = intlMiddleware(request);
-  if (response) {
-    Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
-      response.headers.set(key, value);
-    });
-  }
+  const response = NextResponse.next();
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+    response.headers.set(key, value);
+  });
 
   if (pathname.startsWith('/api/')) {
     const rateLimitResponse = rateLimitMiddleware(request);

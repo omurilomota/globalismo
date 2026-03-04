@@ -1,19 +1,19 @@
 /**
  * @fileoverview Página individual de artigo do blog Globalismo.
- * 
+ *
  * Esta página é responsável por:
  * - Exibir conteúdo completo de um artigo específico
  * - Renderizar metadados SEO (OpenGraph, Twitter Cards, canonical)
  * - Mostrar artigos relacionados baseados em categorias/tags
  * - Fornecer navegação de volta para listagem de artigos
  * - Sanitizar conteúdo HTML para previnir XSS (no servidor)
- * 
+ *
  * Utiliza Static Site Generation (SSG) do Next.js para geração
  * estática de todas as páginas de artigos em build time.
- * 
- * @module app/[locale]/artigos/[slug]/page
+ *
+ * @module app/artigos/[slug]/page
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { Metadata } from 'next';
@@ -30,36 +30,21 @@ import Link from 'next/link';
 import { User, Calendar, Clock, TrendingUp, Eye } from 'lucide-react';
 
 interface PageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
   const slugs = getAllSlugs();
-  const locales = ['pt', 'en', 'de', 'es'];
-  
-  const params = [];
-  for (const slug of slugs) {
-    for (const locale of locales) {
-      params.push({ locale, slug });
-    }
-  }
-  return params;
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const article = getArticleBySlug(slug);
 
   if (!article) {
     return { title: 'Artigo não encontrado' };
   }
-
-  const titles: Record<string, string> = {
-    pt: 'Artigo não encontrado',
-    en: 'Article not found',
-    de: 'Artikel nicht gefunden',
-    es: 'Artículo no encontrado'
-  };
 
   return {
     title: article.titulo,
@@ -72,10 +57,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       publishedTime: article.dataPublicacao,
       authors: [article.autor],
-      url: getCanonicalUrl(`/${locale}/artigos/${article.slug}`)
+      url: getCanonicalUrl(`/artigos/${article.slug}`)
     },
     alternates: {
-      canonical: getCanonicalUrl(`/${locale}/artigos/${article.slug}`)
+      canonical: getCanonicalUrl(`/artigos/${article.slug}`)
     }
   };
 }
@@ -93,7 +78,7 @@ async function registerView(slug: string) {
 }
 
 export default async function ArtigoPage({ params }: PageProps) {
-  const { locale, slug } = await params;
+  const { slug } = await params;
 
   const article = getArticleBySlug(slug);
 
@@ -103,7 +88,9 @@ export default async function ArtigoPage({ params }: PageProps) {
 
   const sanitizedArticle = sanitizeArticle(article);
   const relatedArticles = getRelatedArticles(slug);
-  const articleUrl = getCanonicalUrl(`/${locale}/artigos/${sanitizedArticle.slug}`);
+  const articleUrl = getCanonicalUrl(`/artigos/${sanitizedArticle.slug}`);
+
+  await registerView(slug);
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -166,7 +153,7 @@ export default async function ArtigoPage({ params }: PageProps) {
 
         <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-            {locale === 'es' ? 'Sobre los Colaboradores' : locale === 'en' ? 'About the Contributors' : locale === 'de' ? 'Über die Mitwirkenden' : 'Sobre os Colaboradores'}
+            Sobre os Colaboradores
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-start gap-3">
@@ -176,10 +163,7 @@ export default async function ArtigoPage({ params }: PageProps) {
               <div>
                 <p className="font-medium text-gray-900 dark:text-white">Gian</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {locale === 'es' ? 'Investigador académico. Contribuyó con la fundamentación teórica sobre globalización.'
-                    : locale === 'en' ? 'Academic researcher. Contributed with theoretical foundation on globalization.'
-                    : locale === 'de' ? 'Akademischer Forscher. Trug zur theoretischen Grundlage über Globalisierung bei.'
-                    : 'Pesquisador acadêmico. Contribuiu com a fundamentação teórica sobre globalização.'}
+                  Pesquisador acadêmico. Contribuiu com a fundamentação teórica sobre globalização.
                 </p>
               </div>
             </div>
@@ -190,10 +174,7 @@ export default async function ArtigoPage({ params }: PageProps) {
               <div>
                 <p className="font-medium text-gray-900 dark:text-white">Murilo Mota</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {locale === 'es' ? 'Fundador y editor. Analista de temas relacionados con la globalización, economía internacional y geopolítica.'
-                    : locale === 'en' ? 'Founder and editor. Analyst of topics related to globalization, international economy and geopolitics.'
-                    : locale === 'de' ? 'Gründer und Herausgeber. Analytiker zu Themen wie Globalisierung, internationale Wirtschaft und Geopolitik.'
-                    : 'Fundador e editor. Analista de temas relacionados à globalização, economia internacional e geopolítica.'}
+                  Fundador e editor. Analista de temas relacionados à globalização, economia internacional e geopolítica.
                 </p>
               </div>
             </div>
@@ -204,10 +185,7 @@ export default async function ArtigoPage({ params }: PageProps) {
               <div>
                 <p className="font-medium text-gray-900 dark:text-white">Matheus Pereira</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {locale === 'es' ? 'Desarrollador y co-fundador. Ingeniero de software enfocado en tecnologías web y experiencias digitales.'
-                    : locale === 'en' ? 'Developer and co-founder. Software engineer focused on web technologies and digital experiences.'
-                    : locale === 'de' ? 'Entwickler und Mitgründer. Software-Ingenieur mit Fokus auf Web-Technologien und digitale Erfahrungen.'
-                    : 'Desenvolvedor e co-fundador. Engenheiro de software focado em tecnologias web e experiências digitais.'}
+                  Desenvolvedor e co-fundador. Engenheiro de software focado em tecnologias web e experiências digitais.
                 </p>
               </div>
             </div>
@@ -217,13 +195,10 @@ export default async function ArtigoPage({ params }: PageProps) {
         {/* Créditos para pesquisadores aleatórios */}
         <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-            {locale === 'es' ? 'Investigadores Colaboradores' : locale === 'en' ? 'Research Contributors' : locale === 'de' ? 'Forschungsmitwirkende' : 'Pesquisadores Colaboradores'}
+            Pesquisadores Colaboradores
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            {locale === 'es' ? 'Agradecemos a los siguientes investigadores por sus contribuciones:'
-              : locale === 'en' ? 'We thank the following researchers for their contributions:'
-              : locale === 'de' ? 'Wir danken den folgenden Forschern für ihre Beiträge:'
-              : 'Agradecemos aos seguintes pesquisadores por suas contribuições:'}
+            Agradecemos aos seguintes pesquisadores por suas contribuições:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <div className="flex items-center gap-2">
@@ -268,7 +243,7 @@ export default async function ArtigoPage({ params }: PageProps) {
         {sanitizedArticle.fontes && sanitizedArticle.fontes.length > 0 && (
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-              {locale === 'es' ? 'Fuentes y Referencias' : locale === 'en' ? 'Sources and References' : locale === 'de' ? 'Quellen und Referenzen' : 'Fontes e Referências'}
+              Fontes e Referências
             </h3>
             <ul className="space-y-2">
               {sanitizedArticle.fontes.map((fonte, index) => (
@@ -284,13 +259,13 @@ export default async function ArtigoPage({ params }: PageProps) {
       {relatedArticles.length > 0 && (
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            {locale === 'es' ? 'Artículos Relacionados' : locale === 'en' ? 'Related Articles' : locale === 'de' ? 'Verwandte Artikel' : 'Artigos Relacionados'}
+            Artigos Relacionados
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedArticles.map((related) => (
               <Link
                 key={related.id}
-                href={`/${locale}/artigos/${related.slug}`}
+                href={`/artigos/${related.slug}`}
                 className="block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md transition-shadow group"
               >
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-900 dark:group-hover:text-blue-300 line-clamp-2">
@@ -318,14 +293,14 @@ export default async function ArtigoPage({ params }: PageProps) {
       <Comments articleSlug={slug} />
 
       <div className="mt-12">
-        <Link 
-          href={`/${locale}/artigos`}
+        <Link
+          href="/artigos"
           className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          {locale === 'es' ? 'Volver a Artículos' : locale === 'en' ? 'Back to Articles' : locale === 'de' ? 'Zurück zu Artikel' : 'Voltar para Artigos'}
+          Voltar para Artigos
         </Link>
       </div>
     </article>

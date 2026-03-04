@@ -1,17 +1,17 @@
 /**
- * @fileoverview Componente de cartão paraIndex exibição de artigo em listas.
- * 
+ * @fileoverview Componente de cartão para exibição de artigo em listas.
+ *
  * Este componente é responsável por:
  * - Exibir artigo em formato de cartão compacto
  * - Mostrar imagem de capa, título, resumo e metadados
- * - Fornecer link paraIndex a página completa do artigo
+ * - Fornecer link para a página completa do artigo
  * - Suportar modo claro/escuro via Tailwind
- * 
+ *
  * Utilizado em listas de artigos como na home e página de artigos.
- * 
+ *
  * @module components/articles/ArticleCard
  * @author Globalismo
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 import { memo } from 'react';
@@ -25,28 +25,26 @@ import { Clock, User } from 'lucide-react';
 interface ArticleCardProps {
   // Artigo a ser exibido no cartão
   article: IArticle;
-  // Locale atual para links localizados
-  locale?: string;
 }
 
 /**
  * Componente de cartão para exibição de artigo em listas.
  * Apresenta artigo em formato visual compacto com imagem, título,
  * resumo e metadados. Inclui efeitos de hover.
- * 
+ *
  * Usando memo para evitar re-renders desnecessários quando
  * a lista de artigos é re-renderizada.
- * 
+ *
  * @component
  * @param {ArticleCardProps} props - Props contendo o artigo a ser exibido
  * @returns {JSX.Element} Cartão de artigo renderizado
  */
-const ArticleCard = memo(function ArticleCard({ article, locale = 'pt' }: ArticleCardProps) {
+const ArticleCard = memo(function ArticleCard({ article }: ArticleCardProps) {
   return (
     // Container do cartão com bordas e efeito hover
     <article className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 card-hover h-full flex flex-col" suppressHydrationWarning>
       {/* Link para a imagem de capa (envolve toda a imagem) */}
-      <Link href={`/${locale}/artigos/${article.slug}`}>
+      <Link href={`/artigos/${article.slug}`}>
         {/* Container com aspecto 16:9 para a imagem */}
         <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-700">
           {/* Verifica se existe imagem de capa */}
@@ -82,7 +80,7 @@ const ArticleCard = memo(function ArticleCard({ article, locale = 'pt' }: Articl
         </div>
 
         {/* Título do artigo como link */}
-        <Link href={`/${locale}/artigos/${article.slug}`}>
+        <Link href={`/artigos/${article.slug}`}>
           <h2 className="text-base font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-900 dark:group-hover:text-blue-300 transition-colors line-clamp-2 font-serif">
             {article.titulo}
           </h2>
