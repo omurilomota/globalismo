@@ -7,3 +7,5 @@ Comunicação, Consumismo e Integração Social na Era da Globalização
 Cidadania e Direitos na Sociedade Capitalista
 
 Artigos sem texto acima.
+
+Commite as alterações com gitmoji e gitflow com no máximo de até 1 linha por commit.
