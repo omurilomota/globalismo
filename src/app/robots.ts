@@ -26,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/']
       }
     ],
-    sitemap: 'https://globalismo.com.br/sitemap.xml',
-    host: 'https://globalismo.com.br'
+    sitemap: 'https://globalismo.vercel.app/sitemap.xml',
+    host: 'https://globalismo.vercel.app'
   };
 }

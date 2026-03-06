@@ -20,7 +20,7 @@ import { IArticle } from '@/types';
 import artigosData from '@/data/artigos.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://globalismo.com.br';
+  const baseUrl = 'https://globalismo.vercel.app';
   const artigos = (artigosData as { artigos: IArticle[] }).artigos;
 
   const staticPages: MetadataRoute.Sitemap = [

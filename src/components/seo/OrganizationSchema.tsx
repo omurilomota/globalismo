@@ -40,8 +40,8 @@ interface OrganizationSchemaProps {
  */
 export default function OrganizationSchema({
   name = 'Globalismo',
-  url = 'https://globalismo.com.br',
-  logo = 'https://globalismo.com.br/logo.png',
+  url = 'https://globalismo.vercel.app',
+  logo = 'https://globalismo.vercel.app/logo.png',
   description = 'Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.',
   sameAs = [],
 }: OrganizationSchemaProps) {
@@ -66,7 +66,7 @@ export default function OrganizationSchema({
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://globalismo.com.br/artigos?busca={search_term_string}',
+        urlTemplate: 'https://globalismo.vercel.app/artigos?busca={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },

@@ -35,8 +35,8 @@ interface WebsiteSchemaProps {
  */
 export default function WebsiteSchema({
   name = 'Globalismo',
-  url = 'https://globalismo.com.br',
-  searchUrl = 'https://globalismo.com.br/artigos?busca={search_term_string}',
+  url = 'https://globalismo.vercel.app',
+  searchUrl = 'https://globalismo.vercel.app/artigos?busca={search_term_string}',
 }: WebsiteSchemaProps) {
   // Define o objeto schema conforme especificação Schema.org
   const schema = {

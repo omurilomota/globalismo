@@ -29,10 +29,10 @@ const ARTICLES_PER_PAGE = 6;
 /**
  * URL base do site para geração de URLs canônicas.
  * Usada em tags meta, sitemap e feeds RSS.
- * 
+ *
  * @constant {string} baseUrl
  */
-const baseUrl = 'https://globalismo.com.br';
+const baseUrl = 'https://globalismo.vercel.app';
 
 /**
  * Retorna todos os artigos disponíveis no banco de dados.

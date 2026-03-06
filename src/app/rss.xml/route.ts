@@ -18,7 +18,7 @@
 import { getAllArticles } from '@/lib/articles';
 
 // Constantes de configuração do feed RSS
-const SITE_URL = 'https://globalismo.com.br';
+const SITE_URL = 'https://globalismo.vercel.app';
 const SITE_NAME = 'Globalismo';
 const SITE_DESCRIPTION = 'Um espaço para reflexão crítica sobre os impactos da globalização na economia, política, cultura e sociedade contemporânea.';
 const DEFAULT_LOCALE = 'pt';

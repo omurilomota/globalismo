@@ -17,8 +17,8 @@ import { rateLimitMiddleware } from './rateLimit';
 
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',
-  'https://globalismo.com.br',
-  'https://www.globalismo.com.br',
+  'https://globalismo.vercel.app',
+  'https://www.globalismo.vercel.app',
 ];
 
 const SECURITY_HEADERS = {

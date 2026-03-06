@@ -31,7 +31,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://globalismo.com.br'),
+  metadataBase: new URL('https://globalismo.vercel.app'),
   title: {
     default: "Globalismo - Reflexões sobre a Globalização",
     template: "%s | Globalismo"
@@ -45,10 +45,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Globalismo",
-    url: "https://globalismo.com.br"
+    url: "https://globalismo.vercel.app"
   },
   alternates: {
-    canonical: "https://globalismo.com.br"
+    canonical: "https://globalismo.vercel.app"
   },
   robots: {
     index: true,
