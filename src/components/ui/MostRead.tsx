@@ -13,6 +13,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { TrendingUp, Clock } from 'lucide-react';
+import artigosData from '@/data/artigos.json';
 
 interface Article {
   id: string;
@@ -22,6 +23,17 @@ interface Article {
   tempoLeitura: number;
 }
 
+const fallbackArticles: Article[] = artigosData.artigos
+  .sort((a, b) => b.visualizacoes - a.visualizacoes)
+  .slice(0, 5)
+  .map(article => ({
+    id: article.id,
+    titulo: article.titulo,
+    slug: article.slug,
+    visualizacoes: article.visualizacoes,
+    tempoLeitura: article.tempoLeitura,
+  }));
+
 export default function MostRead() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,11 +42,13 @@ export default function MostRead() {
     fetch('/api/views?top=5')
       .then(res => res.json())
       .then(data => {
-        setArticles(data.articles || []);
+        const fetchedArticles = data.articles || [];
+        setArticles(fetchedArticles.length > 0 ? fetchedArticles : fallbackArticles);
         setLoading(false);
       })
       .catch(err => {
         console.error('Erro ao buscar artigos mais lidos:', err);
+        setArticles(fallbackArticles);
         setLoading(false);
       });
   }, []);

@@ -1,11 +1,6 @@
-A Era do Globalismo Acabou? O Que Vem Depois
-A Ascensão da China e Rússia na Governança Global
-Globalização: A Crise e as Duas Saídas Possíveis
-Refragmentação da Economia Global
-O Colapso da Ordem Liberal Mundial
-Comunicação, Consumismo e Integração Social na Era da Globalização
-Cidadania e Direitos na Sociedade Capitalista
+//vercel
+https://globalismo.vercel.app/pt/artigos/era-globalismo-acabou-2025
+//localhost
+http://localhost:3000/artigos/era-globalismo-acabou-2025
 
-Artigos sem texto acima.
-
-Commite as alterações com gitmoji e gitflow com no máximo de até 1 linha por commit.
+não consigo navegar pelos mais acessados no vercel, e agora ?
